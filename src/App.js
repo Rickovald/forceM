@@ -1,3 +1,4 @@
+import React, {useState, useEffect, lazy, Suspense} from 'react'
 import Main from './Main/Main';
 import Concerts from './Concerts/Concerts';
 import Albums from './Albums/Albums';

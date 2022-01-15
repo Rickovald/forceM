@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom"
 import s from "./navigation.module.sass"
 
 const Navigation = () => {
-	const [activeStyle] = useState({color: '#202020'})
+	// const [activeStyle] = useState({color: '#202020'})
 	return (
 		<div className={s.navigation}>
 			{/* <NavLink activeStyle={activeStyle} to='/' > */}
