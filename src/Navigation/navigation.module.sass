@@ -1,10 +1,35 @@
+@import "../presets/variables"
+
 .navigation
 	display: flex
 	width: 100%
+	height: 70px
+	align-items: stretch
+	background: rgba(0,0,0,.3)
+	justify-content: space-between
+	&__logo
+		cursor: pointer
+		img
+			height: 100%
+	&__right
+		display: flex
 	&__link
-		padding: 10px 20px
+		padding: 0 20px
+		height: 100%
 		transition: .1s
+		color: black
+		display: flex
+		justify-content: center
+		align-items: center
+		@include H1Regular
+		cursor: pointer
 		&:hover
 			transition: .1s
 			background: rgba(0,0,0,.3)
 			color: #202020
+		&.activated
+			background: rgba(0,0,0,.3)
+			color: #202020
+
+
+		

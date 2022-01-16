@@ -1,0 +1,142 @@
+/*Colors*/ 
+$MainUnAccent: #FFFFFF
+$MainAccent: #44BAFF
+$AdditionalUnAccent: #7C7A98
+$AdditionalAccent: #FFFFFF
+$AdditionalAccentForText: #D3D2DB
+$BackgroundElements: #0B0735
+$Background: #130A27
+$BackgroundInput: #232049
+$BackgroundCard: #191447
+$BackgroundNotification: #1A2651
+$MainButtonTopColor: #FF1F91 
+$MainButtonBottomColor: #C61086
+$AdditionalButtonTopColor: #44C0FF
+$AdditionalButtonBottomColor: #4481FF
+$BoxGradientTopColor: #001741
+$BoxGradientBottomColor: #00366D
+$AvatarJuniorStrokeTop:#44C0FF
+$AvatarJuniorStrokeCenter:#4481FF
+$AvatarJuniorStrokeBottom:#44C0FF
+$AvatarMiddleStrokeTop: #808080
+$AvatarMiddleStrokeCenter:#D9D9D9
+$AvatarMiddleStrokeBottom:#9B9B9B
+$AvatarSeniorStrokeTop: #C6901B
+$AvatarSeniorStrokeCenter:#EBC63E
+$AvatarSeniorStrokeBottom:#D09E1E
+$VipColor: #61EDF4
+$BonusTextColor: #82f0ff
+$ColorText: #272727
+/*Colors*/ 
+
+/*Gradients*/ 
+$MainButton: linear-gradient(180deg, $MainButtonTopColor 0%,$MainButtonBottomColor 100%)
+$MainButtonKoleso: linear-gradient(180deg, transparentize($MainButtonTopColor, .5) 0%,transparentize($MainButtonBottomColor, .5) 100%)
+$AdditionalButton: linear-gradient(180deg, $AdditionalButtonTopColor 0%, $AdditionalButtonBottomColor 100%)
+$BoxGradient: linear-gradient(180deg, $BoxGradientTopColor 0%, $BoxGradientBottomColor 100%)
+$AdditionalColor: #FF5DF0
+$AvatarJuniorStroke: linear-gradient(180deg, $AvatarJuniorStrokeTop 0%, $AvatarJuniorStrokeCenter 50.52%, $AvatarJuniorStrokeBottom 100%)
+$AvatarMiddleStroke: linear-gradient(180deg, $AvatarMiddleStrokeTop 0%, $AvatarMiddleStrokeCenter 51.04%, $AvatarMiddleStrokeBottom 100%)
+$AvatarSeniorStroke: linear-gradient(180deg, $AvatarSeniorStrokeTop 0%, $AvatarSeniorStrokeCenter 51.04%, $AvatarSeniorStrokeBottom 100%)
+$TransperentGradient: linear-gradient(to bottom, rgba(0,0,0,0) 10%, green)
+/*Gradients*/  
+
+
+/*Fonts Tag*/ 
+
+/*Headline*/
+@mixin Font ($font-size, $font-weight:normal)
+    font:
+        family: Ubuntu
+        style: normal
+        weight: $font-weight
+        size: $font-size   
+        line-height: 150%
+
+@mixin H1Regular ($font-size: 20px)
+    @include Font($font-size)
+
+@mixin H1Bold ($font-size: 20px, $font-weight:bold)
+    @include Font($font-size, $font-weight)
+
+@mixin H2Regular ($font-size: 26px)
+    @include Font($font-size)
+
+@mixin H2Bold ($font-size: 26px, $font-weight:bold)
+    @include Font($font-size, $font-weight)
+
+@mixin H3Regular ($font-size: 30px)
+    @include Font($font-size)
+
+@mixin H3Bold ($font-size: 30px, $font-weight:bold)
+    @include Font($font-size, $font-weight)
+
+@mixin H4Regular ($font-size: 36px)
+    @include Font($font-size)
+
+@mixin H4Bold ($font-size: 36px, $font-weight:bold)
+    @include Font($font-size)
+
+@mixin H54Regular ($font-size: 66px)
+    @include Font($font-size, $font-weight)
+
+@mixin H5Bold ($font-size: 66px, $font-weight:bold) //!! === H5Bold
+    @include Font($font-size, $font-weight)
+
+
+/*Paragraph*/
+
+@mixin P1Regular ($font-size: 9px)
+    @include Font($font-size)
+
+@mixin P2Regular ($font-size: 10px)
+    @include Font($font-size)
+
+@mixin P2Bold ($font-size: 10px, $font-weight:bold)
+    @include Font($font-size, $font-weight)
+
+@mixin P3Regular ($font-size: 12px, $font-weight:200)
+    @include Font($font-size, $font-weight)
+
+@mixin P3Bold ($font-size: 12px, $font-weight:bold)
+    @include Font($font-size, $font-weight)
+
+@mixin P4Regular ($font-size: 14px)
+    @include Font($font-size)
+
+@mixin P5Regular ($font-size: 16px)
+    @include Font($font-size)
+
+@mixin P6Bold ($font-size: 16px, $font-weight:bold)
+    @include Font($font-size, $font-weight)
+
+/*Fonts Tag*/
+
+
+/*ButtonsFont*/
+@mixin ButtonFont ($font-size, $text-transform: uppercase)
+    font:
+        family: Ubuntu
+        style: normal
+        weight: bold
+        size: $font-size  
+    color: $MainUnAccent
+    text:
+        transform: $text-transform
+        align: center
+
+@mixin ButtonF1 ($font-size: 20px)
+    @include ButtonFont($font-size)
+
+@mixin ButtonF2 ($font-size: 26px)
+    @include ButtonFont($font-size)
+
+@mixin ButtonF3 ($font-size: 16px)
+    @include ButtonFont($font-size)
+
+@mixin ButtonF4 ($font-size: 20px, $text-transform: none)
+    @include ButtonFont($font-size)
+
+@mixin ButtonF5 ($font-size: 12px)
+    @include ButtonFont($font-size)
+
