@@ -1,10 +1,36 @@
+@import url("presets/fonts.css");
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+    font-family: "Montserrat"
+}
+#root {
+    height: calc(100vh - 70px);
+}
 body {
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: relative
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+*::selection {background: #7C7A98;}
+
+input {
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: normal;
+}
+
+img {
+    pointer-events: none;
+    user-select: none;
+}
+
+input[type='number'] {
+    -moz-appearance: textfield;
 }
