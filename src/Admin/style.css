@@ -1,0 +1,149 @@
+* {
+	box-sizing: border-box;
+}
+body {
+	background-color: #f69a73;
+	font-family: 'Roboto', sans-serif;
+	/* color: #8b8479; */
+	color: #C5C7C9
+}
+.decor {
+	position: relative;
+	max-width: 500px;
+	width: 80vw;
+	margin: 50px auto 0;
+	background: #1c1e1f;
+	border-top-left-radius: 30px;
+	border-top-right-radius: 30px;
+}
+.form-left-decoration, .form-right-decoration {
+	content: "";
+	position: absolute;
+	width: 50px;
+	height: 20px;
+	background: #f69a73;
+	border-radius: 20px;
+}
+.form-left-decoration {
+	bottom: 60px;
+	left: -30px;
+}
+.form-right-decoration {
+	top: 60px;
+	right: -30px;
+}
+.form-left-decoration:before, .form-left-decoration:after, .form-right-decoration:before, .form-right-decoration:after {
+	content: "";
+	position: absolute;
+	width: 50px;
+	height: 20px;
+	border-radius: 30px;
+	background: #1c1e1f;
+}
+.form-left-decoration:before {
+	top: -20px;
+}
+.form-left-decoration:after {
+	top: 20px;
+	left: 10px;
+}
+.form-right-decoration:before {
+	top: -20px;
+	right: 0;
+}
+.form-right-decoration:after {
+	top: 20px;
+	right: 10px;
+}
+.circle {
+	position: absolute;
+	bottom: 80px;
+	left: -55px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #1c1e1f;
+}
+.form-inner, section {
+	padding: 40px;
+}
+.priority_box {
+	display: flex;
+}
+label {
+	display: block;
+	border-top-right-radius: 0%!important;
+	border-bottom-right-radius: 0%!important;
+	border-right: solid 1px #37393b!important;
+}
+.priority {
+	width: fit-content !important;
+	border-top-left-radius: 0%!important;
+	border-bottom-left-radius: 0%!important;
+	border-left: solid 1px #37393b!important;
+}
+.form-inner input, .form-inner textarea, label {
+	display: block;
+	width: 100%;
+	padding: 0 20px;
+	margin-bottom: 10px;
+	background: #27292b;
+	line-height: 40px;
+	border-width: 0;
+	border-radius: 20px;
+	
+}
+.form-inner input[type="submit"] {
+	margin-top: 30px;
+	background-color: rgb(120, 49, 19);
+	color: rgb(201, 199, 197);
+	font-size: 14px;
+}
+.form-inner textarea {
+	resize: none;
+}
+input[type="number"] {
+	color: #C5C7C9
+}
+h3 {
+	margin-top: 0;
+	font-weight: 500;
+	font-size: 24px;
+	
+}
+
+section {
+	position: relative;
+	max-width: 500px;
+	width: 80vw;
+	margin: 0 auto;
+	background: #1c1e1f;
+	border-radius: 30px;
+	/* border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 30px; */
+}
+
+div[class^="priority"]{
+	border-radius: 20px;
+	padding: 0 2vw;
+	margin: .8vh 0;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+div[class$="5"]{
+	background: rgba(100,50,50,.4);
+}
+
+div[class$="4"]{
+	background: rgba(90,50,60,.4);
+}
+div[class$="3"]{
+	background: rgba(80,50,70,.4);
+}
+div[class$="2"]{
+	background: rgba(70,50,80,.4);
+}
+div[class$="1"]{
+	background: rgba(60,50,90,.4);
+}
