@@ -2,7 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom"
 import s from "./navigation.module.sass"
 import {wrapper} from '../presets/wrapper.module.sass'
-import logo from "../img/diz/logo-trans.png"
+import logo from "../img/diz/logo.png"
+// import logo from "../img/diz/logo-trans.png"
 
 const Navigation = () => {
 	return (
