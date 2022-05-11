@@ -180,7 +180,7 @@
         url('./fonts/Montserrat-ExtraBoldItalic.woff') format('woff'),
         url('./fonts/Montserrat-ExtraBoldItalic.ttf') format('truetype'),
         url('./fonts/Montserrat-ExtraBoldItalic.svg#Montserrat-ExtraBoldItalic') format('svg');
-    font-weight: bold;
+    font-weight: 900;
     font-style: italic;
     font-display: swap;
 }
@@ -191,7 +191,7 @@
         url('./fonts/Montserrat-ExtraBold.woff') format('woff'),
         url('./fonts/Montserrat-ExtraBold.ttf') format('truetype'),
         url('./fonts/Montserrat-ExtraBold.svg#Montserrat-ExtraBold') format('svg');
-    font-weight: bold;
+    font-weight: 900;
     font-style: normal;
     font-display: swap;
 }

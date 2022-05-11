@@ -1,4 +1,5 @@
 $MainBackground: #161616
+$LigthBackground: #454545
 
 @mixin Font ($font-size, $font-weight:normal)
     font:
@@ -6,36 +7,36 @@ $MainBackground: #161616
         style: normal
         weight: $font-weight
         size: $font-size   
-        line-height: 150%
+    line-height: 150%    
 
 @mixin H1Regular ($font-size: 16px)
     @include Font($font-size)
 
-@mixin H1Bold ($font-size: 16px, $font-weight:bold)
+@mixin H1Bold ($font-size: 16px, $font-weight: bold)
     @include Font($font-size, $font-weight)
 
 @mixin H2Regular ($font-size: 26px)
     @include Font($font-size)
 
-@mixin H2Bold ($font-size: 26px, $font-weight:bold)
+@mixin H2Bold ($font-size: 26px, $font-weight: bold)
     @include Font($font-size, $font-weight)
 
 @mixin H3Regular ($font-size: 30px)
     @include Font($font-size)
 
-@mixin H3Bold ($font-size: 30px, $font-weight:bold)
+@mixin H3Bold ($font-size: 30px, $font-weight: bold)
     @include Font($font-size, $font-weight)
 
 @mixin H4Regular ($font-size: 36px)
     @include Font($font-size)
 
-@mixin H4Bold ($font-size: 36px, $font-weight:bold)
-    @include Font($font-size)
-
-@mixin H54Regular ($font-size: 66px)
+@mixin H4Bold ($font-size: 36px, $font-weight: bold)
     @include Font($font-size, $font-weight)
 
-@mixin H5Bold ($font-size: 66px, $font-weight:bold) //!! === H5Bold
+@mixin H5Regular ($font-size: 66px)
+    @include Font($font-size, $font-weight)
+
+@mixin H5Bold ($font-size: 66px, $font-weight: bold) //!! === H5Bold
     @include Font($font-size, $font-weight)
 
 
@@ -47,13 +48,13 @@ $MainBackground: #161616
 @mixin P2Regular ($font-size: 10px)
     @include Font($font-size)
 
-@mixin P2Bold ($font-size: 10px, $font-weight:bold)
+@mixin P2Bold ($font-size: 10px, $font-weight: bold)
     @include Font($font-size, $font-weight)
 
 @mixin P3Regular ($font-size: 12px, $font-weight:200)
     @include Font($font-size, $font-weight)
 
-@mixin P3Bold ($font-size: 12px, $font-weight:bold)
+@mixin P3Bold ($font-size: 12px, $font-weight: bold)
     @include Font($font-size, $font-weight)
 
 @mixin P4Regular ($font-size: 14px)
@@ -62,7 +63,7 @@ $MainBackground: #161616
 @mixin P5Regular ($font-size: 16px)
     @include Font($font-size)
 
-@mixin P6Bold ($font-size: 16px, $font-weight:bold)
+@mixin P6Bold ($font-size: 16px, $font-weight: bold)
     @include Font($font-size, $font-weight)
 
 /*Fonts Tag*/
@@ -71,11 +72,11 @@ $MainBackground: #161616
 /*ButtonsFont*/
 @mixin ButtonFont ($font-size, $text-transform: uppercase)
     font:
-        family: Ubuntu
+        family: Montserrat
         style: normal
         weight: bold
         size: $font-size  
-    color: $MainUnAccent
+    color: black
     text:
         transform: $text-transform
         align: center
