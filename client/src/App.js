@@ -7,6 +7,7 @@ import Navigation from './Navigation/Navigation';
 
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Contacts from './Contacts/Contacts';
+import Footer from './Footer/Footer';
 
 function App() {
 	return (
@@ -39,6 +40,7 @@ function App() {
 					element={<Contacts/>}
 				/>
 			</Routes>
+			<Footer/>
 		</Router>
 	);
 }

@@ -6,7 +6,7 @@ async function getMultiple(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
   const rows = await db.query(
     `SELECT * 
-    FROM goods LIMIT ${offset},${config.listPerPage}`
+    FROM banners LIMIT ${offset},${config.listPerPage}`
   );
   const data = helper.emptyOrRows(rows);
   const meta = { page };
@@ -17,12 +17,12 @@ async function getMultiple(page = 1) {
   };
 }
 
-async function create(good) {
+async function create(banner) {
   let data = {
-    name: good.name,
-    description: good.description,
-    photo: good.photo,
-    price: good.price,
+    img: banner.img,
+    head: banner.head,
+    button: banner.button,
+    href: banner.href,
   };
   let sql = "INSERT INTO users SET ?";
   let query = conn.query(sql, data, (err, results) => {
@@ -31,46 +31,46 @@ async function create(good) {
   });
 
   // const result = await db.query(
-  //   `INSERT INTO goods
+  //   `INSERT INTO banners
   //     ('id', 'name', 'description', 'photo', 'price')
   //     VALUES
   //     (NULL, ${name}, ${description}, ${photo}, ${price})`
   // );
 
-  // let message = "Error in creating good";
+  // let message = "Error in creating banner";
 
   // if (result.affectedRows) {
-  //   message = "Good created successfully";
+  //   message = "banner created successfully";
   // }
 
   return { message };
 }
 
-async function update(id, good) {
+async function update(id, banner) {
   const result = await db.query(
-    `UPDATE goods 
+    `UPDATE banners 
         SET 
-            name="${good.name}", description=${good.description}, 
-            photo=${good.photo}, price=${good.price}
+            img="${banner.img}", head=${banner.head}, 
+            button=${banner.button}, href=${banner.href}
         WHERE id=${id}`
   );
 
-  let message = "Error in updating good";
+  let message = "Error in updating banner";
 
   if (result.affectedRows) {
-    message = "Good updating successfully";
+    message = "banner updating successfully";
   }
 
   return { message };
 }
 
 async function remove(id) {
-  const result = await db.query(`DELETE FROM goods WHERE id=${id}`);
+  const result = await db.query(`DELETE FROM banners WHERE id=${id}`);
 
-  let message = "Error in deleting good";
+  let message = "Error in deleting banner";
 
   if (result.affectedRows) {
-    message = "Good deleted successfully";
+    message = "banner deleted successfully";
   }
 
   return { message };

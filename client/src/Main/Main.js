@@ -6,14 +6,16 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useState, useEffect } from "react";
+import { observer } from "mobx-react-lite";
+
 import Banner from "./banners/Banner";
 
-import concert from "../img/banners/kryaken.jpg";
-import alb from "../img/banners/alb.png";
+import BannersStore from "../stores/BannersStore";
 
-const Main = () => {
-  const [slider, setSlider] = useState();
+const Main = observer(() => {
+  // const [slider, setSlider] = useState();
   const [slides, setSlides] = useState([]);
+  const data = BannersStore.getBanners().data
 
   const settingsSlider = {
     infinite: false,
@@ -26,42 +28,34 @@ const Main = () => {
     // beforeChange: (current, next)  => (setActiveIndicator(next))
   };
 
-  const data = [
-    {
-      head: "играли концерт!",
-      button: "смотреть!",
-      img: `${concert}`,
-      href: "",
-    },
-    {
-      head: "наш альбом!",
-      button: "слушать",
-      img: `${alb}`,
-      href: "",
-    },
-  ];
   useEffect(() => {
-	data.map((item) => {
-		slides.push(
-		  <Banner
-			header={item.head}
-			button={item.button}
-			img={item.img}
-			href={item.href}
-		  />
-		);
-	  });
-  }, []);
-  
+    if (data) {
+      const banners = [];
+      data.map((item) =>
+        banners.push(
+          <Banner
+            
+            key={`banner_${item.id}`}
+            header={item.head}
+            button={item.button}
+            img={item.img}
+            href={item.href}
+          />
+        )
+      );
+      setSlides(banners);
+    }
+  }, [data]);
+
   return (
     <div className={`${s.main} ${wrapper}`}>
       <div className={s.main__slider}>
-        <Slider {...settingsSlider} ref={(slider) => setSlider(slider)}>
+        <Slider {...settingsSlider} >
           {slides}
         </Slider>
       </div>
     </div>
   );
-};
+});
 
 export default Main;

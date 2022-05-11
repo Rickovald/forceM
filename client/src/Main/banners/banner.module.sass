@@ -1,9 +1,14 @@
+@import "../../presets/variables"
+
 .banner
     height: calc( 100vh - 70px )
     // background: rgba(0,0,0,.1)
     // background-size: cover
     width: 100%
     position: relative
+    display: flex
+    align-items: center
+    padding: 0 5vw 75px
     &__background
         z-index: -1
         position: absolute
@@ -15,6 +20,20 @@
     &__content
         position: relative
         z-index: 1
+        width: 700px
+        color: #fff
+        display: flex
+        flex-direction: column
+        align-items: baseline
+    &__head
+        @include H4Bold
+        text-transform: uppercase
+        margin-bottom: 35px
+    &__button
+        @include ButtonF1
+        background: #fff
+        padding: 15px 35px
+        font-weight: normal
     &::before
         content: ''
         position: absolute

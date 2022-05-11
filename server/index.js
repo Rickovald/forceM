@@ -4,7 +4,7 @@ const express = require("express");
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 5000; //Line 3
-const goodsRouter = require("./routes/goods");
+const bannersRouter = require("./routes/banners");
 const cors = require("cors");
 const corsOptions = {
   origin: "*",
@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
 
-app.use("/goods", goodsRouter);
+app.use("/banners", bannersRouter);
 
 // app.use(session({
 //   resave: false, // don't save session if unmodified

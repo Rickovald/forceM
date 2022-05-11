@@ -1,20 +1,20 @@
 const express = require("express");
 const router = express.Router();
-const goods = require("../services/goods");
+const banners = require("../services/banners");
 
-/* GET goods. */
+/* GET banners. */
 router.get("/", async function (req, res, next) {
   try {
-    res.json(await goods.getMultiple(req.query.page));
+    res.json(await banners.getMultiple(req.query.page));
   } catch (err) {
-    console.error(`Error while getting goods `, err.message);
+    console.error(`Error while getting banners `, err.message);
     next(err);
   }
 });
 
 router.post("/", async function (req, res, next) {
   try {
-    res.json(await goods.create(req.body));
+    res.json(await banners.create(req.body));
   } catch (err) {
     console.error(`Error while creating good`, err.message);
     next(err);
@@ -32,7 +32,7 @@ router.put("/:id", async function (req, res, next) {
 
 router.delete('/:id', async function(req, res, next) {
     try {
-      res.json(await goods.remove(req.params.id));
+      res.json(await banners.remove(req.params.id));
     } catch (err) {
       console.error(`Error while deleting good`, err.message);
       next(err);
