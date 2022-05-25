@@ -15,7 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- База данных: `fm`
@@ -33,7 +33,7 @@ CREATE TABLE `banners` (
   `head` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `button` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `href` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Дамп данных таблицы `banners`
@@ -57,7 +57,7 @@ CREATE TABLE `concerts` (
   `city` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `place` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `group` varchar(400) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Дамп данных таблицы `concerts`
@@ -72,22 +72,22 @@ INSERT INTO `concerts` (`id`, `date`, `country`, `tickets`, `city`, `place`, `gr
 -- Структура таблицы `concert_program`
 --
 
-CREATE TABLE `concert_program` (
-  `id` int NOT NULL,
-  `name` varchar(30) NOT NULL,
-  `cover` tinyint(1) NOT NULL,
-  `difficulty` tinyint NOT NULL,
-  `comments` varchar(100) NOT NULL,
-  `place` int NOT NULL,
-  `concert_name` varchar(30) NOT NULL,
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CREATE TABLE `concert_program` (
+    `id` int NOT NULL,
+    `name` varchar(30) NOT NULL,
+    `cover` tinyint(1) NOT NULL,
+    `difficulty` tinyint NOT NULL,
+    `comments` varchar(100) NOT NULL,
+    `place` int NOT NULL,
+    `concert_name` varchar(30) NOT NULL
+  ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Дамп данных таблицы `concert_program`
---
+  --
+  -- Дамп данных таблицы `concert_program`
+  --
 
-INSERT INTO `concert_program` (`id`, `name`, `cover`, `difficulty`, `comments`, `place`, `concert_name`) VALUES
-(1, 'Force-Minor - Кривой Роцк', 0, 3, 'Трудно держать ритм на слабой доле. Насть, пропиши барабаны', 1, 'Тот куда Тортан позвал');
+  INSERT INTO `concert_program` (`id`, `name`, `cover`, `difficulty`, `comments`, `place`, `concert_name`) VALUES
+  (1, 'Force-Minor - Кривой Роцк', 0, 3, 'Трудно держать ритм на слабой доле. Насть, пропиши барабаны', 1, 'Тот куда Тортан позвал');
 
 -- --------------------------------------------------------
 
@@ -102,7 +102,7 @@ CREATE TABLE `discography` (
   `songlist` varchar(70) NOT NULL,
   `href` varchar(100) NOT NULL,
   `image` varchar(70) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Дамп данных таблицы `discography`
