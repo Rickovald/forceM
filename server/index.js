@@ -5,6 +5,10 @@ const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 5000; //Line 3
 const bannersRouter = require("./routes/banners");
+const concertsRouter = require("./routes/concerts");
+const programsRouter = require("./routes/programs");
+const albumsRouter = require("./routes/albums");
+const songsRouter = require("./routes/songs");
 const cors = require("cors");
 const corsOptions = {
   origin: "*",
@@ -27,7 +31,10 @@ app.get("/", (req, res) => {
 });
 
 app.use("/banners", bannersRouter);
-
+app.use("/concerts", concertsRouter);
+app.use("/programs", programsRouter);
+app.use("/albums", albumsRouter);
+app.use("/songs", songsRouter);
 // app.use(session({
 //   resave: false, // don't save session if unmodified
 //   saveUninitialized: false, // don't create session until something stored
