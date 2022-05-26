@@ -73,7 +73,7 @@ INSERT INTO `concerts` (`id`, `date`, `country`, `tickets`, `city`, `place`, `gr
 --
 
 CREATE TABLE `concert_program` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(30) NOT NULL,
   `cover` tinyint(1) NOT NULL,
   `difficulty` tinyint(4) NOT NULL,
@@ -96,7 +96,7 @@ INSERT INTO `concert_program` (`id`, `name`, `cover`, `difficulty`, `comments`, 
 --
 
 CREATE TABLE `discography` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `name` varchar(50) NOT NULL,
   `year` smallint(6) NOT NULL,
   `href` varchar(100) NOT NULL,
@@ -117,10 +117,10 @@ INSERT INTO `discography` (`id`, `name`, `year`, `href`, `image`) VALUES
 --
 
 CREATE TABLE `songs` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `id_in_album` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `album_id` int(11) NOT NULL
+  `album_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -175,31 +175,31 @@ ALTER TABLE `songs`
 -- AUTO_INCREMENT для таблицы `banners`
 --
 ALTER TABLE `banners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `concerts`
 --
 ALTER TABLE `concerts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `concert_program`
 --
 ALTER TABLE `concert_program`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `discography`
 --
 ALTER TABLE `discography`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `songs`
 --
 ALTER TABLE `songs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
