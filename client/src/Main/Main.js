@@ -9,37 +9,33 @@ import { useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
 import Banner from "./banners/Banner";
 import BannersStore from "../stores/BannersStore";
-import { toJS } from "mobx";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Pagination, Navigation } from "swiper";
+import "swiper/scss/pagination";
+import "swiper/scss/navigation";
+// import ss from "swiper/scss/navigation";
+// import sss from "swiper/scss/pagination";
+import "swiper/css";
+import "./swiper.sass";
 
 const Main = observer(() => {
-  // const [slider, setSlider] = useState();
   const [slides, setSlides] = useState([]);
-  const data = BannersStore.getBanners().data
-
-  // const settingsSlider = {
-  //   infinite: false,
-  //   easing: "ease",
-  //   speed: 700,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   arrows: false,
-  //   swipeToSlide: true,
-  //   // beforeChange: (current, next)  => (setActiveIndicator(next))
-  // };
-
+  const data = BannersStore.getBanners().data;
   useEffect(() => {
     if (data) {
       const banners = [];
       data.map((item) =>
         banners.push(
-          <Banner
-            
-            key={`banner_${item.id}`}
-            header={item.head}
-            button={item.button}
-            img={item.img}
-            href={item.href}
-          />
+          <SwiperSlide>
+            <Banner
+              key={`banner_${item.id}`}
+              header={item.head}
+              button={item.button}
+              img={item.img}
+              href={item.href}
+            />
+          </SwiperSlide>
         )
       );
       setSlides(banners);
@@ -48,13 +44,21 @@ const Main = observer(() => {
 
   return (
     <div className={`${s.main}`}>
-      <div className={s.main__slider}>
-      {slides}
-      {console.log(toJS(data), slides)}
-        {/* <Slider {...settingsSlider} >
+      <Swiper
+        spaceBetween={50}
+        modules={[Pagination, Navigation]}
+        pagination={{
+          dynamicBullets: true,
+          clickable: true,
+        }}
+        navigation={true}
+        className={s.main__slider}
+      >
+        {slides}
+      </Swiper>
+      {/* <Slider {...settingsSlider} >
           
         </Slider> */}
-      </div>
     </div>
   );
 });
