@@ -16,16 +16,16 @@ router.post("/", async function (req, res, next) {
   try {
     res.json(await banners.create(req.body));
   } catch (err) {
-    console.error(`Error while creating good`, err.message);
+    console.error(`Error while creating banner`, err.message);
     next(err);
   }
 });
 
 router.put("/:id", async function (req, res, next) {
   try {
-    res.json(await good.update(req.params.id, req.body));
+    res.json(await banners.update(req.params.id, req.body));
   } catch (err) {
-    console.error(`Error while updating good`, err.message);
+    console.error(`Error while updating banner`, err.message);
     next(err);
   }
 });
@@ -34,7 +34,7 @@ router.delete('/:id', async function(req, res, next) {
     try {
       res.json(await banners.remove(req.params.id));
     } catch (err) {
-      console.error(`Error while deleting good`, err.message);
+      console.error(`Error while deleting banner`, err.message);
       next(err);
     }
   });

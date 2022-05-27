@@ -3,8 +3,8 @@ import postSetting from "./post.json";
 
 class BannersService {
   get = async () => {
-    return await fetch("http://localhost:5000/banners", getSetting).then((response) =>
-      response.json()
+    return await fetch("http://localhost:5000/albums", getSetting).then(
+      (response) => response.json()
     );
   };
   post = (json) => {
@@ -17,7 +17,8 @@ class BannersService {
         price: json.price,
       }),
     };
-    return fetch("http://localhost:5000/banners", settings);
+
+    return fetch("http://localhost:5000/albums", settings);
   };
 }
 

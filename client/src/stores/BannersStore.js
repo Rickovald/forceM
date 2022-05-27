@@ -7,7 +7,7 @@ class BannersStore {
   constructor() {
     makeAutoObservable(this);
 
-    this.loadBanners();
+    this.fetchBanners();
   }
 
   setBanners = (banners) => {
@@ -18,20 +18,22 @@ class BannersStore {
     return this.banners;
   };
 
-  loadBanners =  () => {
-    this.bannersService.get()
-        .then(response => response.json())
-        .then(json => {
-            this.setBanners(json)
-        })
-        .catch(err => {
-            console.error(err)
-        })
-  };
+
   uploadBanners = (json) => {
-    console.log(json);
-    this.bannersService.post(json)
-};
+    this.bannersService.post(json);
+  };
+  *fetchBanners() {
+    this.banners = [];
+    this.state = "pending";
+    try {
+      // Yield instead of await.
+      const banners = yield this.bannersService.get();
+      this.state = "done";
+      this.setBanners(banners);
+    } catch (error) {
+      this.state = "error";
+    }
+  }
 }
 
 export default new BannersStore();

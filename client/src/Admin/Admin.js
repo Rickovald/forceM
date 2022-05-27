@@ -1,5 +1,4 @@
 import s from "./admin.module.sass"
-import {wrapper} from '../presets/wrapper.module.sass'
 import list from "./song_list.json"
 
 const Admin = () => {
@@ -8,7 +7,7 @@ const Admin = () => {
 	});
 	
 	return (
-		<div className={`${s.admin} ${wrapper}`}>
+		<div className={`${s.admin}`}>
 			
 			<div className={s.admin__list}>
 				<h2 className={s.admin__header}>Список песен на концерт</h2>

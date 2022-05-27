@@ -24,7 +24,7 @@ async function create(banner) {
     button: banner.button,
     href: banner.href,
   };
-  let sql = "INSERT INTO users SET ?";
+  let sql = "INSERT INTO banners SET ?";
   let query = conn.query(sql, data, (err, results) => {
     if (err) throw err;
     res.send(JSON.stringify({ status: 200, error: null, response: results }));
@@ -32,9 +32,9 @@ async function create(banner) {
 
   // const result = await db.query(
   //   `INSERT INTO banners
-  //     ('id', 'name', 'description', 'photo', 'price')
+  //     ('id', 'img', 'head', 'button', 'href')
   //     VALUES
-  //     (NULL, ${name}, ${description}, ${photo}, ${price})`
+  //     (NULL, ${img}, ${head}, ${button}, ${href})`
   // );
 
   // let message = "Error in creating banner";
@@ -43,7 +43,7 @@ async function create(banner) {
   //   message = "banner created successfully";
   // }
 
-  return { message };
+  // return { message };
 }
 
 async function update(id, banner) {

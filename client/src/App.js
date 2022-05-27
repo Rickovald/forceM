@@ -8,6 +8,7 @@ import Navigation from './Navigation/Navigation';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Contacts from './Contacts/Contacts';
 import Footer from './Footer/Footer';
+import Album from './Album/Album';
 
 function App() {
 	return (
@@ -29,6 +30,11 @@ function App() {
 					// caseSensitive={false} 
 					element={<Albums/>}
 				/>
+				<Route 
+				   path='/album/:id'
+				   // caseSensitive={false} 
+				   element={<Album/>}
+			   />
 				<Route 
 					path='/admin'
 					// caseSensitive={false} 
