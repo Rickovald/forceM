@@ -50,7 +50,6 @@ const Main = observer(() => {
     <div className={`${s.main}`}>
       <div className={s.main__slider}>
       {slides}
-      жопа
       {console.log(toJS(data), slides)}
         {/* <Slider {...settingsSlider} >
           
