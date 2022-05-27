@@ -2,14 +2,12 @@ import s from "./main.module.sass";
 import { wrapper } from "../presets/wrapper.module.sass";
 
 import Slider from "react-slick";
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 import { useState, useEffect } from "react";
 import { observer } from "mobx-react-lite";
-
 import Banner from "./banners/Banner";
-
 import BannersStore from "../stores/BannersStore";
 
 const Main = observer(() => {
