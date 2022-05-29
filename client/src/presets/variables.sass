@@ -1,6 +1,7 @@
 $MainBackground: #161616
 $LigthBackground: #454545
 
+$FastTransition: .2s ease-in-out
 @mixin Font ($font-size, $font-weight:normal)
     font:
         family: Montserrat
@@ -39,7 +40,6 @@ $LigthBackground: #454545
 @mixin H5Bold ($font-size: 66px, $font-weight: bold) //!! === H5Bold
     @include Font($font-size, $font-weight)
 
-
 /*Paragraph*/
 
 @mixin P1Regular ($font-size: 9px)
@@ -68,7 +68,6 @@ $LigthBackground: #454545
 
 /*Fonts Tag*/
 
-
 /*ButtonsFont*/
 @mixin ButtonFont ($font-size, $text-transform: uppercase)
     font:
@@ -96,3 +95,22 @@ $LigthBackground: #454545
 @mixin ButtonF5 ($font-size: 12px)
     @include ButtonFont($font-size)
 
+@mixin Wrapper
+    width: 100%
+    background: url("../img/backs/000.jpg")
+    color: white
+    min-height: calc( 100vh - 80px )
+    position: relative
+    padding: 40px 5vw 75px
+    display: flex
+    justify-content: space-between
+    flex-direction: column
+    // flex-wrap: wrap
+    align-items: center
+
+@mixin Content
+    width: 100%
+    max-width: 1000px
+    padding: 10px
+    overflow: hidden
+    border-radius: 8px
