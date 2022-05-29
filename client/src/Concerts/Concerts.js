@@ -22,6 +22,7 @@ const Concerts = observer(() => {
           <tbody>
             <tr className={s.concerts__row_head}>
               <th className={s.concerts__cell}>Дата</th>
+              <th className={s.concerts__cell}>Страна</th>
               <th className={s.concerts__cell}>Город</th>
               <th className={s.concerts__cell}>Цена на билет</th>
               <th className={s.concerts__cell}>Билеты</th>
@@ -34,6 +35,7 @@ const Concerts = observer(() => {
                   <th className={s.concerts__cell}>
                     {date.getDay()}-{date.getMonth() + 1}-{date.getFullYear()}
                   </th>
+                  <th className={s.concerts__cell}>{item.country}</th>
                   <th className={s.concerts__cell}>{item.city}</th>
                   <th className={s.concerts__cell}>{item.tickets_price}</th>
                   <th className={s.concerts__cell}>
