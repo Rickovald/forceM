@@ -1,5 +1,6 @@
 $MainBackground: #161616
 $LigthBackground: #454545
+$TextColor: #D3D2DB
 
 $FastTransition: .2s ease-in-out
 @mixin Font ($font-size, $font-weight:normal)
@@ -98,7 +99,7 @@ $FastTransition: .2s ease-in-out
 @mixin Wrapper
     width: 100%
     background: url("../img/backs/000.jpg")
-    color: white
+    color: $TextColor
     min-height: calc( 100vh - 80px )
     position: relative
     padding: 40px 5vw 75px
@@ -106,7 +107,17 @@ $FastTransition: .2s ease-in-out
     justify-content: space-between
     flex-direction: column
     // flex-wrap: wrap
+    // z-index: -2
     align-items: center
+    // &::after
+    //     content: ""
+    //     position: absolute
+    //     top: 0
+    //     left: 0
+    //     right: 0
+    //     bottom: 0
+    //     z-index: -1
+    //     backdrop-filter: grayscale(75%) hue-rotate(170deg) sepia(55%) // blur(1px)
 
 @mixin Content
     width: 100%
