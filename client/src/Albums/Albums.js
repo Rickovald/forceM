@@ -9,20 +9,27 @@ const Albums = observer(() => {
   const [slides, setSlides] = useState([]);
   const data = AlbumsStore.getAlbums().data;
   useEffect(() => {
+    const slides = []
     if (data) {
-      setSlides(data);
+      for (let i = 0; i <= 1; i++) {
+        slides.push(data[0])
+      }
+      setSlides(slides)
     }
   }, [data]);
   return (
     <div className={`${s.albums}`}>
-      <h1>Discography</h1>
-      {slides.map((item) => {
+      {/* <h1>Discography</h1> */}
+      {slides.map((item, index) => {
         return (
           <Banner
-            key={`banner_${item.id}`}
+            key={`banner_${index}`}
             header={item.name}
-            img={item.img}
-						id={item.id}
+            img={item.image}
+            year={item.year}
+            side={index % 2}
+            desc={item.desc}
+            id={item.id}
             // href={item.href}
           />
         );

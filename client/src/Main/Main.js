@@ -11,7 +11,7 @@ import Banner from "./banners/Banner";
 import BannersStore from "../stores/BannersStore";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Navigation } from "swiper";
+import { Navigation } from "swiper";
 import "swiper/scss/pagination";
 import "swiper/scss/navigation";
 // import ss from "swiper/scss/navigation";
@@ -27,9 +27,8 @@ const Main = observer(() => {
       const banners = [];
       data.map((item) =>
         banners.push(
-          <SwiperSlide>
+          <SwiperSlide key={`banner_${item.id}`}>
             <Banner
-              key={`banner_${item.id}`}
               header={item.head}
               button={item.button}
               img={item.img}
@@ -46,11 +45,14 @@ const Main = observer(() => {
     <div className={`${s.main}`}>
       <Swiper
         spaceBetween={50}
-        modules={[Pagination, Navigation]}
-        pagination={{
-          dynamicBullets: true,
-          clickable: true,
-        }}
+        modules={[
+          // Pagination,
+          Navigation,
+        ]}
+        // pagination={{
+        //   dynamicBullets: true,
+        //   clickable: true,
+        // }}
         navigation={true}
         className={s.main__slider}
       >
