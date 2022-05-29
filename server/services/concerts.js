@@ -23,6 +23,7 @@ async function create(concert) {
     date: concert.date,
     country: concert.country,
     tickets: concert.tickets,
+    tickets_price: concert.tickets_price,
     city: concert.city,
     place: concert.place,
     group: concert.group,

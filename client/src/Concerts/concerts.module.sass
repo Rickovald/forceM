@@ -1,0 +1,32 @@
+@import "../presets/variables"
+$radius: 20px
+
+.concerts
+    @include Wrapper
+    justify-content: flex-start
+    &__table
+        // border-collapse: collapse
+        border-collapse: separate
+        border-spacing: 0px 8px
+        &_wrapper
+            padding: 20px
+    // &__row
+    &__cell
+        min-width: 100px
+        padding: 15px 20px
+        // border: 2px solid black
+        background: $MainBackground
+        border-right: 2px solid black
+        &:first-child
+            border-radius: $radius 0 0 $radius
+
+        &:last-child
+            border-radius: 0 $radius $radius 0
+
+            border-right: none
+    &__href
+        text-decoration: underline
+        color: $TextColor
+        // transition: $FastTransition
+        &:hover
+            color: white
