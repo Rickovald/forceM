@@ -1,5 +1,5 @@
 // import {wrapper} from '../presets/wrapper.module.sass'
-import { toJS } from "mobx";
+// import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import ConcertsStore from "../stores/ConcertsStore";
@@ -9,10 +9,18 @@ const Concerts = observer(() => {
   const [concerts, setConcerts] = useState([]);
   const data = ConcertsStore.getConcerts().data;
   useEffect(() => {
+    const slides = []
     if (data) {
-      setConcerts(data);
-      console.log(toJS(data));
+      for (let i = 0; i <= 6; i++) {
+        slides.push(data[0])
+      }
+      setConcerts(slides)
     }
+
+    // if (data) {
+    //   setConcerts(data,data);
+    //   console.log(concerts);
+    // }
   }, [data]);
   return (
     <div className={`${s.concerts}`}>

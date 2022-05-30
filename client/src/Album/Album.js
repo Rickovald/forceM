@@ -4,7 +4,6 @@ import { useParams } from "react-router";
 import AlbumsStore from "../stores/AlbumsStore";
 import { useEffect, useState } from "react";
 import SongsStore from "../stores/SongsStore";
-import { toJS } from "mobx";
 
 const Album = observer(() => {
   // const { id } = match.params;
@@ -27,10 +26,8 @@ const Album = observer(() => {
   useEffect(() => {
     const songs = [];
     if (songsData) {
-      console.log(toJS(songsData));
       songsData.map((item) => {
         if (item.album_id.toString() === params.id) {
-          console.log(toJS(item));
           songs.push(item);
         }
         return "";
@@ -38,8 +35,6 @@ const Album = observer(() => {
       setSongs(songs);
     }
   }, [songsData, params.id]);
-  console.log(songs);
-  // console.log(album.image);
 
   return (
     <div className={`${s.album}`}>

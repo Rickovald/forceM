@@ -1,7 +1,8 @@
 const db = require("./db")
 const helper = require("../helper")
 const config = require("../config")
-
+const bcrypt = require('bcrypt')
+const salt = bcrypt.genSaltSync(10);
 async function getMultiple(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage)
 
@@ -19,10 +20,11 @@ async function getMultiple(page = 1) {
 }
 
 async function create(user) {
+  let passToSave = bcrypt.hashSync(user.password, salt)
   let data = {
     role: user.role,
     name: user.name,
-    password: user.password,
+    password: passToSave,
     hint: user.hint,
   };
   let sql = "INSERT INTO discography SET ?";
@@ -48,11 +50,13 @@ async function create(user) {
 }
 
 async function update(id, user) {
+  
+  let passToSave = bcrypt.hashSync(user.password, salt)
   const result = await db.query(
     `UPDATE discography 
         SET 
             role="${user.role}", name=${user.name}, 
-            password=${user.password}, hint=${user.hint}
+            password=${passToSave}, hint=${user.hint}
         WHERE id=${id}`
   );
 
