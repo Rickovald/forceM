@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Май 26 2022 г., 15:38
+-- Время создания: Июн 05 2022 г., 17:40
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.1.33
 
@@ -53,6 +53,7 @@ CREATE TABLE `concerts` (
   `id` int(11) NOT NULL,
   `date` date NOT NULL,
   `country` varchar(50) NOT NULL,
+  `tickets_price` varchar(40) NOT NULL,
   `tickets` varchar(400) NOT NULL,
   `city` varchar(50) NOT NULL,
   `place` varchar(20) NOT NULL,
@@ -63,8 +64,8 @@ CREATE TABLE `concerts` (
 -- Дамп данных таблицы `concerts`
 --
 
-INSERT INTO `concerts` (`id`, `date`, `country`, `tickets`, `city`, `place`, `group`) VALUES
-(1, '2022-02-25', 'Россия', '200 ₽', 'Москва', 'МосквоМеняльник', 'https://vk.com/force_minor');
+INSERT INTO `concerts` (`id`, `date`, `country`, `tickets_price`, `tickets`, `city`, `place`, `group`) VALUES
+(1, '2022-02-25', 'Россия', '200 ₽', 'https://vk.com/domnepomer?w=wall-205245784_439', 'Москва', 'МосквоМеняльник', 'https://vk.com/force_minor');
 
 -- --------------------------------------------------------
 
@@ -73,7 +74,7 @@ INSERT INTO `concerts` (`id`, `date`, `country`, `tickets`, `city`, `place`, `gr
 --
 
 CREATE TABLE `concert_program` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `cover` tinyint(1) NOT NULL,
   `difficulty` tinyint(4) NOT NULL,
@@ -96,19 +97,20 @@ INSERT INTO `concert_program` (`id`, `name`, `cover`, `difficulty`, `comments`, 
 --
 
 CREATE TABLE `discography` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `year` smallint(6) NOT NULL,
   `href` varchar(100) NOT NULL,
-  `image` varchar(70) NOT NULL
+  `image` varchar(70) NOT NULL,
+  `desc` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `discography`
 --
 
-INSERT INTO `discography` (`id`, `name`, `year`, `href`, `image`) VALUES
-(1, 'Debut', 2022, 'https://vk.com/music/playlist/-184530709_1', '/images/debut.webp');
+INSERT INTO `discography` (`id`, `name`, `year`, `href`, `image`, `desc`) VALUES
+(1, 'Debut', 2022, 'https://vk.com/music/playlist/-184530709_1', '/images/debut.webp', 'Дебютный альбом нашей группы состоящий из совершенно разношерстных песен, ибо каждый вложился в него по своему, но это не делает общую картину хуже:)');
 
 -- --------------------------------------------------------
 
@@ -117,10 +119,10 @@ INSERT INTO `discography` (`id`, `name`, `year`, `href`, `image`) VALUES
 --
 
 CREATE TABLE `songs` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `id_in_album` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `album_id` int NOT NULL
+  `album_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -130,6 +132,27 @@ CREATE TABLE `songs` (
 INSERT INTO `songs` (`id`, `id_in_album`, `name`, `album_id`) VALUES
 (1, 1, 'Мечты', 1),
 (2, 2, 'Тени', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `role` varchar(50) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `password` varchar(256) NOT NULL,
+  `hint` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `users`
+--
+
+INSERT INTO `users` (`id`, `role`, `name`, `password`, `hint`) VALUES
+(1, 'admin', 'ricko', '$2b$10$UfKtj8CTxfQsQiG.sAvz3.UEQWWj2B.K9aai9GhadYusxdt2ylNKm', 'проверь хеши!');
 
 --
 -- Индексы сохранённых таблиц
@@ -168,6 +191,12 @@ ALTER TABLE `songs`
   ADD KEY `album_id` (`album_id`);
 
 --
+-- Индексы таблицы `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
@@ -175,31 +204,37 @@ ALTER TABLE `songs`
 -- AUTO_INCREMENT для таблицы `banners`
 --
 ALTER TABLE `banners`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `concerts`
 --
 ALTER TABLE `concerts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `concert_program`
 --
 ALTER TABLE `concert_program`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `discography`
 --
 ALTER TABLE `discography`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `songs`
 --
 ALTER TABLE `songs`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT для таблицы `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
