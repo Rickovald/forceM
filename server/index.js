@@ -9,6 +9,7 @@ const concertsRouter = require("./routes/concerts");
 const programsRouter = require("./routes/programs");
 const albumsRouter = require("./routes/albums");
 const songsRouter = require("./routes/songs");
+const userRouter = require("./routes/users");
 const cors = require("cors");
 const corsOptions = {
   origin: "*",
@@ -35,6 +36,7 @@ app.use("/concerts", concertsRouter);
 app.use("/programs", programsRouter);
 app.use("/albums", albumsRouter);
 app.use("/songs", songsRouter);
+app.use("/user", userRouter);
 // app.use(session({
 //   resave: false, // don't save session if unmodified
 //   saveUninitialized: false, // don't create session until something stored

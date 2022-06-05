@@ -1,13 +1,14 @@
 import getSetting from "./get.json";
 import postSetting from "./post.json";
 
-class BannersService {
-  get = async () => {
-    return await fetch("http://localhost:5000/albums", getSetting).then(
+class AlbumsService {
+  static get = async () => {
+    return await fetch("http://localhost:5000/albums", getSetting)
+    .then(
       (response) => response.json()
     );
   };
-  post = (json) => {
+  static post = (json) => {
     const settings = {
       ...postSetting,
       body: JSON.stringify({
@@ -22,4 +23,4 @@ class BannersService {
   };
 }
 
-export default BannersService;
+export default AlbumsService;

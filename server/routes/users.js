@@ -12,6 +12,15 @@ router.get("/", async function (req, res, next) {
   }
 });
 
+router.post("/login", async function (req, res, next) {
+  try {
+    res.json(await users.login(req.body));
+  } catch (err) {
+    console.error(`Error while loggining`, err.message);
+    next(err);
+  }
+});
+
 router.post("/", async function (req, res, next) {
   try {
     res.json(await users.create(req.body));
@@ -30,13 +39,13 @@ router.put("/:id", async function (req, res, next) {
   }
 });
 
-router.delete('/:id', async function(req, res, next) {
-    try {
-      res.json(await users.remove(req.params.id));
-    } catch (err) {
-      console.error(`Error while deleting user`, err.message);
-      next(err);
-    }
-  });
+router.delete("/:id", async function (req, res, next) {
+  try {
+    res.json(await users.remove(req.params.id));
+  } catch (err) {
+    console.error(`Error while deleting user`, err.message);
+    next(err);
+  }
+});
 
 module.exports = router;

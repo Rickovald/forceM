@@ -8,7 +8,7 @@ const Admin = () => {
 	
 	return (
 		<div className={`${s.admin}`}>
-			
+			<input />
 			<div className={s.admin__list}>
 				<h2 className={s.admin__header}>Список песен на концерт</h2>
 				{sorted_list.map ((item, index) => {
