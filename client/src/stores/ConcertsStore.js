@@ -27,7 +27,7 @@ class ConcertsStore {
       // Yield instead of await.
       const concerts = yield ConcertsService.get();
       this.state = COMPLETE_STATUS;
-      this.setConcerts(concerts);
+      this.setConcerts(concerts.data);
     } catch (error) {
       this.state = ERROR_STATUS;
     }

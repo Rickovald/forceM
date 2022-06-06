@@ -29,6 +29,7 @@ const Album = observer(() => {
       songsData.map((item) => {
         if (item.album_id.toString() === params.id) {
           songs.push(item);
+          
         }
         return "";
       });

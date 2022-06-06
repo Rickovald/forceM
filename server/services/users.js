@@ -111,7 +111,7 @@ async function refresh(refreshToken) {
     return "Пользователь не авторизован"
   }
 
-  const userData = tokenService.validateRefreshToken(refreshToken);
+  const userData = await tokenService.validateRefreshToken(refreshToken);
   const tokenFromDb = await tokenService.findToken(refreshToken);
   if (!userData || !tokenFromDb) {
     return "Пользователь не авторизован"
@@ -125,7 +125,7 @@ async function refresh(refreshToken) {
     role: "admin",
   };
 
-  const tokens = tokenService.generateTokens({ ...userDto });
+  const tokens = await tokenService.generateTokens({ ...userDto });
 
   await tokenService.saveToken(userDto.id, tokens.refreshToken);
   return { ...tokens, user: userDto };

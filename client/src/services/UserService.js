@@ -1,15 +1,15 @@
 import $api from "./index";
 
 export default class AuthService {
-  static async login(login, password) {
+  static login = async (login, password) => {
     return await $api.post("/login", { login, password });
   }
 
-  static async registration(name, password) {
+  static registration = async (name, password) => {
     return await $api.post("/user", { name, password });
   }
 
-  static async logout() {
+  static logout = async () => {
     return await $api.post("/logout");
   }
 }

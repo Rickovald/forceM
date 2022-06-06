@@ -5,6 +5,7 @@ const config = {
     user: "root",
     password: "",
     database: "fm",
+    connectionLimit: 10,
   },
   listPerPage: 10,
 };

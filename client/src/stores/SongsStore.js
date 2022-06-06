@@ -2,9 +2,7 @@ import { flow, makeAutoObservable } from "mobx";
 import SongsService from "../services/SongsService";
 import { LOADING_STATUS, COMPLETE_STATUS, ERROR_STATUS } from "./constants";
 
-
 class SongsStore {
-
   songs = [];
   state = LOADING_STATUS;
 
@@ -27,10 +25,9 @@ class SongsStore {
     try {
       // Yield instead of await.
       const songs = yield SongsService.get();
-      console.log(songs);
 
       this.state = COMPLETE_STATUS;
-      this.setSongs(songs);
+      this.setSongs(songs.data);
     } catch (error) {
       this.state = ERROR_STATUS;
     }

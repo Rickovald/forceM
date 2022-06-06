@@ -26,7 +26,7 @@ class AlbumsStore {
       // Yield instead of await.
       const albums = yield AlbumsService.get();
       this.state = COMPLETE_STATUS;
-      this.setAlbums(albums);
+      this.setAlbums(albums.data);
     } catch (error) {
       this.state = ERROR_STATUS;
     }

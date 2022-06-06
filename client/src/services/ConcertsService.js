@@ -1,27 +1,11 @@
-import getSetting from "./get.json";
-import postSetting from "./post.json";
+import $api from "./index";
 
 class BannersService {
   static get = async () => {
-    return await fetch("http://localhost:5000/concerts", getSetting).then(
-      (response) => response.json()
-    );
+    return await $api.get("/concerts");
   };
-  static post = (json) => {
-    const settings = {
-      ...postSetting,
-      body: JSON.stringify({
-        date: json.date,
-        country: json.country,
-        tickets: json.tickets,
-        tickets_price: json.tickets_price,
-        city: json.city,
-        place: json.place,
-        group : json.group,
-      }),
-    };
-
-    return fetch("http://localhost:5000/concerts", settings);
+  static post = async (date, country, tickets, tickets_price, city, place, group) => {
+    return await $api.post("/concerts",  { date, country, tickets, tickets_price, city, place, group });
   };
 }
 

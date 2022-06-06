@@ -55,7 +55,6 @@ router.delete("/:id", async function (req, res, next) {
 
 router.get("/refresh", async function (req, res, next) {
   try {
-    console.log("000");
     const {refreshToken} = req.cookies;
     const userData = await users.refresh(refreshToken);
     res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})

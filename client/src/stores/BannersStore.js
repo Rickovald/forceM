@@ -32,7 +32,7 @@ class BannersStore {
       // Yield instead of await.
       const banners = yield BannersService.get();
       this.state = COMPLETE_STATUS;
-      this.setBanners(banners);
+      this.setBanners(banners.data);
     } catch (error) {
       this.state = ERROR_STATUS;
     }
