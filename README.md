@@ -1,14 +1,27 @@
-# forceM
-My music band website
+# Force Minor
 
-Запуск
+Сайт группы Force Minor
 
-Сервера
+## Запуск
+
+### Сервера
+```Bash
 cd server
-npm i (если нет модулей)
+```
+```Node
+npm i #(если нет модулей)
+```
+```Node
 npm run dev
+```
 
-Клиента
+### Клиента
+```Bash
 cd client
-npm i (если нет модулей)
+```
+```Node
+npm i #(если нет модулей)
+```
+```Node
 npm start
+```
