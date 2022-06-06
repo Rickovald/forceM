@@ -1,5 +1,3 @@
-// import {wrapper} from '../presets/wrapper.module.sass'
-// import { toJS } from "mobx";
 import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import ConcertsStore from "../stores/ConcertsStore";
@@ -11,16 +9,11 @@ const Concerts = observer(() => {
   useEffect(() => {
     const slides = []
     if (data) {
-      for (let i = 0; i <= 6; i++) {
-        slides.push(data[0])
+      for (let i = 0; i < data.length; i++) {
+        slides.push(data[i])
       }
       setConcerts(slides)
     }
-
-    // if (data) {
-    //   setConcerts(data,data);
-    //   console.log(concerts);
-    // }
   }, [data]);
   return (
     <div className={`${s.concerts}`}>
@@ -41,7 +34,7 @@ const Concerts = observer(() => {
               return (
                 <tr key={`concert_${index}`} className={s.concerts__row}>
                   <th className={s.concerts__cell}>
-                    {date.getDay()}-{date.getMonth() + 1}-{date.getFullYear()}
+                    {date.getDate()}-{date.getMonth() + 1}-{date.getFullYear()}
                   </th>
                   <th className={s.concerts__cell}>{item.country}</th>
                   <th className={s.concerts__cell}>{item.city}</th>

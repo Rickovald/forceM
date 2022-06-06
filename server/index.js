@@ -18,7 +18,6 @@ const corsOptions = {
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
-console.log("Port:", process.env.PORT);
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());

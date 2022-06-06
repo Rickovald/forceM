@@ -46,21 +46,13 @@ const Main = observer(() => {
       <Swiper
         spaceBetween={50}
         modules={[
-          // Pagination,
           Navigation,
         ]}
-        // pagination={{
-        //   dynamicBullets: true,
-        //   clickable: true,
-        // }}
         navigation={true}
         className={s.main__slider}
       >
         {slides}
       </Swiper>
-      {/* <Slider {...settingsSlider} >
-          
-        </Slider> */}
     </div>
   );
 });
