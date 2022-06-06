@@ -1,11 +1,12 @@
 import { flow, makeAutoObservable } from "mobx";
 import SongsService from "../services/SongsService";
+import { LOADING_STATUS, COMPLETE_STATUS, ERROR_STATUS } from "./constants";
+
 
 class SongsStore {
-  songsService = new SongsService();
 
   songs = [];
-  state = "pending";
+  state = LOADING_STATUS;
 
   constructor() {
     makeAutoObservable(this, {
@@ -22,14 +23,16 @@ class SongsStore {
   // Note the star, this a generator function!
   *fetchSongs() {
     this.songs = [];
-    this.state = "pending";
+    this.state = LOADING_STATUS;
     try {
       // Yield instead of await.
-      const songs = yield this.songsService.get();
-      this.state = "done";
+      const songs = yield SongsService.get();
+      console.log(songs);
+
+      this.state = COMPLETE_STATUS;
       this.setSongs(songs);
     } catch (error) {
-      this.state = "error";
+      this.state = ERROR_STATUS;
     }
   }
 }

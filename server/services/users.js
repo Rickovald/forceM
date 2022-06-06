@@ -2,8 +2,9 @@ const db = require("./db");
 const helper = require("../helper");
 const config = require("../config");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const tokenService = require("./token");
 const salt = bcrypt.genSaltSync(10);
+
 async function getMultiple(page = 1) {
   const offset = helper.getOffset(page, config.listPerPage);
 
@@ -25,45 +26,27 @@ async function create(user) {
     `SELECT * 
       FROM users WHERE name = "${user.name}"`
   );
-  if (users) {
-    return res.json({ message: "Такой пользователь уже существует" });
+  if (users[0]) {
+    return { message: "Такой пользователь уже существует" };
   }
+
   const passToSave = bcrypt.hashSync(user.password, salt);
-  const data = {
-    role: user.role,
+
+  const sql = `INSERT INTO users
+  VALUES (NULL, "admin", "${user.name}", "${passToSave}", "");`;
+
+  const query = await db.query(sql);
+
+  const userDto = {
     name: user.name,
-    password: passToSave,
-    hint: user.hint,
+    role: "admin",
   };
+  const tokens = tokenService.generateTokens({ ...userDto });
 
-  const sql = "INSERT INTO users SET ?";
-  const query = conn.query(sql, data, (err, results) => {
-    if (err) throw err;
-    res.send(JSON.stringify({ status: 200, error: null, response: results }));
-  });
-  // const result = await db.query(
-  //   `INSERT INTO users
-  //     ('id', 'img', 'head', 'button', 'href')
-  //     VALUES
-  //     (NULL, ${img}, ${head}, ${button}, ${href})`
-  // );
+  await tokenService.saveToken(userDto.name, tokens.refreshToken);
 
-  // const message = "Error in creating user";
-
-  // if (result.affectedRows) {
-  //   message = "user created successfully";
-  // }
-
-  // return { message };
+  return { ...tokens, user: userDto };
 }
-
-const generateAccessToken = (name, role) => {
-  const payload = {
-    name: name,
-    role: role,
-  };
-  return jwt.sign(payload, process.env.JWT_ACCESS_SECRET);
-};
 
 async function login(user) {
   const users = await db.query(
@@ -78,9 +61,14 @@ async function login(user) {
   if (!match) {
     return res.json({ message: "Неправильный пароль" });
   }
-  const token = generateAccessToken(user.name, user.role);
+  const userDto = {
+    name: user.name,
+    role: "admin",
+  };
+  const tokens = tokenService.generateTokens({ ...userDto });
 
-  return [users[0], token];
+  await tokenService.saveToken(userDto.name, tokens.refreshToken);
+  return { ...tokens, user: userDto };
 }
 
 async function update(id, user) {
@@ -89,7 +77,7 @@ async function update(id, user) {
     `UPDATE users 
         SET 
             role="${user.role}", name=${user.name},   
-            password=${passToSave}, hint=${user.hint}
+            password=${passToSave}
         WHERE id=${id}`
   );
 
@@ -114,10 +102,40 @@ async function remove(id) {
   return { message };
 }
 
+async function logout(refreshToken) {
+  const token = await tokenService.removeToken(refreshToken);
+  return token;
+}
+async function refresh(refreshToken) {
+  if (!refreshToken) {
+    return "Пользователь не авторизован"
+  }
+
+  const userData = tokenService.validateRefreshToken(refreshToken);
+  const tokenFromDb = await tokenService.findToken(refreshToken);
+  if (!userData || !tokenFromDb) {
+    return "Пользователь не авторизован"
+  }
+  const user = await db.query(
+    `SELECT * 
+      FROM users WHERE name = "${userData.name}"`
+  );
+  const userDto = {
+    name: user[0].name,
+    role: "admin",
+  };
+
+  const tokens = tokenService.generateTokens({ ...userDto });
+
+  await tokenService.saveToken(userDto.id, tokens.refreshToken);
+  return { ...tokens, user: userDto };
+}
 module.exports = {
   getMultiple,
   create,
   update,
   remove,
   login,
+  logout,
+  refresh,
 };

@@ -1,6 +1,25 @@
+@import "../presets/variables"
 .admin 
+	@include Wrapper
+	flex-direction: row
+	justify-content: flex-start
+	align-items: flex-start
 	background: #454545
-	padding: 40px 0
+	&__aside
+		margin-right: 125px
+	&__select
+		cursor: pointer
+		font-size: 16px
+		width: 250px
+		height: 50px
+		border-radius: 5px
+		padding: 0 20px
+		margin-bottom: 16px
+		background: $BtnBackground
+		display: flex
+		align-items: center
+		&_active
+			background: $MainBackground
 	&__header
 		color: #eee
 		text-align: center

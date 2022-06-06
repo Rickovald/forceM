@@ -2,12 +2,12 @@ import getSetting from "./get.json";
 import postSetting from "./post.json";
 
 class BannersService {
-  get = async () => {
+  static get = async () => {
     return await fetch("http://localhost:5000/concerts", getSetting).then(
       (response) => response.json()
     );
   };
-  post = (json) => {
+  static post = (json) => {
     const settings = {
       ...postSetting,
       body: JSON.stringify({

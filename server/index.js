@@ -1,4 +1,7 @@
+require('dotenv').config()
 const express = require("express");
+const cookieParser = require('cookie-parser')
+const cors = require("cors");
 // const hash = require('pbkdf2-password')()
 // const session = require('express-session');
 const bodyParser = require('body-parser');
@@ -10,15 +13,15 @@ const programsRouter = require("./routes/programs");
 const albumsRouter = require("./routes/albums");
 const songsRouter = require("./routes/songs");
 const userRouter = require("./routes/users");
-const cors = require("cors");
 const corsOptions = {
-  origin: "*",
+  origin: "http://localhost:3000",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
-
+console.log("Port:", process.env.PORT);
 app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(
   express.urlencoded({
@@ -30,7 +33,6 @@ app.use(
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
-
 app.use("/banners", bannersRouter);
 app.use("/concerts", concertsRouter);
 app.use("/programs", programsRouter);

@@ -1,24 +1,17 @@
-import getSetting from "./get.json";
-import postSetting from "./post.json";
+import $api from "./index";
 
-class BannersService {
-  get = async () => {
-    return await fetch("http://localhost:5000/songs", getSetting).then(
-      (response) => response.json()
-    );
+class SongsService {
+  static get = async () => {
+    return await $api.get("/songs").then((data) => data.json());
+    // fetch("http://localhost:5000/songs", getSetting).then(
+    //   (response) => response.json()
+    // );
   };
-  post = (json) => {
-    const settings = {
-      ...postSetting,
-      body: JSON.stringify({
-        id_in_album: json.id_in_album,
-        name: json.name,
-        album_id : json.album_id,
-      }),
-    };
+  static post = async (id_in_album, name, album_id) => {
 
-    return fetch("http://localhost:5000/songs", settings);
+    return await $api.post("/songs", { id_in_album, name, album_id });
+    // fetch("http://localhost:5000/songs", settings);
   };
 }
 
-export default BannersService;
+export default SongsService;

@@ -14,7 +14,9 @@ router.get("/", async function (req, res, next) {
 
 router.post("/login", async function (req, res, next) {
   try {
-    res.json(await users.login(req.body));
+    const userData = await users.login(req.body);
+    res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+    return res.json(userData);
   } catch (err) {
     console.error(`Error while loggining`, err.message);
     next(err);
@@ -23,7 +25,9 @@ router.post("/login", async function (req, res, next) {
 
 router.post("/", async function (req, res, next) {
   try {
-    res.json(await users.create(req.body));
+    const userData =  await users.create(req.body);
+    res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+    return res.json(userData);
   } catch (err) {
     console.error(`Error while creating user`, err.message);
     next(err);
@@ -42,6 +46,32 @@ router.put("/:id", async function (req, res, next) {
 router.delete("/:id", async function (req, res, next) {
   try {
     res.json(await users.remove(req.params.id));
+  } catch (err) {
+    console.error(`Error while deleting user`, err.message);
+    next(err);
+  }
+
+});
+
+router.get("/refresh", async function (req, res, next) {
+  try {
+    console.log("000");
+    const {refreshToken} = req.cookies;
+    const userData = await users.refresh(refreshToken);
+    res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+    return res.json(userData);
+  } catch (err) {
+    console.error(`Error while refreshing user`, err.message);
+    next(err);
+  }
+});
+
+router.post("/logout", async function (req, res, next) {
+  try {
+    const {refreshToken} = req.cookies;
+    const token = await users.logout(refreshToken);
+    res.clearCookie('refreshToken');
+    return res.json(token);
   } catch (err) {
     console.error(`Error while deleting user`, err.message);
     next(err);

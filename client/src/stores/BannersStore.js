@@ -1,9 +1,12 @@
 import { makeAutoObservable } from "mobx";
 import BannersService from "../services/BannersService";
+import { LOADING_STATUS, COMPLETE_STATUS, ERROR_STATUS } from "./constants";
+
 
 class BannersStore {
-  bannersService = new BannersService();
   banners = [];
+  state = LOADING_STATUS;
+
   constructor() {
     makeAutoObservable(this);
 
@@ -20,18 +23,18 @@ class BannersStore {
 
 
   uploadBanners = (json) => {
-    this.bannersService.post(json);
+    BannersService.post(json);
   };
   *fetchBanners() {
     this.banners = [];
-    this.state = "pending";
+    this.state = LOADING_STATUS;
     try {
       // Yield instead of await.
-      const banners = yield this.bannersService.get();
-      this.state = "done";
+      const banners = yield BannersService.get();
+      this.state = COMPLETE_STATUS;
       this.setBanners(banners);
     } catch (error) {
-      this.state = "error";
+      this.state = ERROR_STATUS;
     }
   }
 }

@@ -9,8 +9,17 @@ import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import Contacts from './Contacts/Contacts';
 import Footer from './Footer/Footer';
 import Album from './Album/Album';
+import UserStore from './stores/UserStore';
+import { useEffect } from 'react';
 
 function App() {
+
+	useEffect(() => {
+        if (localStorage.getItem('token')) {
+            UserStore.checkAuth()
+        }
+    }, [])
+
 	return (
 		<Router>
 			<Navigation/>
