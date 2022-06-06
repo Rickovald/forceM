@@ -1,0 +1,25 @@
+@import "../presets/variables"
+.contacts
+    position: fixed
+    z-index: -1
+    top: 0
+    left: 0
+    width: 100%
+    height: 100%
+    overflow: hidden
+    transition: .4s ease
+    &__content
+        position: absolute
+        padding: 20px
+        width: 400px
+        z-index: 300
+        height: 100vh
+        background: $MainBackground
+        right: -400px
+        transition: .4s ease all
+        color: white
+        text-align: justify
+.active1
+    z-index: 5
+.active
+    right: 0

@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import s from "./navigation.module.sass";
 // import {wrapper} from '../presets/wrapper.module.sass'
 import logo from "../img/diz/logo.png";
 import UserStore from "../stores/UserStore";
+import Contacts from "../Contacts/Contacts";
+
 // import logo from "../img/diz/logo-trans.png"
 import { observer } from "mobx-react-lite";
 const Navigation = observer(() => {
+
+  const [contacts, setContacts] = useState(0);
   return (
     <div className={`${s.navigation}`}>
       <NavLink className={s.navigation__logo} to="/">
@@ -43,14 +47,6 @@ const Navigation = observer(() => {
         >
           <span className={s.navigation__link_item}>Магазин</span>
         </a>
-        <NavLink
-          className={({ isActive }) =>
-            s.navigation__link + " " + (isActive ? s.activated : "")
-          }
-          to="/contact"
-        >
-          <span className={s.navigation__link_item}>Контакты</span>
-        </NavLink>
         {UserStore.getAuth() && (
           <NavLink
             className={({ isActive }) =>
@@ -61,7 +57,11 @@ const Navigation = observer(() => {
             <span className={s.navigation__link_item}>Админ</span>
           </NavLink>
         )}
+        <div onClick={() => setContacts(true)} className={s.navigation__link}>
+          <span className={s.navigation__link_item}>Контакты</span>
+        </div>
       </div>
+      <Contacts active={contacts} setActive={setContacts}/>
     </div>
   );
 });
