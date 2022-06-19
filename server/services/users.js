@@ -49,17 +49,20 @@ async function create(user) {
 }
 
 async function login(user) {
+  console.log(user.login);
   const users = await db.query(
-    `SELECT * 
-      FROM users WHERE name = "${user.name}"`
+    `SELECT * FROM users WHERE name = "${user.login}"`
   );
-  if (!users) {
-    return res.json({ message: "Такого пользователя не существует" });
+  console.log(user, users);
+  if (!users[0]) {
+    console.log("хуй");
+    return "Такого пользователя не существует"
   }
   const match = await bcrypt.compare(user.password, users[0].password);
 
   if (!match) {
-    return res.json({ message: "Неправильный пароль" });
+    console.log("хер");
+    return "Неправильный пароль"
   }
   const userDto = {
     name: user.name,
@@ -113,6 +116,7 @@ async function refresh(refreshToken) {
 
   const userData = await tokenService.validateRefreshToken(refreshToken);
   const tokenFromDb = await tokenService.findToken(refreshToken);
+  
   if (!userData || !tokenFromDb) {
     return "Пользователь не авторизован"
   }

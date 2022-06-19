@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 function App() {
 
 	useEffect(() => {
+		console.log("000");
         if (localStorage.getItem('token')) {
             UserStore.checkAuth()
         }

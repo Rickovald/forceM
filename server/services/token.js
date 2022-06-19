@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const db = require("./db");
 
 class TokenService {
-  generateTokens(payload) {
+  async generateTokens(payload) {
     const accessToken = jwt.sign(payload, process.env.JWT_ACCESS_SECRET, {
       expiresIn: "1h",
     });
@@ -23,7 +23,7 @@ class TokenService {
     }
   }
 
-  validateRefreshToken(token) {
+  async validateRefreshToken(token) {
     try {
       const userData = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
       return userData;
@@ -57,7 +57,8 @@ class TokenService {
 
   async removeToken(refreshToken) {
     const tokenData = await db.query(
-      `DELETE FROM users
+      `UPDATE users SET
+        refreshToken = ""
         where refreshToken = "${refreshToken}"`
     );
 

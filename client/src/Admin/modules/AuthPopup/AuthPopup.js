@@ -5,6 +5,16 @@ import s from "./auth.module.sass";
 const AuthPopup = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const toLogin = async () => {
+    const response = await UserStore.login(login, password)
+    console.log(response);
+    setError(response)
+
+    console.log(error);
+  }
+
   return (
     <div className={`${s.popup}`}>
       <div className={s.popup__form}>
@@ -25,10 +35,17 @@ const AuthPopup = () => {
           required
         />
 
-        <button 
-          className={s.popup__button} onClick={() => UserStore.registration(login, password)}>
+        <button
+          className={s.popup__button}
+          // onClick={() => UserStore.registration(login, password)}
+          onClick={() => toLogin()}
+        >
           Вход
         </button>
+
+        {error !== ""
+          && <p className={s.popup__error}>{error}</p>
+        }
       </div>
     </div>
   );

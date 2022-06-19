@@ -68,12 +68,14 @@ const Admin = observer(() => {
         >
           Концерты
         </div>
+
       </div>
 
       {activeTab === 0 && <Program />}
       {activeTab === 1 && <Banners />}
       {activeTab === 2 && <Albums />}
       {activeTab === 3 && <Concerts />}
+      <div className={`${s.admin__logout}`} onClick={() => UserStore.logout()}>выход</div>
     </div>
   );
 });

@@ -25,11 +25,17 @@ class UserStore {
     this.state = LOADING_STATUS;
     try {
       const response = await UserService.login(email, password);
-      localStorage.setItem("token", response.data.accessToken);
-      this.setAuth(true);
-      this.setUser(response.data.user);
+      console.log(response.data);
+      if (response.data.user) {
+        this.setAuth(true);
+        this.setUser(response.data.user);
+        localStorage.setItem("token", response.data.accessToken);
+      } else {
+        return response.data
+      }
       this.state = COMPLETE_STATUS;
     } catch (e) {
+      console.log(e.response);
       this.state = ERROR_STATUS;
       console.log(e.response?.data?.message);
     }
@@ -52,8 +58,7 @@ class UserStore {
   logout = async () => {
     this.state = LOADING_STATUS;
     try {
-      const response = await UserService.logout();
-      console.log(response);
+      await UserService.logout();
       localStorage.removeItem("token");
       this.setAuth(false);
       this.setUser({});
@@ -70,7 +75,6 @@ class UserStore {
       const response = await axios.get(`http://localhost:5000/user/refresh`, {
         withCredentials: true,
       });
-      // console.log(response);
       localStorage.setItem("token", response.data.accessToken);
       this.setAuth(true);
       this.setUser(response.data.user);

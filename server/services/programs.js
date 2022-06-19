@@ -1,9 +1,9 @@
-const db = require("./db")
-const helper = require("../helper")
-const config = require("../config")
+const db = require("./db");
+const helper = require("../helper");
+const config = require("../config");
 
 async function getMultiple(page = 1) {
-  const offset = helper.getOffset(page, config.listPerPage)
+  const offset = helper.getOffset(page, config.listPerPage);
 
   const rows = await db.query(
     `SELECT * 
@@ -19,45 +19,32 @@ async function getMultiple(page = 1) {
 }
 
 async function create(program) {
-  let data = {
-    name: program.name,
-    cover: program.cover,
-    tickets: program.tickets,
-    difficulty: program.difficulty,
-    comments: program.comments,
-    place: program.place,
-    concert_name: program.concert_name,
-  };
-  let sql = "INSERT INTO concert_program SET ?";
-  let query = conn.query(sql, data, (err, results) => {
-    if (err) throw err;
-    res.send(JSON.stringify({ status: 200, error: null, response: results }));
-  });
-
-  // const result = await db.query(
-  //   `INSERT INTO programs
-  //     ('id', 'img', 'head', 'button', 'href')
-  //     VALUES
-  //     (NULL, ${img}, ${head}, ${button}, ${href})`
-  // );
-
-  // let message = "Error in creating program";
-
-  // if (result.affectedRows) {
-  //   message = "program created successfully";
-  // }
-
-  // return { message };
+  const result = await db.query(
+    `INSERT INTO concert_program 
+        SET 
+        name = "${program.name}",
+        difficulty = "${program.difficulty}",
+        comments = "${program.comments}",
+        place = "${program.place}",
+        concert_name = "${program.concert_name}"`
+  );
+  // let sql = "INSERT INTO concert_program SET ?";
+  // let query = db.query(sql, data, (err, results) => {
+  //   if (err) throw err;
+  //   res.send(JSON.stringify({ status: 200, error: null, response: results }));
+  // });
+  let message = "Error in updating program";
+  if (result.affectedRows) {
+    message = "program updating successfully";
+    return { message };
+  }
 }
 
 async function update(id, program) {
   const result = await db.query(
     `UPDATE concert_program 
         SET 
-            name="${program.name}", cover=${program.cover}, 
-            tickets=${program.tickets}, difficulty=${program.difficulty}
-            comments="${program.comments}", place="${program.place}".
-            concert_name="${program.concert_name}"
+            ${program.name}="${program.data}"
         WHERE id=${id}`
   );
 

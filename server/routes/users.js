@@ -23,7 +23,7 @@ router.post("/login", async function (req, res, next) {
   }
 });
 
-router.post("/", async function (req, res, next) {
+router.post("/registration", async function (req, res, next) {
   try {
     const userData =  await users.create(req.body);
     res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
