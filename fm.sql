@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 06 2022 г., 05:10
+-- Время создания: Июн 19 2022 г., 15:42
 -- Версия сервера: 8.0.24
 -- Версия PHP: 7.2.34
 
@@ -65,7 +65,8 @@ CREATE TABLE `concerts` (
 --
 
 INSERT INTO `concerts` (`id`, `date`, `country`, `tickets_price`, `tickets`, `city`, `place`, `group`) VALUES
-(1, '2022-02-25', 'Россия', '200 ₽', 'https://vk.com/domnepomer?w=wall-205245784_439', 'Москва', 'МосквоМеняльник', 'https://vk.com/force_minor');
+(1, '2022-02-25', 'Россия', '200 ₽', 'https://vk.com/domnepomer?w=wall-205245784_439', 'Москва', 'МосквоМеняльник', 'https://vk.com/force_minor'),
+(2, '2022-06-26', 'Россия', '300 ₽', 'https://vk.com/force_minor', 'Москва', 'Спотыкач', 'https://vk.com/spotycach');
 
 -- --------------------------------------------------------
 
@@ -76,7 +77,7 @@ INSERT INTO `concerts` (`id`, `date`, `country`, `tickets_price`, `tickets`, `ci
 CREATE TABLE `concert_program` (
   `id` int NOT NULL,
   `name` varchar(30) NOT NULL,
-  `difficulty` tinyint NOT NULL,
+  `difficulty` varchar(30) NOT NULL,
   `comments` varchar(100) NOT NULL,
   `place` int NOT NULL,
   `concert_name` varchar(30) NOT NULL
@@ -87,8 +88,9 @@ CREATE TABLE `concert_program` (
 --
 
 INSERT INTO `concert_program` (`id`, `name`, `difficulty`, `comments`, `place`, `concert_name`) VALUES
-(1, 'Force-Minor - Кривой Роцк', 3, 'Трудно держать ритм на слабой доле. Насть, пропиши барабаны', 1, 'Дебюты и Проводы'),
-(2, 'Force-Minor - Не летов', 2, 'Надо подумать над соло', 2, 'Дебюты и Проводы');
+(1, 'Force-Minor - Кривой Роцк', 'Средняя', 'Трудно держать ритм на слабой доле. Насть, пропиши барабаны', 1, 'Дебюты и Проводы'),
+(3, 'Force-Minor - Не летов', 'Простая', 'Надо подумать над соло и дописать предприпев', 2, 'Дебюты и Проводы'),
+(13, 'Force-Minor - Ееуеуеуе', 'Сложная', 'Больше металла, новая мелодическая линия, текст писать на квенья', 3, 'Дебюты и Проводы');
 
 -- --------------------------------------------------------
 
@@ -152,7 +154,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role`, `name`, `password`, `refreshToken`) VALUES
-(0, 'admin', 'ricko', '$2b$10$UfKtj8CTxfQsQiG.sAvz3.UEQWWj2B.K9aai9GhadYusxdt2ylNKm', '');
+(0, 'admin', 'ricko', '$2b$10$UfKtj8CTxfQsQiG.sAvz3.UEQWWj2B.K9aai9GhadYusxdt2ylNKm', ''),
+(5, 'admin', 'Torvunheart', '$2b$10$vQUwsEulmag07e/VFBxT0OBwv5em4MBDeIpoGvWL404yYyAKT4U36', ''),
+(6, 'admin', 'Tortan', '$2b$10$V81C2ydYZe38DVoc0Xw/OezQL3eXVN/a3/.JB3YHt2sbNjGxHRXEK', '');
 
 --
 -- Индексы сохранённых таблиц
@@ -210,13 +214,13 @@ ALTER TABLE `banners`
 -- AUTO_INCREMENT для таблицы `concerts`
 --
 ALTER TABLE `concerts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `concert_program`
 --
 ALTER TABLE `concert_program`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT для таблицы `discography`
@@ -234,7 +238,7 @@ ALTER TABLE `songs`
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
