@@ -21,9 +21,22 @@ class BannersStore {
     return this.banners;
   };
 
-
-  uploadBanners = (json) => {
-    BannersService.post(json);
+  putBanner = async (id, img, head, button, href, href_type) => {
+    await BannersService.update(id, img, head, button, href, href_type);
+  };
+  putImg = async (img) => {
+    await BannersService.upload(img);
+  };
+  createBanner = async (name, description, photo, price) => {
+    await BannersService.post(name, description, photo, price);
+  };
+  deleteBanner = async (id) => {
+    try {
+      await BannersService.delete(id);
+      this.state = COMPLETE_STATUS;
+    } catch (error) {
+      this.state = ERROR_STATUS;
+    }
   };
   *fetchBanners() {
     this.banners = [];
@@ -37,6 +50,17 @@ class BannersStore {
       this.state = ERROR_STATUS;
     }
   }
+  updateBanners = async () => {
+    this.program = [];
+    this.state = LOADING_STATUS;
+    try {
+      const program = await BannersService.get();
+      this.state = COMPLETE_STATUS;
+      this.setProgram(program.data);
+    } catch (error) {
+      this.state = ERROR_STATUS;
+    }
+  };
 }
 
 export default new BannersStore();
