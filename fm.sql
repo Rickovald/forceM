@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 19 2022 г., 15:42
+-- Время создания: Июн 19 2022 г., 21:36
 -- Версия сервера: 8.0.24
 -- Версия PHP: 7.2.34
 
@@ -32,16 +32,17 @@ CREATE TABLE `banners` (
   `img` varchar(50) NOT NULL,
   `head` varchar(100) NOT NULL,
   `button` varchar(20) NOT NULL,
-  `href` varchar(100) NOT NULL
+  `href` varchar(100) NOT NULL,
+  `href_type` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Дамп данных таблицы `banners`
 --
 
-INSERT INTO `banners` (`id`, `img`, `head`, `button`, `href`) VALUES
-(1, '/images/concert4.jpg', 'Квартирник от МосквоМеняльника (Live)', 'Смотреть', 'https://vk.com/video/@domnepomer?z=video-205245784_456239041%2Fclub205245784%2Fpl_-205245784_-2'),
-(2, '/images/alb.jpg', 'Дебютный альбом', 'Слушать', 'https://vk.com/audios-184530709');
+INSERT INTO `banners` (`id`, `img`, `head`, `button`, `href`, `href_type`) VALUES
+(1, '/images/concert4.jpg', 'Квартирник от МосквоМеняльника (Live)', 'Смотреть', 'https://vk.com/video/@domnepomer?z=video-205245784_456239041%2Fclub205245784%2Fpl_-205245784_-2', 'outer'),
+(2, '/images/alb.jpg', 'Дебютный альбом', 'Слушать', 'https://vk.com/audios-184530709', 'outer');
 
 -- --------------------------------------------------------
 
@@ -90,7 +91,8 @@ CREATE TABLE `concert_program` (
 INSERT INTO `concert_program` (`id`, `name`, `difficulty`, `comments`, `place`, `concert_name`) VALUES
 (1, 'Force-Minor - Кривой Роцк', 'Средняя', 'Трудно держать ритм на слабой доле. Насть, пропиши барабаны', 1, 'Дебюты и Проводы'),
 (3, 'Force-Minor - Не летов', 'Простая', 'Надо подумать над соло и дописать предприпев', 2, 'Дебюты и Проводы'),
-(13, 'Force-Minor - Ееуеуеуе', 'Сложная', 'Больше металла, новая мелодическая линия, текст писать на квенья', 3, 'Дебюты и Проводы');
+(13, 'Force-Minor - Ееуеуеуе', 'Сложная', 'Больше металла, новая мелодическая линия, текст писать на квенья', 3, 'Дебюты и Проводы'),
+(15, 'Имя', 'Простая', 'Комментарий', 4, 'Дебюты и Проводы');
 
 -- --------------------------------------------------------
 
@@ -220,7 +222,7 @@ ALTER TABLE `concerts`
 -- AUTO_INCREMENT для таблицы `concert_program`
 --
 ALTER TABLE `concert_program`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `discography`

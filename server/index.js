@@ -31,12 +31,12 @@ app.use(
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
-app.use("/banners", bannersRouter);
-app.use("/concerts", concertsRouter);
-app.use("/programs", programsRouter);
-app.use("/albums", albumsRouter);
-app.use("/songs", songsRouter);
-app.use("/user", userRouter);
+app.use("/api/banners", bannersRouter);
+app.use("/api/concerts", concertsRouter);
+app.use("/api/programs", programsRouter);
+app.use("/api/albums", albumsRouter);
+app.use("/api/songs", songsRouter);
+app.use("/api/user", userRouter);
 
 
 const storage = multer.diskStorage({
@@ -50,7 +50,7 @@ const storage = multer.diskStorage({
 
 const uploadStorage = multer({ storage: storage })
 
-app.post("/upload", uploadStorage.single("newimg"), (req, res) => {
+app.post("/api/upload", uploadStorage.single("newimg"), (req, res) => {
   console.log(req.file)
   return res.send("Single file")
 })
