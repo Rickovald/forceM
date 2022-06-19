@@ -28,16 +28,13 @@ async function create(program) {
         place = "${program.place}",
         concert_name = "${program.concert_name}"`
   );
-  // let sql = "INSERT INTO concert_program SET ?";
-  // let query = db.query(sql, data, (err, results) => {
-  //   if (err) throw err;
-  //   res.send(JSON.stringify({ status: 200, error: null, response: results }));
-  // });
+
   let message = "Error in updating program";
   if (result.affectedRows) {
     message = "program updating successfully";
-    return { message };
   }
+
+  return { message };
 }
 
 async function update(id, program) {

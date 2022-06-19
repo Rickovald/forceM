@@ -18,52 +18,44 @@ async function getMultiple(page = 1) {
 }
 
 async function create(banner) {
-  let data = {
-    img: banner.img,
-    head: banner.head,
-    button: banner.button,
-    href: banner.href,
-  };
-  let sql = "INSERT INTO banners SET ?";
-  let query = conn.query(sql, data, (err, results) => {
-    if (err) throw err;
-    res.send(JSON.stringify({ status: 200, error: null, response: results }));
-  });
-
-  // const result = await db.query(
-  //   `INSERT INTO banners
-  //     ('id', 'img', 'head', 'button', 'href')
-  //     VALUES
-  //     (NULL, ${img}, ${head}, ${button}, ${href})`
-  // );
-
-  // let message = "Error in creating banner";
-
-  // if (result.affectedRows) {
-  //   message = "banner created successfully";
-  // }
-
-  // return { message };
-}
-
-async function update(id, banner) {
   const result = await db.query(
-    `UPDATE banners 
+    `INSERT INTO banners 
         SET 
-            img="${banner.img}", head=${banner.head}, 
-            button=${banner.button}, href=${banner.href}
-        WHERE id=${id}`
+        img = "${banner.img}",
+        head = "${banner.head}",
+        button = "${banner.button}",
+        href = "${banner.href}"`
   );
 
-  let message = "Error in updating banner";
-
+  let message = "Error in updating program";
   if (result.affectedRows) {
-    message = "banner updating successfully";
+    message = "program updating successfully";
   }
 
   return { message };
 }
 
+async function update(id, banner) {
+  console.log("ъуй", banner);
+  // const result = await db.query(
+  //   `UPDATE banners
+  //       SET
+  //           img="${banner.img}", head=${banner.head},
+  //           button=${banner.button}, href=${banner.href}
+  //       WHERE id=${id}`
+  // );
+
+  // let message = "Error in updating banner";
+
+  // if (result.affectedRows) {
+  //   message = "banner updating successfully";
+  // }
+
+  // return { message };
+}
+async function upload(img) {
+  console.log("ъуй", img);
+}
 async function remove(id) {
   const result = await db.query(`DELETE FROM banners WHERE id=${id}`);
 
@@ -81,4 +73,5 @@ module.exports = {
   create,
   update,
   remove,
+  upload,
 };

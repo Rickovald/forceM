@@ -20,6 +20,15 @@ router.post("/", async function (req, res, next) {
     next(err);
   }
 });
+router.post("/upload", async function (req, res, next) {
+  try {
+    console.log("00qwe0", req.files);
+    res.json(await banners.upload(req.body));
+  } catch (err) {
+    console.error(`Error while creating banner`, err.message);
+    next(err);
+  }
+});
 
 router.put("/:id", async function (req, res, next) {
   try {

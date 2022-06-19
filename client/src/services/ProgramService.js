@@ -16,7 +16,6 @@ class ProgramsService {
   };
 
   static put = async (id, data, name) => {
-    console.log(name);
     return await $api.put(`/programs/${id}`, {data, name});
   };
 

@@ -1,16 +1,15 @@
 @import "../../../presets/variables"
 .program
+	width: 1020px
 	&__header
 		color: #eee
 		text-align: center
 		margin-bottom: 20px
-	&__table
-		border-collapse: separate
-		border-spacing: 8px
 	&__song
 		display: flex
 		z-index: 200
 		position: relative
+		margin-bottom: 8px
 	&__songItem
 		border: none
 		resize: none
@@ -24,23 +23,19 @@
 		color: black
 		background: $AdminFormBackground
 		margin-right: 8px
-		margin-bottom: 8px
 		border-radius: 5px
-	&__commentWrapper //, &__itemWrapper
-		// display: inline-block
+	&__commentWrapper
 		position: relative
 		width: 100%
 	&__comment
+		position: relative
 		text-align: left
-		// resize: auto
-		// display: block
 		padding-right: 50px
 		height: fit-content
 		width: 100%
-		// line-height: 53px
-		// width: 100%
 		max-width: 515px
 		transition: .3s ease
+		margin-right: 0
 		&_inactive p
 			white-space: nowrap
 			overflow: hidden
@@ -70,7 +65,7 @@
 		width: 53px
 		// background: rgba(0,0,0,.1)
 		top: 0
-		right: 8px
+		right: 13px
 		cursor: pointer
 		transition: .3s ease
 		&_active

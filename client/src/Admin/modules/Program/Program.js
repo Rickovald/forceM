@@ -11,6 +11,7 @@ const Program = () => {
   useEffect(() => {
     setProgram(data);
   }, [data]);
+
   const deleteSong = async (id) => {
     await ProgramStore.deleteSong(id);
 
@@ -39,15 +40,12 @@ const Program = () => {
       program[program.length - 1].place + 1,
       "Дебюты и Проводы"
     );
-    // console.log(data[data.length - 1].place + 1);
     await ProgramStore.updateProgram();
     const data = await ProgramStore.getProgram().data;
     setProgram(data);
   };
   return (
     <div className={`${s.program}`}>
-      {/* <table className={s.program__table}>
-        <tbody> */}
       {program.map((item, index) => {
         return (
           <div key={`song_${index}`} className={s.program__song}>
@@ -105,8 +103,6 @@ const Program = () => {
           </div>
         );
       })}
-      {/* </tbody>
-      </table> */}
       <div className={s.program__add} onClick={() => addSong()}>
         <img src={del} alt="delete" />
       </div>

@@ -1,9 +1,8 @@
 require('dotenv').config()
 const express = require("express");
 const cookieParser = require('cookie-parser')
+const multer = require('multer')
 const cors = require("cors");
-// const hash = require('pbkdf2-password')()
-// const session = require('express-session');
 const bodyParser = require('body-parser');
 const app = express();
 const port = process.env.PORT || 5000; //Line 3
@@ -38,17 +37,24 @@ app.use("/programs", programsRouter);
 app.use("/albums", albumsRouter);
 app.use("/songs", songsRouter);
 app.use("/user", userRouter);
-// app.use(session({
-//   resave: false, // don't save session if unmodified
-//   saveUninitialized: false, // don't create session until something stored
-//   secret: 'shhhh, very secret'
-// }));
-// hash({ password: 'foobar' }, function (err, pass, salt, hash) {
-//   if (err) throw err;
-//   // store the salt & hash in the "db"
-//   users.tj.salt = salt;
-//   users.tj.hash = hash;
-// });
+
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/images/")
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname)
+  },
+})
+
+const uploadStorage = multer({ storage: storage })
+
+app.post("/upload", uploadStorage.single("newimg"), (req, res) => {
+  console.log(req.file)
+  return res.send("Single file")
+})
+
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {
