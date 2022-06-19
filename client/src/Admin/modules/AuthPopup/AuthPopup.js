@@ -9,10 +9,7 @@ const AuthPopup = () => {
 
   const toLogin = async () => {
     const response = await UserStore.login(login, password)
-    console.log(response);
     setError(response)
-
-    console.log(error);
   }
 
   return (

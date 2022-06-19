@@ -39,13 +39,11 @@ const Banner = (props) => {
 
     const data = new FormData();
     data.append("newimg", file);
-		console.log(file, data.get("img"));
     setImage(`/images/${file.name}`);
 		setImgPublic(data)
   };
 	
   const submit = () => {
-    console.log(check, banner, button, href, image);
     BannersStore.putBanner(props.item.id, image, banner, button, href, check);
     BannersStore.putImg(imgPublic);
   };

@@ -25,7 +25,6 @@ class UserStore {
     this.state = LOADING_STATUS;
     try {
       const response = await UserService.login(email, password);
-      console.log(response.data);
       if (response.data.user) {
         this.setAuth(true);
         this.setUser(response.data.user);
@@ -35,9 +34,7 @@ class UserStore {
       }
       this.state = COMPLETE_STATUS;
     } catch (e) {
-      console.log(e.response);
       this.state = ERROR_STATUS;
-      console.log(e.response?.data?.message);
     }
   };
 

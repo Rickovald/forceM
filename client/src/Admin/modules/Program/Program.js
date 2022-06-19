@@ -22,7 +22,6 @@ const Program = () => {
   const putToSong = (e, id, data) => {
     // event.target.attributes.getNamedItem('data-tag')
     if (e.target.innerText !== data) {
-      console.log(id, e.target.innerText, e.target.attributes.name.value, data);
 
       ProgramStore.putSong(
         id,

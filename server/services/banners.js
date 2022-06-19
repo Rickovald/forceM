@@ -36,7 +36,6 @@ async function create(banner) {
 }
 
 async function update(id, banner) {
-  console.log("ъуй", banner);
   // const result = await db.query(
   //   `UPDATE banners
   //       SET
@@ -54,7 +53,6 @@ async function update(id, banner) {
   // return { message };
 }
 async function upload(img) {
-  console.log("ъуй", img);
 }
 async function remove(id) {
   const result = await db.query(`DELETE FROM banners WHERE id=${id}`);

@@ -22,7 +22,6 @@ router.post("/", async function (req, res, next) {
 });
 router.post("/upload", async function (req, res, next) {
   try {
-    console.log("00qwe0", req.files);
     res.json(await banners.upload(req.body));
   } catch (err) {
     console.error(`Error while creating banner`, err.message);

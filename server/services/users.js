@@ -49,19 +49,15 @@ async function create(user) {
 }
 
 async function login(user) {
-  console.log(user.login);
   const users = await db.query(
     `SELECT * FROM users WHERE name = "${user.login}"`
   );
-  console.log(user, users);
   if (!users[0]) {
-    console.log("хуй");
     return "Такого пользователя не существует"
   }
   const match = await bcrypt.compare(user.password, users[0].password);
 
   if (!match) {
-    console.log("хер");
     return "Неправильный пароль"
   }
   const userDto = {

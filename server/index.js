@@ -51,7 +51,6 @@ const storage = multer.diskStorage({
 const uploadStorage = multer({ storage: storage })
 
 app.post("/api/upload", uploadStorage.single("newimg"), (req, res) => {
-  console.log(req.file)
   return res.send("Single file")
 })
 
