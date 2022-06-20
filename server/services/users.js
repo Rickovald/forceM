@@ -24,7 +24,7 @@ async function getMultiple(page = 1) {
 async function create(user) {
   const users = await db.query(
     `SELECT * 
-      FROM users WHERE name = "${user.name}"`
+      FROM admins WHERE name = "${user.name}"`
   );
   if (users[0]) {
     return { message: "Такой пользователь уже существует" };
@@ -32,8 +32,8 @@ async function create(user) {
 
   const passToSave = bcrypt.hashSync(user.password, salt);
 
-  const sql = `INSERT INTO users
-  VALUES (NULL, "admin", "${user.name}", "${passToSave}", "");`;
+  const sql = `INSERT INTO admins
+  VALUES (NULL, "${user.name}", "${passToSave}", "");`;
 
   const query = await db.query(sql);
 
@@ -50,7 +50,7 @@ async function create(user) {
 
 async function login(user) {
   const users = await db.query(
-    `SELECT * FROM users WHERE name = "${user.login}"`
+    `SELECT * FROM admins WHERE name = "${user.login}"`
   );
   if (!users[0]) {
     return "Такого пользователя не существует"
@@ -73,9 +73,9 @@ async function login(user) {
 async function update(id, user) {
   const passToSave = bcrypt.hashSync(user.password, salt);
   const result = await db.query(
-    `UPDATE users 
+    `UPDATE admins 
         SET 
-            role="${user.role}", name=${user.name},   
+            name=${user.name},   
             password=${passToSave}
         WHERE id=${id}`
   );
@@ -90,7 +90,7 @@ async function update(id, user) {
 }
 
 async function remove(id) {
-  const result = await db.query(`DELETE FROM users WHERE id=${id}`);
+  const result = await db.query(`DELETE FROM admins WHERE id=${id}`);
 
   const message = "Error in deconsting user";
 
@@ -118,7 +118,7 @@ async function refresh(refreshToken) {
   }
   const user = await db.query(
     `SELECT * 
-      FROM users WHERE name = "${userData.name}"`
+      FROM admins WHERE name = "${userData.name}"`
   );
   const userDto = {
     name: user[0].name,

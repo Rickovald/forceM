@@ -35,7 +35,7 @@ class TokenService {
   async saveToken(userName, refreshToken) {
     const tokenData = await db.query(
       `SELECT refreshToken 
-        FROM users WHERE name="${userName}"`
+        FROM admins WHERE name="${userName}"`
     );
 
     // if (tokenData[0]) {
@@ -48,7 +48,7 @@ class TokenService {
     // }
     const token = await db.query(
       
-      `UPDATE users SET 
+      `UPDATE admins SET 
         refreshToken = "${refreshToken}"
         WHERE name="${userName}"`
     );
@@ -57,7 +57,7 @@ class TokenService {
 
   async removeToken(refreshToken) {
     const tokenData = await db.query(
-      `UPDATE users SET
+      `UPDATE admins SET
         refreshToken = ""
         where refreshToken = "${refreshToken}"`
     );
@@ -67,7 +67,7 @@ class TokenService {
 
   async findToken(refreshToken) {
     const tokenData = await db.query(
-      `SELECT refreshToken FROM users
+      `SELECT refreshToken FROM admins
          where refreshToken = "${refreshToken}"`
     );
 
