@@ -9,13 +9,7 @@ const Albums = observer(() => {
   const [slides, setSlides] = useState([]);
   const data = AlbumsStore.getAlbums().data;
   useEffect(() => {
-    const slides = []
-    if (data) {
-      for (let i = 0; i <= 1; i++) {
-        slides.push(data[0])
-      }
-      setSlides(slides)
-    }
+      setSlides(data)
   }, [data]);
   return (
     <div className={`${s.albums}`}>

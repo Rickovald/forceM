@@ -1,9 +1,9 @@
-const db = require("./db")
-const helper = require("../helper")
-const config = require("../config")
+const db = require("./db");
+const helper = require("../helper");
+const config = require("../config");
 
 async function getMultiple(page = 1) {
-  const offset = helper.getOffset(page, config.listPerPage)
+  const offset = helper.getOffset(page, config.listPerPage);
 
   const rows = await db.query(
     `SELECT * 
@@ -19,17 +19,19 @@ async function getMultiple(page = 1) {
 }
 
 async function create(song) {
-  let data = {
-    id_in_album: song.id_in_album,
-    name: song.name,
-    album_id: song.album_id,
-  };
-  let sql = "INSERT INTO songs SET ?";
-  let query = conn.query(sql, data, (err, results) => {
-    if (err) throw err;
-    res.send(JSON.stringify({ status: 200, error: null, response: results }));
-  });
+  const result = await db.query(
+    `INSERT INTO songs 
+        SET 
+        id_in_album = "${song.id_in_album}",
+        name = "${song.name}",
+        album_id = "${song.album_id}"`
+  );
+  let message = "Error in updating program";
+  if (result.affectedRows) {
+    message = "program updating successfully";
+  }
 
+  return { message };
   // const result = await db.query(
   //   `INSERT INTO songs
   //     ('id', 'img', 'head', 'button', 'href')
@@ -50,8 +52,7 @@ async function update(id, song) {
   const result = await db.query(
     `UPDATE songs 
         SET 
-            id_in_album="${song.id_in_album}", name=${song.name}, 
-            album_id=${song.album_id},
+             name='${song.name}'
         WHERE id=${id}`
   );
 

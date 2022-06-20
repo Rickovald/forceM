@@ -7,6 +7,7 @@ import AuthPopup from "./modules/AuthPopup/AuthPopup";
 import Banners from "./modules/Banners/Banners";
 import Concerts from "./modules/Concerts/Concerts";
 import Program from "./modules/Program/Program";
+import Songs from "./modules/Songs/Songs";
 
 const Admin = observer(() => {
   const [activeTab, setActiveTab] = useState(0);
@@ -68,6 +69,15 @@ const Admin = observer(() => {
         >
           Концерты
         </div>
+        <div
+          onClick={() => {
+            setActiveTab(4);
+          }}
+          className={`${s.admin__select}
+						 ${4 === activeTab && s.admin__select_active}`}
+        >
+          Песни
+        </div>
 
       </div>
 
@@ -75,6 +85,7 @@ const Admin = observer(() => {
       {activeTab === 1 && <Banners />}
       {activeTab === 2 && <Albums />}
       {activeTab === 3 && <Concerts />}
+      {activeTab === 4 && <Songs />}
       <div className={`${s.admin__logout}`} onClick={() => UserStore.logout()}>выход</div>
     </div>
   );
