@@ -1,9 +1,9 @@
-const db = require("./db")
-const helper = require("../helper")
-const config = require("../config")
+const db = require("./db");
+const helper = require("../helper");
+const config = require("../config");
 
 async function getMultiple(page = 1) {
-  const offset = helper.getOffset(page, config.listPerPage)
+  const offset = helper.getOffset(page, config.listPerPage);
 
   const rows = await db.query(
     `SELECT * 
@@ -19,20 +19,27 @@ async function getMultiple(page = 1) {
 }
 
 async function create(concert) {
-  let data = {
-    date: concert.date,
-    country: concert.country,
-    tickets: concert.tickets,
-    tickets_price: concert.tickets_price,
-    city: concert.city,
-    place: concert.place,
-    group: concert.group,
-  };
-  let sql = "INSERT INTO concerts SET ?";
-  let query = conn.query(sql, data, (err, results) => {
-    if (err) throw err;
-    res.send(JSON.stringify({ status: 200, error: null, response: results }));
-  });
+  const result = await db.query(
+    `INSERT INTO concert_program 
+        SET 
+        date = "${concert.date}",
+        concert_name = "${concert.concert_name}", 
+        tickets_price = "${concert.tickets_price}",
+        tickets = "${concert.tickets}",
+        city = "${concert.city}",
+        place = "${concert.place}",
+        group = "${concert.group}",
+        country = "${concert.country}",
+        main_album = "${concert.main_album}"
+        `
+  );
+
+  let message = "Error in updating program";
+  if (result.affectedRows) {
+    message = "program updating successfully";
+  }
+
+  return { message };
 
   // const result = await db.query(
   //   `INSERT INTO concerts
@@ -54,9 +61,15 @@ async function update(id, concert) {
   const result = await db.query(
     `UPDATE concerts 
         SET 
-            date="${concert.date}", country=${concert.country}, 
-            tickets=${concert.tickets}, city=${concert.city}
-            place="${concert.place}", group="${concert.group}"
+          date = "${concert.date}",
+          concert_name = "${concert.concert_name}", 
+          tickets_price = "${concert.tickets_price}",
+          tickets = "${concert.tickets}",
+          city = "${concert.city}",
+          place = "${concert.place}",
+          group = "${concert.group}",
+          country = "${concert.country}",
+          main_album = "${concert.main_album}"
         WHERE id=${id}`
   );
 

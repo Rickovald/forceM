@@ -1,6 +1,103 @@
 @import "../../../presets/variables"
 .albums 
+	&__card
+		background: $AdminFormBackground
+		max-width: 1020px
+		padding: 16px 51px 16px 16px
+		margin-bottom: 20px
+		border-radius: 5px
+		width: 850px
+		position: relative
+		cursor: pointer
+		&_active
+			cursor: auto
+	&__name
+		font-weight: 500
+		font-size: 16px
+		color: black
 	&__header
 		color: #eee
 		text-align: center
 		margin-bottom: 20px
+	&__form
+		margin-top: 0
+		height: 0
+		transition: .5s ease-in-out
+		color: black
+		overflow: hidden
+		display: flex
+		position: relative
+		&_active
+			margin-top: 20px
+			height: 400px
+	&__inputs
+		margin-right: 50px
+	&__inputWrapper
+		display: flex
+		margin-bottom: 10px
+		// align-items: center
+	&__inputLabel
+		width: 150px
+	&__input
+		border: none
+		outline: none
+		height: 33px
+		width: 300px
+		border-radius: 5px
+		padding: 0 10px
+		background: white
+		font-size: 14px
+		&_big
+			padding: 10px
+			height: 150px
+			resize: none
+	&__drag
+		&_on, &_out
+			width: 280px
+			height: 280px
+			background: #ababab
+		&_on
+			display: flex
+			justify-content: center
+			align-items: center
+			flex-direction: column
+	&__old_img
+		width: 100%
+		height: 100%
+		object-fit: contain
+
+	&__submit
+		background: #ababab
+		position: absolute
+		width: 200px
+		height: 50px
+		cursor: pointer
+		@include ButtonF4
+		text-transform: none
+		font-weight: 600
+		border-radius: 5px
+
+		bottom: 0
+		right: 0
+
+	&__dropdown
+		position: absolute
+		height: 51px
+		width: 51px
+		// background: rgba(0,0,0,.1)
+		top: 0
+		right: 0
+		cursor: pointer
+		transition: .3s ease
+		z-index: 200
+		&_active
+			transform: rotate(-90deg)
+		&_inactive
+			transform: rotate(90deg)
+
+		&::after
+			font-family: icomoon
+			content: "\e900"
+			// font-weight: bold
+			font-size: 51px
+			color: rgba(0,0,0,.5)

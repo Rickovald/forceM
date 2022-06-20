@@ -1,4 +1,3 @@
-// import { toJS } from "mobx";
 import { useEffect, useState } from "react";
 import s from "./song.module.sass";
 import del from "../../../img/icons/close.svg";
@@ -23,6 +22,7 @@ const Songs = () => {
         if (item.album_id === album) {
           slides.push(item);
         }
+        return ""
       });
       slides.sort(byField("id_in_album"));
       setSongs(slides);
@@ -54,7 +54,6 @@ const Songs = () => {
     const data = await SongsStore.getSongs().data;
     setSongs(data);
   };
-  console.log("[eq");
   return (
     <div className={`${s.songs}`}>
       <div>

@@ -1,4 +1,5 @@
 @import "../presets/variables"
+@import "../presets/functions"
 $radius: 12px
 
 .concerts
@@ -30,3 +31,26 @@ $radius: 12px
         // transition: $FastTransition
         &:hover
             color: white
+
+.concert
+    @include Content
+    margin-bottom: 40px
+    justify-content: space-between
+    position: relative
+    background: rgba(22,22,22,0.6)
+    &__head
+        margin-bottom: 10px
+    &__columns
+        display: flex
+        // justify-content: space-around
+    &__row
+        margin-bottom: 10px
+        display: flex
+        align-items: center
+    &__name
+        width: 120px
+@media (max-width: 380px)
+    .concert
+        font-size: 13px
+        &__name
+            width: 105px
