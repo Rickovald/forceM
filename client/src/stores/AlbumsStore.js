@@ -14,11 +14,21 @@ class AlbumsStore {
   }
   setAlbums = (albums) => {
     this.albums = albums;
-
   };
   getAlbums = () => {
     return this.albums;
   };
+
+  putAlbum = async (id, name, year, href, image, desc) => {
+    await AlbumsService.update(id, name, year, href, image, desc);
+  };
+  createAlbum = async (name, year, href, image, desc) => {
+    await AlbumsService.post(name, year, href, image, desc);
+  };
+  deleteAlbum = async (id) => {
+    await AlbumsService.delete(id);
+  };
+
   // Note the star, this a generator function!
   *fetchAlbums() {
     this.state = LOADING_STATUS;

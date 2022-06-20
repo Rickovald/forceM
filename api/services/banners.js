@@ -39,8 +39,8 @@ async function update(id, banner) {
   // const result = await db.query(
   //   `UPDATE banners
   //       SET
-  //           img="${banner.img}", head=${banner.head},
-  //           button=${banner.button}, href=${banner.href}
+  //           img="${banner.img}", head="${banner.head}",
+  //           button="${banner.button}", href="${banner.href}"
   //       WHERE id=${id}`
   // );
 
@@ -51,8 +51,6 @@ async function update(id, banner) {
   // }
 
   // return { message };
-}
-async function upload(img) {
 }
 async function remove(id) {
   const result = await db.query(`DELETE FROM banners WHERE id=${id}`);

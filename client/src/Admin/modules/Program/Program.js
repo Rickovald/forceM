@@ -33,11 +33,11 @@ const Program = () => {
 
   const addSong = async () => {
     await ProgramStore.createSong(
-      "Имя",
+      "Force-Minor - Название",
       "Сложность",
       "Комментарий",
       program[program.length - 1].place + 1,
-      "Дебюты и Проводы"
+      2
     );
     await ProgramStore.updateProgram();
     const data = await ProgramStore.getProgram().data;

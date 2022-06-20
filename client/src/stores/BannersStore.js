@@ -51,12 +51,12 @@ class BannersStore {
     }
   }
   updateBanners = async () => {
-    this.program = [];
+    this.banners = [];
     this.state = LOADING_STATUS;
     try {
-      const program = await BannersService.get();
+      const banners = await BannersService.get();
       this.state = COMPLETE_STATUS;
-      this.setProgram(program.data);
+      this.setBanners(banners.data);
     } catch (error) {
       this.state = ERROR_STATUS;
     }
