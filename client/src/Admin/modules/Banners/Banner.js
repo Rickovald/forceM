@@ -13,6 +13,7 @@ const Banner = (props) => {
   const [href, setHref] = useState(props.item.href);
   const [image, setImage] = useState(props.item.img);
   const [imgPublic, setImgPublic] = useState({});
+  const [imgPreview, setImgPreview] = useState("");
 
   const toggleActive = (flag) => {
     if (flag) {
@@ -38,13 +39,23 @@ const Banner = (props) => {
     const file = e.dataTransfer.files[0];
 
     const data = new FormData();
+    let reader = new FileReader(file);
+    // reader.readAsText(file);
+
+    reader.onloadend = () => {
+      setImgPreview(reader.result);
+    };
+
+    reader.readAsDataURL(file);
+
     data.append("newimg", file);
     console.log("Объект form-data", data);
     console.log("Переменная с файлом", data.get("newimg"));
     setImage(`/images/${file.name}`);
-		setImgPublic(data)
+    setImgPublic(data);
+    setDrag(false);
   };
-	
+
   const submit = () => {
     BannersStore.putBanner(props.item.id, image, banner, button, href, check);
     BannersStore.putImg(imgPublic);
@@ -132,7 +143,7 @@ const Banner = (props) => {
               <img
                 className={s.banners__old_img}
                 alt="banner_old"
-                src={props.item.img}
+                src={imgPreview ? imgPreview : props.item.img}
                 style={{ marginBottom: "10px" }}
               />
             </p>
