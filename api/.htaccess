@@ -1,0 +1,8 @@
+RewriteEngine off
+SetEnv GHOST_NODE_VERSION_CHECK false
+PassengerStartupFile index.js
+PassengerResolveSymlinksInDocumentRoot on
+Require all granted
+PassengerAppType node
+PassengerAppRoot /home/a0687392/domains/force-minor.ru/public_html/api
+Options -MultiViews
