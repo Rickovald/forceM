@@ -20,7 +20,7 @@ const corsOptions = {
     "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe, Authorization, access-control-allow-origin, access-control-allow-credentials",
   methods: "GET,PUT,POST,DELETE,UPDATE,OPTIONS",
   credentials: true,
-  origin: "http://localhost:3001",
+  origin: "http://localhost:3000",
 };
 app.use(cors(corsOptions));
 app.use(express.json());

@@ -5,7 +5,7 @@ import vk from "../img/social/VK_white.svg";
 const Footer = () => {
   return (
     <div className={s.footer}>
-      © 2022 Все права защищены. Официальный сайт группы Force Minor.
+      <div>© 2022 Все права защищены. Официальный сайт группы Force Minor.</div>
       <div className={s.footer__social}>
         <a
           className={s.footer__href}

@@ -9,37 +9,41 @@
 		position: relative
 		z-index: 1
 		width: 100%
-	&__prev, &__next
-		font-family: "icomoon"
-		position: absolute
-		font-size: 70px
-		height: 70px
-		width: 70px
-		font-weight: normal
-		top: 0
-		bottom: 0
-		margin: auto 10px
-		z-index: 2
-		cursor: pointer
-		transition: .3s ease-in-out
-		&:hover
-			color: white
-			transform: scale(1.2)
-	&__prev
-		left: 0
-		color: #7C7A98
-		&::after
-			content: "\e901"
-	&__next
-		right: 0
-		color: #7C7A98
-		&::after
-			content: "\e900"
-.none_button
-	color: #7C7A98
-	opacity: .5
-	transform: scale(.9)
-	cursor: default
-	&:hover
-		color: #7C7A98
-		transform: scale(.9)
+// 	&__prev, &__next
+// 		font-family: "icomoon"
+// 		position: absolute
+// 		font-size: 70px
+// 		height: 70px
+// 		width: 70px
+// 		font-weight: normal
+// 		top: 0
+// 		bottom: 0
+// 		margin: auto 10px
+// 		z-index: 2
+// 		cursor: pointer
+// 		transition: .3s ease-in-out
+// 		&:hover
+// 			color: white
+// 			transform: scale(1.2)
+// 	&__prev
+// 		left: 0
+// 		color: #7C7A98
+// 		&::after
+// 			content: "\e901"
+// 	&__next
+// 		right: 0
+// 		color: #7C7A98
+// 		&::after
+// 			content: "\e900"
+// .none_button
+// 	color: #7C7A98
+// 	opacity: .5
+// 	transform: scale(.9)
+// 	cursor: default
+// 	&:hover
+// 		color: #7C7A98
+// 		transform: scale(.9)
+
+@media (max-width: 1024px)
+	.main
+		padding: 0
