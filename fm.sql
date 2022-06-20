@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 19 2022 г., 21:36
--- Версия сервера: 8.0.24
--- Версия PHP: 7.2.34
+-- Время создания: Июн 20 2022 г., 19:54
+-- Версия сервера: 10.3.22-MariaDB
+-- Версия PHP: 7.1.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,17 +24,39 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `admins`
+--
+
+CREATE TABLE `admins` (
+  `id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `password` varchar(256) NOT NULL,
+  `refreshToken` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `admins`
+--
+
+INSERT INTO `admins` (`id`, `name`, `password`, `refreshToken`) VALUES
+(0, 'ricko', '$2b$10$UfKtj8CTxfQsQiG.sAvz3.UEQWWj2B.K9aai9GhadYusxdt2ylNKm', ''),
+(5, 'Torvunheart', '$2b$10$vQUwsEulmag07e/VFBxT0OBwv5em4MBDeIpoGvWL404yYyAKT4U36', ''),
+(6, 'Tortan', '$2b$10$V81C2ydYZe38DVoc0Xw/OezQL3eXVN/a3/.JB3YHt2sbNjGxHRXEK', '');
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `banners`
 --
 
 CREATE TABLE `banners` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `img` varchar(50) NOT NULL,
   `head` varchar(100) NOT NULL,
   `button` varchar(20) NOT NULL,
   `href` varchar(100) NOT NULL,
-  `href_type` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `href_type` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `banners`
@@ -51,23 +73,26 @@ INSERT INTO `banners` (`id`, `img`, `head`, `button`, `href`, `href_type`) VALUE
 --
 
 CREATE TABLE `concerts` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `country` varchar(50) NOT NULL,
+  `concert_name` varchar(50) NOT NULL,
   `tickets_price` varchar(40) NOT NULL,
   `tickets` varchar(400) NOT NULL,
   `city` varchar(50) NOT NULL,
   `place` varchar(20) NOT NULL,
-  `group` varchar(400) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `group` varchar(400) NOT NULL,
+  `country` varchar(50) NOT NULL,
+  `main_album` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `concerts`
 --
 
-INSERT INTO `concerts` (`id`, `date`, `country`, `tickets_price`, `tickets`, `city`, `place`, `group`) VALUES
-(1, '2022-02-25', 'Россия', '200 ₽', 'https://vk.com/domnepomer?w=wall-205245784_439', 'Москва', 'МосквоМеняльник', 'https://vk.com/force_minor'),
-(2, '2022-06-26', 'Россия', '300 ₽', 'https://vk.com/force_minor', 'Москва', 'Спотыкач', 'https://vk.com/spotycach');
+INSERT INTO `concerts` (`id`, `date`, `concert_name`, `tickets_price`, `tickets`, `city`, `place`, `group`, `country`, `main_album`) VALUES
+(1, '2022-02-25', 'Да будет форс минор', '200 ₽', 'https://vk.com/domnepomer?w=wall-205245784_439', 'Москва', 'МосквоМеняльник', 'https://vk.com/force_minor', 'Россия', 1),
+(2, '2022-06-26', 'Дебюты и проводы', '300 ₽', 'https://vk.com/force_minor', 'Москва', 'Спотыкач', 'https://vk.com/spotycach', 'Россия', 1),
+(4, '2022-07-27', 'Новые музыканты!', '300 ₽', 'https://vk.com/force_minor', 'москва', 'Еще не определено', 'https://vk.com/force_minor', 'Россия', 1);
 
 -- --------------------------------------------------------
 
@@ -76,23 +101,25 @@ INSERT INTO `concerts` (`id`, `date`, `country`, `tickets_price`, `tickets`, `ci
 --
 
 CREATE TABLE `concert_program` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(30) NOT NULL,
   `difficulty` varchar(30) NOT NULL,
   `comments` varchar(100) NOT NULL,
-  `place` int NOT NULL,
-  `concert_name` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `place` int(11) NOT NULL,
+  `concert_name` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `concert_program`
 --
 
 INSERT INTO `concert_program` (`id`, `name`, `difficulty`, `comments`, `place`, `concert_name`) VALUES
-(1, 'Force-Minor - Кривой Роцк', 'Средняя', 'Трудно держать ритм на слабой доле. Насть, пропиши барабаны', 1, 'Дебюты и Проводы'),
-(3, 'Force-Minor - Не летов', 'Простая', 'Надо подумать над соло и дописать предприпев', 2, 'Дебюты и Проводы'),
-(13, 'Force-Minor - Ееуеуеуе', 'Сложная', 'Больше металла, новая мелодическая линия, текст писать на квенья', 3, 'Дебюты и Проводы'),
-(15, 'Имя', 'Простая', 'Комментарий', 4, 'Дебюты и Проводы');
+(1, 'Force-Minor - Кривой Роцк', 'Средняя', 'Трудно держать ритм на слабой доле. Дил, пропиши барабаны', 1, 2),
+(3, 'Force-Minor - Не летов', 'Простая', 'Надо подумать над соло и дописать предприпев', 2, 2),
+(13, 'Force-Minor - Ееуеуеуе', 'Сложная', 'Больше металла, новая мелодическая линия, текст писать на квенья', 3, 2),
+(15, 'Force-Minor - Perdelka', 'Простая', 'Стоит ли вообще ее оставлять...', 4, 2),
+(17, 'Force-Minor - новая песня', 'Сложность', 'Комментарий', 5, 2),
+(18, 'Force-Minor - Тусклый свет', 'Простая', 'Лид партию сделать, легкая ударка', 6, 2);
 
 -- --------------------------------------------------------
 
@@ -101,13 +128,13 @@ INSERT INTO `concert_program` (`id`, `name`, `difficulty`, `comments`, `place`, 
 --
 
 CREATE TABLE `discography` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `year` smallint NOT NULL,
+  `year` smallint(6) NOT NULL,
   `href` varchar(100) NOT NULL,
   `image` varchar(70) NOT NULL,
   `desc` varchar(500) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `discography`
@@ -123,11 +150,11 @@ INSERT INTO `discography` (`id`, `name`, `year`, `href`, `image`, `desc`) VALUES
 --
 
 CREATE TABLE `songs` (
-  `id` int NOT NULL,
-  `id_in_album` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `id_in_album` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `album_id` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `album_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `songs`
@@ -137,32 +164,15 @@ INSERT INTO `songs` (`id`, `id_in_album`, `name`, `album_id`) VALUES
 (1, 1, 'Мечты', 1),
 (2, 2, 'Тени', 1);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `users`
---
-
-CREATE TABLE `users` (
-  `id` int NOT NULL,
-  `role` varchar(50) NOT NULL,
-  `name` varchar(50) NOT NULL,
-  `password` varchar(256) NOT NULL,
-  `refreshToken` varchar(256) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
-
---
--- Дамп данных таблицы `users`
---
-
-INSERT INTO `users` (`id`, `role`, `name`, `password`, `refreshToken`) VALUES
-(0, 'admin', 'ricko', '$2b$10$UfKtj8CTxfQsQiG.sAvz3.UEQWWj2B.K9aai9GhadYusxdt2ylNKm', ''),
-(5, 'admin', 'Torvunheart', '$2b$10$vQUwsEulmag07e/VFBxT0OBwv5em4MBDeIpoGvWL404yYyAKT4U36', ''),
-(6, 'admin', 'Tortan', '$2b$10$V81C2ydYZe38DVoc0Xw/OezQL3eXVN/a3/.JB3YHt2sbNjGxHRXEK', '');
-
 --
 -- Индексы сохранённых таблиц
 --
+
+--
+-- Индексы таблицы `admins`
+--
+ALTER TABLE `admins`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Индексы таблицы `banners`
@@ -174,13 +184,16 @@ ALTER TABLE `banners`
 -- Индексы таблицы `concerts`
 --
 ALTER TABLE `concerts`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `concert_name` (`concert_name`),
+  ADD KEY `main_album` (`main_album`);
 
 --
 -- Индексы таблицы `concert_program`
 --
 ALTER TABLE `concert_program`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `concert_name` (`concert_name`);
 
 --
 -- Индексы таблицы `discography`
@@ -197,54 +210,60 @@ ALTER TABLE `songs`
   ADD KEY `album_id` (`album_id`);
 
 --
--- Индексы таблицы `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT для сохранённых таблиц
 --
+
+--
+-- AUTO_INCREMENT для таблицы `admins`
+--
+ALTER TABLE `admins`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT для таблицы `banners`
 --
 ALTER TABLE `banners`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `concerts`
 --
 ALTER TABLE `concerts`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT для таблицы `concert_program`
 --
 ALTER TABLE `concert_program`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT для таблицы `discography`
 --
 ALTER TABLE `discography`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `songs`
 --
 ALTER TABLE `songs`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT для таблицы `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --
+
+--
+-- Ограничения внешнего ключа таблицы `concerts`
+--
+ALTER TABLE `concerts`
+  ADD CONSTRAINT `concerts_ibfk_1` FOREIGN KEY (`main_album`) REFERENCES `discography` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ограничения внешнего ключа таблицы `concert_program`
+--
+ALTER TABLE `concert_program`
+  ADD CONSTRAINT `concert_program_ibfk_1` FOREIGN KEY (`concert_name`) REFERENCES `concerts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `songs`
