@@ -57,6 +57,7 @@ const Album = (props) => {
   };
 
   const submit = () => {
+    console.log(name, year, desc, image, imgPublic);
     // AlbumsStore.putAlbum(props.item.id, image, album, year, desc, check);
     // AlbumsStore.putImg(imgPublic);
   };
