@@ -1,9 +1,9 @@
-require('dotenv').config()
+require("dotenv").config();
 const express = require("express");
-const cookieParser = require('cookie-parser')
-const multer = require('multer')
+const cookieParser = require("cookie-parser");
+const multer = require("multer");
 const cors = require("cors");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 5000; //Line 3
 const bannersRouter = require("./routes/banners");
@@ -13,9 +13,14 @@ const albumsRouter = require("./routes/albums");
 const songsRouter = require("./routes/songs");
 const userRouter = require("./routes/users");
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: "*",
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
+  allowedHeaders:
+    "X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept, Observe, Authorization, access-control-allow-origin, access-control-allow-credentials",
+  methods: "GET,PUT,POST,DELETE,UPDATE,OPTIONS",
+  credentials: true,
+  origin: "http://localhost:3001",
 };
 app.use(cors(corsOptions));
 app.use(express.json());
@@ -27,7 +32,6 @@ app.use(
   })
 );
 
-
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
@@ -38,22 +42,21 @@ app.use("/api/albums", albumsRouter);
 app.use("/api/songs", songsRouter);
 app.use("/api/user", userRouter);
 
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/images/")
+    cb(null, "public/images/");
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname)
+    cb(null, file.originalname);
   },
-})
+});
 
-const uploadStorage = multer({ storage: storage })
+const uploadStorage = multer({ storage: storage });
 
 app.post("/api/upload", uploadStorage.single("newimg"), (req, res) => {
-  return res.send("Single file")
-})
-
+  console.log(req.file);
+  return res.send("Single file");
+});
 
 /* Error handler middleware */
 app.use((err, req, res, next) => {

@@ -69,7 +69,7 @@ class UserStore {
   checkAuth = async () => {
     this.state = LOADING_STATUS;
     try {
-      const response = await axios.get(`http://localhost:5000/user/refresh`, {
+      const response = await axios.get(`http://localhost:5000/api/user/refresh`, {
         withCredentials: true,
       });
       localStorage.setItem("token", response.data.accessToken);

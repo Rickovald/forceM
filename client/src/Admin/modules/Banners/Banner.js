@@ -39,6 +39,8 @@ const Banner = (props) => {
 
     const data = new FormData();
     data.append("newimg", file);
+    console.log("Объект form-data", data);
+    console.log("Переменная с файлом", data.get("newimg"));
     setImage(`/images/${file.name}`);
 		setImgPublic(data)
   };
