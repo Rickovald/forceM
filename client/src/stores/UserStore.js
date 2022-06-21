@@ -29,6 +29,8 @@ class UserStore {
         this.setAuth(true);
         this.setUser(response.data.user);
         localStorage.setItem("token", response.data.accessToken);
+        localStorage.setItem("user", response.data.user.name);
+
       } else {
         return response.data
       }
@@ -42,7 +44,10 @@ class UserStore {
     this.state = LOADING_STATUS;
     try {
       const response = await UserService.registration(email, password);
+
       localStorage.setItem("token", response.data.accessToken);
+      localStorage.setItem("user", response.data.user.name);
+      
       this.setAuth(true);
       this.setUser(response.data.user);
       this.state = COMPLETE_STATUS;
@@ -56,7 +61,8 @@ class UserStore {
     this.state = LOADING_STATUS;
     try {
       await UserService.logout();
-      localStorage.removeItem("token");
+      localStorage.removeItem("token"); 
+      localStorage.removeItem("user");
       this.setAuth(false);
       this.setUser({});
       this.state = COMPLETE_STATUS;

@@ -19,6 +19,10 @@ class BannersService {
     });
   };
 
+  static delete = async (id) => {
+    return await $api.delete(`/banners/${id}`);
+  };
+  
   static upload = async (img) => {
     return await axios.post(
       `${API_URL}/upload`,
@@ -29,9 +33,6 @@ class BannersService {
         },
       }
     );
-  };
-  static delete = async (id) => {
-    return await $api.delete(`/banners/${id}`);
   };
 }
 

@@ -8,8 +8,8 @@ import Contacts from "../Contacts/Contacts";
 
 // import logo from "../img/diz/logo-trans.png"
 import { observer } from "mobx-react-lite";
+import Burger from "./Burger";
 const Navigation = observer(() => {
-
   const [contacts, setContacts] = useState(0);
   return (
     <div className={`${s.navigation}`}>
@@ -61,7 +61,11 @@ const Navigation = observer(() => {
           <span className={s.navigation__link_item}>Контакты</span>
         </div>
       </div>
-      <Contacts active={contacts} setActive={setContacts}/>
+      <Contacts active={contacts} setActive={setContacts} />
+
+      <Burger
+      // setContacts={setContacts}
+      />
     </div>
   );
 });

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Июн 20 2022 г., 19:54
+-- Время создания: Июн 22 2022 г., 02:20
 -- Версия сервера: 10.3.22-MariaDB
 -- Версия PHP: 7.1.33
 
@@ -41,7 +41,7 @@ CREATE TABLE `admins` (
 INSERT INTO `admins` (`id`, `name`, `password`, `refreshToken`) VALUES
 (0, 'ricko', '$2b$10$UfKtj8CTxfQsQiG.sAvz3.UEQWWj2B.K9aai9GhadYusxdt2ylNKm', ''),
 (5, 'Torvunheart', '$2b$10$vQUwsEulmag07e/VFBxT0OBwv5em4MBDeIpoGvWL404yYyAKT4U36', ''),
-(6, 'Tortan', '$2b$10$V81C2ydYZe38DVoc0Xw/OezQL3eXVN/a3/.JB3YHt2sbNjGxHRXEK', '');
+(6, 'Tortan', '$2b$10$V81C2ydYZe38DVoc0Xw/OezQL3eXVN/a3/.JB3YHt2sbNjGxHRXEK', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiVG9ydGFuIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjU1ODE0NDY2fQ.1cOXabYGmfGxtJ32EvRgnx8iSim-DxpFvh3IgWpXbZk');
 
 -- --------------------------------------------------------
 
@@ -91,8 +91,8 @@ CREATE TABLE `concerts` (
 
 INSERT INTO `concerts` (`id`, `date`, `concert_name`, `tickets_price`, `tickets`, `city`, `place`, `group`, `country`, `main_album`) VALUES
 (1, '2022-02-25', 'Да будет форс минор', '200 ₽', 'https://vk.com/domnepomer?w=wall-205245784_439', 'Москва', 'МосквоМеняльник', 'https://vk.com/force_minor', 'Россия', 1),
-(2, '2022-06-26', 'Дебюты и проводы', '300 ₽', 'https://vk.com/force_minor', 'Москва', 'Спотыкач', 'https://vk.com/spotycach', 'Россия', 1),
-(4, '2022-07-27', 'Новые музыканты!', '300 ₽', 'https://vk.com/force_minor', 'москва', 'Еще не определено', 'https://vk.com/force_minor', 'Россия', 1);
+(2, '2022-06-26', 'Дебюты и проводы', '300 ₽', 'https://vk.com/force_minor', 'Москва', 'Спотыкач', 'https://vk.com/spotycach', 'Россия', 2),
+(4, '2022-07-27', 'Новые музыканты!', '300 ₽', 'https://vk.com/force_minor', 'Москва', 'Еще не определено', 'https://vk.com/force_minor', 'Россия', 1);
 
 -- --------------------------------------------------------
 
@@ -114,12 +114,12 @@ CREATE TABLE `concert_program` (
 --
 
 INSERT INTO `concert_program` (`id`, `name`, `difficulty`, `comments`, `place`, `concert_name`) VALUES
-(1, 'Force-Minor - Кривой Роцк', 'Средняя', 'Трудно держать ритм на слабой доле. Дил, пропиши барабаны', 1, 2),
-(3, 'Force-Minor - Не летов', 'Простая', 'Надо подумать над соло и дописать предприпев', 2, 2),
-(13, 'Force-Minor - Ееуеуеуе', 'Сложная', 'Больше металла, новая мелодическая линия, текст писать на квенья', 3, 2),
-(15, 'Force-Minor - Perdelka', 'Простая', 'Стоит ли вообще ее оставлять...', 4, 2),
-(17, 'Force-Minor - новая песня', 'Сложность', 'Комментарий', 5, 2),
-(18, 'Force-Minor - Тусклый свет', 'Простая', 'Лид партию сделать, легкая ударка', 6, 2);
+(3, 'Force-Minor - Не летов', 'Простая', 'Надо подумать над соло и дописать предприпев', 1, 2),
+(13, 'Force-Minor - Ееуеуеуе', 'Сложная', 'Больше металла, новая мелодическая линия, текст писать на квенья', 2, 2),
+(15, 'Force-Minor - Perdelka', 'Простая', 'Стоит ли вообще ее оставлять...', 3, 2),
+(17, 'Force-Minor - новая песня', 'Сложность', 'Комментарий', 4, 2),
+(18, 'Force-Minor - Тусклый свет', 'Простая', 'Лид партию сделать, легкая ударка', 5, 2),
+(20, 'Force-Minor - Кривой Роцк', 'Сложность', 'Трудно держать ритм на слабой доле. Дил, пропиши барабаны\n', 6, 2);
 
 -- --------------------------------------------------------
 
@@ -141,7 +141,8 @@ CREATE TABLE `discography` (
 --
 
 INSERT INTO `discography` (`id`, `name`, `year`, `href`, `image`, `desc`) VALUES
-(1, 'Debut', 2022, 'https://vk.com/music/playlist/-184530709_1', '/images/debut.webp', 'Дебютный альбом нашей группы состоящий из совершенно разношерстных песен, ибо каждый вложился в него по своему, но это не делает общую картину хуже:)');
+(1, 'Дебют', 2022, 'https://vk.com/music/playlist/-184530709_1', '/images/debut.webp', 'Дебютный альбом нашей группы состоящий из совершенно разношерстных песен, ибо каждый вложился в него по своему, но это не делает общую картину хуже:)'),
+(2, 'Мистический второй альбом', 2077, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '/images/life.jpg', '000');
 
 -- --------------------------------------------------------
 
@@ -161,8 +162,11 @@ CREATE TABLE `songs` (
 --
 
 INSERT INTO `songs` (`id`, `id_in_album`, `name`, `album_id`) VALUES
-(1, 1, 'Мечты', 1),
-(2, 2, 'Тени', 1);
+(1, 1, 'Force-Minor - Мечты', 1),
+(2, 4, 'Force-Minor - Тени', 1),
+(4, 3, 'Force-Minor - Тусклый свет', 1),
+(5, 2, 'Force-Minor - Еуеуеуеуе', 2),
+(6, 2, 'Force-Minor - Кривой роцк', 1);
 
 --
 -- Индексы сохранённых таблиц
@@ -235,19 +239,19 @@ ALTER TABLE `concerts`
 -- AUTO_INCREMENT для таблицы `concert_program`
 --
 ALTER TABLE `concert_program`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT для таблицы `discography`
 --
 ALTER TABLE `discography`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `songs`
 --
 ALTER TABLE `songs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц

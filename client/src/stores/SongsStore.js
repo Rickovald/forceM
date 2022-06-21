@@ -18,7 +18,17 @@ class SongsStore {
   getSongs = () => {
     return this.songs;
   };
+  putSong = async (id, name, db_name) => {
+    await SongsService.put(id, name, db_name);
+  };
+  createSong = async (id_in_album, name, album_id) => {
+    await SongsService.post(id_in_album, name, album_id);
+  };
+  deleteSong = async (id) => {
+    await SongsService.delete(id);
+  };
   // Note the star, this a generator function!
+  
   *fetchSongs() {
     this.songs = [];
     this.state = LOADING_STATUS;
@@ -32,6 +42,17 @@ class SongsStore {
       this.state = ERROR_STATUS;
     }
   }
+  updateSongs = async () => {
+    this.songs = [];
+    this.state = LOADING_STATUS;
+    try {
+      const songs = await SongsService.get();
+      this.state = COMPLETE_STATUS;
+      this.setSongs(songs.data);
+    } catch (error) {
+      this.state = ERROR_STATUS;
+    }
+  };
 }
 
 export default new SongsStore();

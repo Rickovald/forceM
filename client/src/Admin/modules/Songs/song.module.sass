@@ -1,0 +1,55 @@
+@import "../../../presets/variables"
+.songs
+	display: flex
+	padding-right: 30px
+	&__song
+		width: 100%
+		max-width: 400px
+		display: flex
+		position: relative
+		margin-bottom: 8px
+	&__songItem
+		border: none
+		resize: none
+		outline: none
+		vertical-align: top
+		width: 100%
+		padding: 10px 22px
+		display: flex
+		align-items: center
+		min-height: 53px
+		color: black
+		background: $AdminFormBackground
+		margin-right: 8px
+		border-radius: 5px
+	&__select
+		cursor: pointer
+		font-size: 16px
+		max-width: 300px
+		height: 50px
+		border-radius: 5px
+		padding: 10px 20px
+		margin-bottom: 16px
+		background: $BtnBackground
+		display: flex
+		align-items: center
+		margin-right: 8px
+		&_active
+			background: $MainBackground
+	&__delete
+		position: absolute
+		height: 30px
+		top: -4px
+		right: -25px
+		cursor: pointer
+		img
+			height: 100%
+	&__add
+		height: 60px
+		top: -4px
+		cursor: pointer
+		margin: 40px auto 0
+		width: 60px
+		img
+			height: 100%
+			transform: rotate(45deg)

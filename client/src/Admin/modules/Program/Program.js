@@ -4,14 +4,26 @@ import ProgramStore from "../../../stores/ProgramStore";
 import s from "./program.module.sass";
 import del from "../../../img/icons/close.svg";
 import Dropdown from "./Dropdown";
+import { observer } from "mobx-react-lite";
 
-const Program = () => {
+const Program = observer(() => {
   const [program, setProgram] = useState([]);
   const data = ProgramStore.getProgram().data;
-  useEffect(() => {
-    setProgram(data);
-  }, [data]);
 
+  const byField = (field) => {
+    return (a, b) => (a[field] > b[field] ? 1 : -1);
+  };
+
+  useEffect(() => {
+
+    // const songs = [];
+
+    if (data) {
+      // songs = вфе
+      data.sort(byField("place"));
+      setProgram(data);
+    }
+  }, [data]);
   const deleteSong = async (id) => {
     await ProgramStore.deleteSong(id);
 
@@ -19,25 +31,28 @@ const Program = () => {
     const data = await ProgramStore.getProgram().data;
     setProgram(data);
   };
-  const putToSong = (e, id, data) => {
+  const putToSong = async (e, id, data) => {
     // event.target.attributes.getNamedItem('data-tag')
     if (e.target.innerText !== data) {
-
       ProgramStore.putSong(
         id,
         e.target.innerText,
         e.target.attributes.name.value
       );
     }
+    
+    await ProgramStore.updateProgram();
+    const newdata = await ProgramStore.getProgram().data;
+    setProgram(newdata);
   };
 
   const addSong = async () => {
     await ProgramStore.createSong(
-      "Имя",
+      "Force-Minor - Название",
       "Сложность",
       "Комментарий",
       program[program.length - 1].place + 1,
-      "Дебюты и Проводы"
+      2
     );
     await ProgramStore.updateProgram();
     const data = await ProgramStore.getProgram().data;
@@ -107,6 +122,6 @@ const Program = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Program;

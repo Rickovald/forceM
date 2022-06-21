@@ -2,7 +2,7 @@ import { useState } from "react";
 import UserStore from "../../../stores/UserStore";
 import s from "./auth.module.sass";
 
-const AuthPopup = () => {
+const AuthPopup = (props) => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -10,6 +10,7 @@ const AuthPopup = () => {
   const toLogin = async () => {
     const response = await UserStore.login(login, password)
     setError(response)
+    props.setUser(localStorage.getItem("user"));
   }
 
   return (

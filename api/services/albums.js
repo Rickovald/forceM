@@ -19,50 +19,40 @@ async function getMultiple(page = 1) {
 }
 
 async function create(album) {
-  let data = {
-    name: album.name,
-    year: album.year,
-    href: album.href,
-    image: album.image,
-  };
-  let sql = "INSERT INTO discography SET ?";
-  let query = conn.query(sql, data, (err, results) => {
-    if (err) throw err;
-    res.send(JSON.stringify({ status: 200, error: null, response: results }));
-  });
-
-  // const result = await db.query(
-  //   `INSERT INTO albums
-  //     ('id', 'img', 'head', 'button', 'href')
-  //     VALUES
-  //     (NULL, ${img}, ${head}, ${button}, ${href})`
-  // );
-
-  // let message = "Error in creating album";
-
-  // if (result.affectedRows) {
-  //   message = "album created successfully";
-  // }
-
-  // return { message };
-}
-
-async function update(id, album) {
   const result = await db.query(
-    `UPDATE discography 
+    `INSERT INTO concert_program 
         SET 
-            name="${album.name}", year=${album.year}, 
-            href=${album.href}, image=${album.image}
-        WHERE id=${id}`
+        name = "${album.name}",
+        year = "${album.year}",
+        href = "${album.href}",
+        image = "${album.image}"`
   );
 
-  let message = "Error in updating album";
-
+  let message = "Error in updating program";
   if (result.affectedRows) {
-    message = "album updating successfully";
+    message = "program updating successfully";
   }
 
   return { message };
+}
+
+async function update(id, album) {
+  // const result = await db.query(
+  //   `UPDATE discography 
+  //       SET 
+  //           name="${album.name}", year="${album.year}", 
+  //           href="${album.href}", image="${album.image}",
+  //           desc = "${album.desc}"
+  //       WHERE id=${id}`
+  // );
+
+  // let message = "Error in updating album";
+
+  // if (result.affectedRows) {
+  //   message = "album updating successfully";
+  // }
+
+  // return { message };
 }
 
 async function remove(id) {

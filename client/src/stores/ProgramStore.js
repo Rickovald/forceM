@@ -14,13 +14,12 @@ class ProgramStore {
   }
 
   // const programObserver = setInterval(async () => {
-//   const data = ProgramStore.getProgram().data
-//     setProgram(data);
-//     console.log(toJS(data));
-//   }, 500);
-//   return () => {
-//     clearInterval(programObserver);
-//   };
+  //   const data = ProgramStore.getProgram().data
+  //     setProgram(data);
+  //   }, 500);
+  //   return () => {
+  //     clearInterval(programObserver);
+  //   };
   setProgram = (program) => {
     this.program = { ...program };
   };
@@ -34,12 +33,7 @@ class ProgramStore {
     await ProgramService.post(name, difficulty, comments, place, concert_name);
   };
   deleteSong = async (id) => {
-    try {
-      await ProgramService.delete(id);
-      this.state = COMPLETE_STATUS;
-    } catch (error) {
-      this.state = ERROR_STATUS;
-    }
+    await ProgramService.delete(id);
   };
   // Note the star, this a generator function!
   *fetchProgram() {

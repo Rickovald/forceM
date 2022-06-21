@@ -1,6 +1,7 @@
 @import "../../../presets/variables"
 .program
-	width: 1020px
+	max-width: 1020px
+	width: fit-content
 	&__header
 		color: #eee
 		text-align: center
@@ -27,6 +28,7 @@
 	&__commentWrapper
 		position: relative
 		width: 100%
+		max-width: 515px
 	&__comment
 		position: relative
 		text-align: left
@@ -42,11 +44,13 @@
 			text-overflow: ellipsis
 		&_active
 			display: block
+			p span
+				white-space: normal !important
 	&__delete
 		position: absolute
 		height: 30px
 		top: -4px
-		right: -25px
+		right: -35px
 		cursor: pointer
 		img
 			height: 100%
@@ -65,7 +69,7 @@
 		width: 53px
 		// background: rgba(0,0,0,.1)
 		top: 0
-		right: 13px
+		right: 0
 		cursor: pointer
 		transition: .3s ease
 		&_active

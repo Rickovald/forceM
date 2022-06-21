@@ -1,7 +1,10 @@
 @import "../presets/variables"
+@import "../presets/functions"
 
 .album
     @include Wrapper
+    &__header
+        margin-bottom: 10px
     &__content
         display: flex
     &__content_wrapper
@@ -10,16 +13,28 @@
         // display: flex
     &__image
         width: 400px
+        border-radius: 10px
+        overflow: hidden
+        margin-right: 20px
     &__button
         @include ButtonF1
         width: fit-content
         display: block
-        background: #fff
+        background:  $AdminFormBackground
         padding: 15px 35px
         font-weight: normal
         margin-top: auto
         margin-left: auto
+        border-radius: 5px
     &__right
         width: 100%
         display: flex
         flex-direction: column
+
+@media (max-width: 768px)
+    .album
+        &__content_wrapper
+            width: calcSize(400, 280, 768, 320)
+            // height: calcSize(400, 280, 768, 320)
+        &__button
+            margin-top: 20px
