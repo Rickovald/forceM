@@ -2,6 +2,7 @@ import s from "./banners.module.sass";
 import { useState } from "react";
 import upload from "../../../img/admin/download.png";
 import BannersStore from "../../../stores/BannersStore";
+import del from "../../../img/icons/close.svg";
 
 const Banner = (props) => {
   const [active, setActive] = useState(false);
@@ -48,16 +49,23 @@ const Banner = (props) => {
     console.log("Объект form-data", data);
     console.log("Переменная с файлом", data.get("newimg"));
     setImage(`/images/${file.name}`);
-    // setImgPublic(data);
+    setImgPublic(data);
     setDrag(false);
+  };
+
+  const deleteSong = async (id) => {
+    console.log(id);
+    await BannersStore.deleteBanner(id);
+
+    await BannersStore.updateBanners();
+    const data = await BannersStore.getBanners().data;
+    props.setBanners(data);
   };
 
   const submit = () => {
     BannersStore.putBanner(props.item.id, image, banner, button, href, check);
     BannersStore.putImg(imgPublic);
   };
-
-
 
   return (
     <div
@@ -169,6 +177,13 @@ const Banner = (props) => {
         <div className={s.banners__submit} onClick={submit}>
           Сохранить
         </div>
+      </div>
+
+      <div
+        className={s.banners__delete}
+        onClick={() => deleteSong(props.item.id)}
+      >
+        <img src={del} alt="delete" />
       </div>
     </div>
   );

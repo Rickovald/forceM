@@ -30,7 +30,6 @@ const Admin = observer(() => {
     setActiveTab(tab);
     localStorage.setItem("admin_tab", tab);
   };
-  console.log(activeTab);
 
   const toLogOut = async () => {
     await UserStore.logout();

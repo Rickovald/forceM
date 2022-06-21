@@ -37,7 +37,7 @@ const Banners = () => {
     <div className={`${s.banners}`}>
       {banners.map((item, index) => {
         return (
-          <Banner key={`banner_card_${index}`} item={item}/>
+          <Banner key={`banner_card_${index}`} item={item} setBanners={setBanners}/>
         );
       })}
       <div className={s.banners__add} onClick={() => addSong()}>

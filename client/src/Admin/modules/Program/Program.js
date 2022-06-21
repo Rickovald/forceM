@@ -10,8 +10,19 @@ const Program = observer(() => {
   const [program, setProgram] = useState([]);
   const data = ProgramStore.getProgram().data;
 
+  const byField = (field) => {
+    return (a, b) => (a[field] > b[field] ? 1 : -1);
+  };
+
   useEffect(() => {
-    if (data) setProgram(data)
+
+    // const songs = [];
+
+    if (data) {
+      // songs = вфе
+      data.sort(byField("place"));
+      setProgram(data);
+    }
   }, [data]);
   const deleteSong = async (id) => {
     await ProgramStore.deleteSong(id);
@@ -20,7 +31,7 @@ const Program = observer(() => {
     const data = await ProgramStore.getProgram().data;
     setProgram(data);
   };
-  const putToSong = (e, id, data) => {
+  const putToSong = async (e, id, data) => {
     // event.target.attributes.getNamedItem('data-tag')
     if (e.target.innerText !== data) {
       ProgramStore.putSong(
@@ -29,6 +40,10 @@ const Program = observer(() => {
         e.target.attributes.name.value
       );
     }
+    
+    await ProgramStore.updateProgram();
+    const newdata = await ProgramStore.getProgram().data;
+    setProgram(newdata);
   };
 
   const addSong = async () => {
