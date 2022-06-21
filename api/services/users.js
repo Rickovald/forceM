@@ -112,7 +112,6 @@ async function refresh(refreshToken) {
   if (!refreshToken) {
     return "Пользователь не авторизован"
   }
-
   const userData = await tokenService.validateRefreshToken(refreshToken);
   const tokenFromDb = await tokenService.findToken(refreshToken);
   

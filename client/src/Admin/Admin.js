@@ -12,24 +12,25 @@ import Songs from "./modules/Songs/Songs";
 const Admin = observer(() => {
   const [activeTab, setActiveTab] = useState(0);
   const [user, setUser] = useState(localStorage.getItem("user"));
+  
+  const storage_tab = localStorage.getItem("admin_tab");
 
   useEffect(() => {
     if (storage_tab) {
       setActiveTab(Number(storage_tab));
     }
-  }, []);
+  }, [storage_tab]);
 
   // const user = localStorage.getItem("user");
   // useEffect(() => {
   //   setUser(localStorage.getItem("user"))
   // }, [])
 
-  const storage_tab = localStorage.getItem("admin_tab");
-
   const tabSetter = (tab) => {
     setActiveTab(tab);
     localStorage.setItem("admin_tab", tab);
   };
+  console.log(activeTab);
 
   const toLogOut = async () => {
     await UserStore.logout();

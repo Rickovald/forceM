@@ -16,7 +16,6 @@ class ProgramStore {
   // const programObserver = setInterval(async () => {
   //   const data = ProgramStore.getProgram().data
   //     setProgram(data);
-  //     console.log(toJS(data));
   //   }, 500);
   //   return () => {
   //     clearInterval(programObserver);

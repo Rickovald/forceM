@@ -43,10 +43,12 @@ const Banner = (props) => {
     reader.readAsDataURL(file);
 
     data.append("newimg", file);
+
+    console.log(typeof file);
     console.log("Объект form-data", data);
     console.log("Переменная с файлом", data.get("newimg"));
     setImage(`/images/${file.name}`);
-    setImgPublic(data);
+    // setImgPublic(data);
     setDrag(false);
   };
 

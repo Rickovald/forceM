@@ -42,6 +42,7 @@ class TokenService {
   }
 
   async removeToken(refreshToken) {
+    
     const tokenData = await db.query(
       `UPDATE admins SET
         refreshToken = ""

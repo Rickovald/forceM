@@ -2,7 +2,6 @@ import s from "./albums.module.sass";
 import { useState } from "react";
 import upload from "../../../img/admin/download.png";
 // import AlbumsStore from "../../../stores/AlbumsStore";
-import { toJS } from "mobx";
 
 const Album = (props) => {
   const [active, setActive] = useState(false);
@@ -16,7 +15,6 @@ const Album = (props) => {
   const [imgPreview, setImgPreview] = useState("");
 
   const toggleActive = () => {
-    console.log('---');
     setActive((active) => (active = !active));
   };
 
