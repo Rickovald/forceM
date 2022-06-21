@@ -1,37 +1,42 @@
 @import "../../../presets/variables"
-.albums 
+.albums
+	max-width: 850px
+	width: 100%
 	&__card
 		background: $AdminFormBackground
-		max-width: 1020px
-		padding: 16px 51px 16px 16px
+		width: 100%
 		margin-bottom: 20px
 		border-radius: 5px
-		width: 850px
 		position: relative
-		cursor: pointer
-		&_active
-			cursor: auto
 	&__name
 		font-weight: 500
 		font-size: 16px
+		padding: 16px
+		cursor: pointer
 		color: black
-	&__header
-		color: #eee
-		text-align: center
-		margin-bottom: 20px
+		position: relative
+		z-index: 1
 	&__form
-		margin-top: 0
 		height: 0
 		transition: .5s ease-in-out
 		color: black
 		overflow: hidden
 		display: flex
 		position: relative
+		padding: 0 16px
 		&_active
-			margin-top: 20px
-			height: 400px
+			height: 430px
 	&__inputs
+		width: fit-content
 		margin-right: 50px
+	&__imgSetter
+		width: 100%
+	&__inputs, &__imgSetter
+		width: 100%
+		z-index: 2
+		position: relative
+		background: $AdminFormBackground
+		height: fit-content
 	&__inputWrapper
 		display: flex
 		margin-bottom: 10px
@@ -42,7 +47,8 @@
 		border: none
 		outline: none
 		height: 33px
-		width: 300px
+		width: 100%
+		max-width: 300px
 		border-radius: 5px
 		padding: 0 10px
 		background: white
@@ -72,13 +78,14 @@
 		width: 200px
 		height: 50px
 		cursor: pointer
+		z-index: 1
 		@include ButtonF4
 		text-transform: none
 		font-weight: 600
 		border-radius: 5px
 
-		bottom: 0
-		right: 0
+		bottom: 16px
+		right: 16px
 
 	&__dropdown
 		position: absolute

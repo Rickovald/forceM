@@ -44,17 +44,19 @@ app.use("/api/user", userRouter);
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "public/images/");
+    cb(null, "./public/images/");
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname);
   },
 });
 
+
+
 const uploadStorage = multer({ storage: storage });
 
 app.post("/api/upload", uploadStorage.single("newimg"), (req, res) => {
-  console.log(req.file);
+  console.log(req.file,req.file,  req.body);
   return res.send("Single file");
 });
 

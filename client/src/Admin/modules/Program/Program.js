@@ -4,14 +4,15 @@ import ProgramStore from "../../../stores/ProgramStore";
 import s from "./program.module.sass";
 import del from "../../../img/icons/close.svg";
 import Dropdown from "./Dropdown";
+import { observer } from "mobx-react-lite";
 
-const Program = () => {
+const Program = observer(() => {
   const [program, setProgram] = useState([]);
   const data = ProgramStore.getProgram().data;
-  useEffect(() => {
-    setProgram(data);
-  }, [data]);
 
+  useEffect(() => {
+    if (data) setProgram(data)
+  }, [data]);
   const deleteSong = async (id) => {
     await ProgramStore.deleteSong(id);
 
@@ -22,7 +23,6 @@ const Program = () => {
   const putToSong = (e, id, data) => {
     // event.target.attributes.getNamedItem('data-tag')
     if (e.target.innerText !== data) {
-
       ProgramStore.putSong(
         id,
         e.target.innerText,
@@ -107,6 +107,6 @@ const Program = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Program;

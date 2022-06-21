@@ -58,20 +58,20 @@ async function create(concert) {
 }
 
 async function update(id, concert) {
-  const result = await db.query(
-    `UPDATE concerts 
-        SET 
-          date = "${concert.date}",
-          concert_name = "${concert.concert_name}", 
-          tickets_price = "${concert.tickets_price}",
-          tickets = "${concert.tickets}",
-          city = "${concert.city}",
-          place = "${concert.place}",
-          group = "${concert.group}",
-          country = "${concert.country}",
-          main_album = "${concert.main_album}"
-        WHERE id=${id}`
-  );
+  const query = `UPDATE concerts 
+  SET 
+    date = '${concert.date}',
+    concert_name = '${concert.concert_name}',
+    tickets_price = '${concert.tickets_price}',
+    tickets = '${concert.tickets}',
+    city = '${concert.city}',
+    place = '${concert.place}',
+    \`group\` = '${concert.group}',
+    country = '${concert.country}',
+    main_album = ${concert.main_album}
+  WHERE id=${id}`;
+
+  const result = await db.query(query);
 
   let message = "Error in updating concert";
 

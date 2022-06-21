@@ -60,13 +60,15 @@ async function login(user) {
   if (!match) {
     return "Неправильный пароль"
   }
+
   const userDto = {
-    name: user.name,
+    name: user.login,
     role: "admin",
   };
-  const tokens = tokenService.generateTokens({ ...userDto });
+  const tokens = await tokenService.generateTokens({ ...userDto });
 
   await tokenService.saveToken(userDto.name, tokens.refreshToken);
+
   return { ...tokens, user: userDto };
 }
 
@@ -105,11 +107,11 @@ async function logout(refreshToken) {
   const token = await tokenService.removeToken(refreshToken);
   return token;
 }
+
 async function refresh(refreshToken) {
   if (!refreshToken) {
     return "Пользователь не авторизован"
   }
-
   const userData = await tokenService.validateRefreshToken(refreshToken);
   const tokenFromDb = await tokenService.findToken(refreshToken);
   
@@ -127,7 +129,6 @@ async function refresh(refreshToken) {
 
   const tokens = await tokenService.generateTokens({ ...userDto });
 
-  await tokenService.saveToken(userDto.id, tokens.refreshToken);
   return { ...tokens, user: userDto };
 }
 module.exports = {

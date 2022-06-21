@@ -15,7 +15,10 @@ router.get("/", async function (req, res, next) {
 router.post("/login", async function (req, res, next) {
   try {
     const userData = await users.login(req.body);
-    res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+    res.cookie("refreshToken", userData.refreshToken, {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    });
     return res.json(userData);
   } catch (err) {
     console.error(`Error while loggining`, err.message);
@@ -25,8 +28,11 @@ router.post("/login", async function (req, res, next) {
 
 router.post("/registration", async function (req, res, next) {
   try {
-    const userData =  await users.create(req.body);
-    res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+    const userData = await users.create(req.body);
+    res.cookie("refreshToken", userData.refreshToken, {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    });
     return res.json(userData);
   } catch (err) {
     console.error(`Error while creating user`, err.message);
@@ -50,14 +56,16 @@ router.delete("/:id", async function (req, res, next) {
     console.error(`Error while deleting user`, err.message);
     next(err);
   }
-
 });
 
 router.get("/refresh", async function (req, res, next) {
   try {
-    const {refreshToken} = req.cookies;
+    const { refreshToken } = req.cookies;
     const userData = await users.refresh(refreshToken);
-    res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+    res.cookie("refreshToken", userData.refreshToken, {
+      maxAge: 30 * 24 * 60 * 60 * 100000,
+      httpOnly: true,
+    });
     return res.json(userData);
   } catch (err) {
     console.error(`Error while refreshing user`, err.message);
@@ -67,9 +75,9 @@ router.get("/refresh", async function (req, res, next) {
 
 router.post("/logout", async function (req, res, next) {
   try {
-    const {refreshToken} = req.cookies;
+    const { refreshToken } = req.cookies;
     const token = await users.logout(refreshToken);
-    res.clearCookie('refreshToken');
+    res.clearCookie("refreshToken");
     return res.json(token);
   } catch (err) {
     console.error(`Error while deleting user`, err.message);

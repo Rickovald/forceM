@@ -15,13 +15,7 @@ const Banner = (props) => {
   const [imgPublic, setImgPublic] = useState({});
   const [imgPreview, setImgPreview] = useState("");
 
-  const toggleActive = (flag) => {
-    if (flag) {
-      if (!active) {
-        setActive((active) => (active = !active));
-        return;
-      } else return;
-    }
+  const toggleActive = () => {
     setActive((active) => (active = !active));
   };
 
@@ -49,10 +43,12 @@ const Banner = (props) => {
     reader.readAsDataURL(file);
 
     data.append("newimg", file);
+
+    console.log(typeof file);
     console.log("Объект form-data", data);
     console.log("Переменная с файлом", data.get("newimg"));
     setImage(`/images/${file.name}`);
-    setImgPublic(data);
+    // setImgPublic(data);
     setDrag(false);
   };
 
@@ -71,9 +67,15 @@ const Banner = (props) => {
           ? `${s.banners__card} ${s.banners__card_active}`
           : `${s.banners__card}`
       }
-      onClick={() => toggleActive(true)}
     >
-      <h2 className={s.banners__name}>{props.item.head}</h2>
+      <h2 onClick={() => toggleActive(true)} className={s.banners__name}>
+        {props.item.head}
+        <div
+          className={`${s.banners__dropdown} ${
+            active ? s.banners__dropdown_active : s.banners__dropdown_inactive
+          }`}
+        />
+      </h2>
 
       <div
         className={
@@ -168,13 +170,6 @@ const Banner = (props) => {
           Сохранить
         </div>
       </div>
-
-      <div
-        className={`${s.banners__dropdown} ${
-          active ? s.banners__dropdown_active : s.banners__dropdown_inactive
-        }`}
-        onClick={() => toggleActive(false)}
-      />
     </div>
   );
 };
