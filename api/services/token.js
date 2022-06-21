@@ -33,21 +33,7 @@ class TokenService {
   }
 
   async saveToken(userName, refreshToken) {
-    const tokenData = await db.query(
-      `SELECT refreshToken 
-        FROM admins WHERE name="${userName}"`
-    );
-
-    // if (tokenData[0]) {
-    //   tokenData.refreshToken = refreshToken;
-    // //   return db.query(
-    // //   `UPDATE users SET 
-    // //     "refreshToken" = "${refreshToken}"
-    // //     WHERE name="${userName}"`
-    // // );
-    // }
     const token = await db.query(
-      
       `UPDATE admins SET 
         refreshToken = "${refreshToken}"
         WHERE name="${userName}"`
@@ -71,7 +57,6 @@ class TokenService {
          where refreshToken = "${refreshToken}"`
     );
 
-    // tokenModel.findOne({ refreshToken });
     return tokenData;
   }
 }

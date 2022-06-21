@@ -69,5 +69,4 @@ module.exports = {
   create,
   update,
   remove,
-  upload,
 };

@@ -14,6 +14,11 @@ const Album = observer(() => {
   const data = AlbumsStore.getAlbums().data;
   const { width } = useWindowDimensions();
   const songsData = SongsStore.getSongs().data;
+
+  const byField = (field) => {
+    return (a, b) => (a[field] > b[field] ? 1 : -1);
+  };
+
   useEffect(() => {
     if (data) {
       data.map((item) => {
@@ -34,6 +39,7 @@ const Album = observer(() => {
         }
         return "";
       });
+      songs.sort(byField("id_in_album"));
       setSongs(songs);
     }
   }, [songsData, params.id]);

@@ -3,8 +3,9 @@ import s from "./song.module.sass";
 import del from "../../../img/icons/close.svg";
 import SongsStore from "../../../stores/SongsStore";
 import AlbumsStore from "../../../stores/AlbumsStore";
+import { observer } from "mobx-react-lite";
 
-const Songs = () => {
+const Songs = observer(() => {
   const [songs, setSongs] = useState([]);
   const [album, setAlbum] = useState(1);
   const [albums, setAlbums] = useState([]);
@@ -16,20 +17,20 @@ const Songs = () => {
   };
 
   useEffect(() => {
-    const slides = [];
+    const songs = [];
     if (data) {
       data.map((item) => {
         if (item.album_id === album) {
-          slides.push(item);
+          songs.push(item);
         }
-        return ""
+        return "";
       });
-      slides.sort(byField("id_in_album"));
-      setSongs(slides);
+      songs.sort(byField("id_in_album"));
+      setSongs(songs);
     }
   }, [data, album]);
   useEffect(() => {
-    setAlbums(data2);
+    if (data2) setAlbums(data2);
   }, [data2]);
   const deleteSong = async (id) => {
     await SongsStore.deleteSong(id);
@@ -37,11 +38,18 @@ const Songs = () => {
     const data = await SongsStore.getSongs().data;
     setSongs(data);
   };
-  const putToSong = (e, id, data) => {
+  const putToSong = async (e, id, data) => {
     // event.target.attributes.getNamedItem('data-tag')
     if (e.target.innerText !== data) {
-      SongsStore.putSong(id, e.target.innerText);
+      SongsStore.putSong(
+        id,
+        e.target.innerText,
+        e.target.attributes.name.value
+      );
     }
+    await SongsStore.updateSongs();
+    const songs = await SongsStore.getSongs().data;
+    setSongs(songs);
   };
 
   const addSong = async () => {
@@ -79,7 +87,7 @@ const Songs = () => {
               <div
                 contentEditable="true"
                 suppressContentEditableWarning={true}
-                name="place"
+                name="id_in_album"
                 onBlur={(e) => putToSong(e, item.id, item.place)}
                 style={{
                   width: "53px",
@@ -91,7 +99,7 @@ const Songs = () => {
               <div
                 contentEditable="true"
                 suppressContentEditableWarning={true}
-                name="difficulty"
+                name="name"
                 onBlur={(e) => putToSong(e, item.id, item.name)}
                 style={{
                   textAlign: "left",
@@ -116,6 +124,6 @@ const Songs = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Songs;

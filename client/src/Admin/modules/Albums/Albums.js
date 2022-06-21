@@ -2,11 +2,13 @@ import s from "./albums.module.sass";
 import AlbumsStore from "../../../stores/AlbumsStore";
 import { useEffect, useState } from "react";
 import Album from "./Album";
-const Albums = () => {
+import { observer } from "mobx-react-lite";
+
+const Albums = observer(() => {
   const [albums, setAlbums] = useState([]);
   const data = AlbumsStore.getAlbums().data;
   useEffect(() => {
-    setAlbums(data);
+    if (data) setAlbums(data);
   }, [data]);
 
   // const deleteAlbum = async (id) => {
@@ -24,6 +26,6 @@ const Albums = () => {
       })}
     </div>
   );
-};
+});
 
 export default Albums;

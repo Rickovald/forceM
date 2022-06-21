@@ -8,7 +8,7 @@ const Banners = () => {
   const [banners, setBanners] = useState([]);
   const data = BannersStore.getBanners().data;
   useEffect(() => {
-    setBanners(data);
+    if (data) setBanners(data);
   }, [data]);
 
   // const deleteBanner = async (id) => {

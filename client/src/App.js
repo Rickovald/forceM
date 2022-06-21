@@ -6,11 +6,12 @@ import Admin from './Admin/Admin';
 import Navigation from './Navigation/Navigation';
 
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
-import Contacts from './Contacts/Contacts';
+// import Contacts from './Contacts/Contacts';
 import Footer from './Footer/Footer';
 import Album from './Album/Album';
 import UserStore from './stores/UserStore';
 import { useEffect } from 'react';
+import Page404 from './Page404/Page404';
 
 function App() {
 
@@ -49,10 +50,9 @@ function App() {
 					// caseSensitive={false} 
 					element={<Admin/>}
 				/>
-				<Route 
-					path='/contact'
-					// caseSensitive={false}
-					element={<Contacts/>}
+				<Route
+					path='*'
+					element={<Page404/>}
 				/>
 			</Routes>
 			<Footer/>

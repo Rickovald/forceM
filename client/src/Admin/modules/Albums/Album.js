@@ -15,13 +15,8 @@ const Album = (props) => {
   const [imgPublic, setImgPublic] = useState({});
   const [imgPreview, setImgPreview] = useState("");
 
-  const toggleActive = (flag) => {
-    if (flag) {
-      if (!active) {
-        setActive((active) => (active = !active));
-        return;
-      } else return;
-    }
+  const toggleActive = () => {
+    console.log('---');
     setActive((active) => (active = !active));
   };
 
@@ -61,7 +56,6 @@ const Album = (props) => {
     // AlbumsStore.putAlbum(props.item.id, image, album, year, desc, check);
     // AlbumsStore.putImg(imgPublic);
   };
-  console.log(toJS(props.item));
 
   return (
     <div
@@ -71,9 +65,15 @@ const Album = (props) => {
           ? `${s.albums__card} ${s.albums__card_active}`
           : `${s.albums__card}`
       }
-      onClick={() => toggleActive(true)}
     >
-      <h2 className={s.albums__name}>{props.item.name}</h2>
+      <h2 onClick={() => toggleActive()} className={s.albums__name}>
+        {props.item.name}
+        <div
+          className={`${s.albums__dropdown} ${
+            active ? s.albums__dropdown_active : s.albums__dropdown_inactive
+          }`}
+        />
+      </h2>
 
       <div
         className={
@@ -145,13 +145,6 @@ const Album = (props) => {
           Сохранить
         </div>
       </div>
-
-      <div
-        className={`${s.albums__dropdown} ${
-          active ? s.albums__dropdown_active : s.albums__dropdown_inactive
-        }`}
-        onClick={() => toggleActive(false)}
-      />
     </div>
   );
 };

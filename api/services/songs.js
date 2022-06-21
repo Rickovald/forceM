@@ -52,7 +52,7 @@ async function update(id, song) {
   const result = await db.query(
     `UPDATE songs 
         SET 
-             name='${song.name}'
+             ${song.db_name}='${song.name}'
         WHERE id=${id}`
   );
 
