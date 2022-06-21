@@ -60,6 +60,9 @@ const Banner = (props) => {
     BannersStore.putBanner(props.item.id, image, banner, button, href, check);
     BannersStore.putImg(imgPublic);
   };
+
+
+
   return (
     <div
       className={

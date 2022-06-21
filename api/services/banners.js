@@ -24,7 +24,9 @@ async function create(banner) {
         img = "${banner.img}",
         head = "${banner.head}",
         button = "${banner.button}",
-        href = "${banner.href}"`
+        href = "${banner.href}",
+        href_type = "${banner.href_type}"
+        `
   );
 
   let message = "Error in updating program";
@@ -69,5 +71,5 @@ module.exports = {
   create,
   update,
   remove,
-  upload,
+  // upload,
 };

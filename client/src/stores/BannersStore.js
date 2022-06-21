@@ -27,8 +27,8 @@ class BannersStore {
   putImg = async (img) => {
     await BannersService.upload(img);
   };
-  createBanner = async (name, description, photo, price) => {
-    await BannersService.post(name, description, photo, price);
+  createBanner = async (img, head, button, href, href_type) => {
+    await BannersService.post(img, head, button, href, href_type);
   };
   deleteBanner = async (id) => {
     try {
