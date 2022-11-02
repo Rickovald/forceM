@@ -1,15 +1,16 @@
 {
     "env": {
         "browser": true,
-        "es2022": true,
-        "node": true
+        "es2022": true
     },
     "extends": [
         "plugin:react/recommended",
-        "standard",
+        "standard-with-typescript",
         "plugin:react/jsx-runtime"
     ],
     "parser": "@typescript-eslint/parser",
+    "overrides": [
+    ],
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
