@@ -1,9 +1,12 @@
+import { AxiosResponse } from 'axios';
 import { flow, makeAutoObservable } from 'mobx';
 import AlbumsService from '../services/AlbumsService';
 import { LOADING_STATUS, COMPLETE_STATUS, ERROR_STATUS } from './constants';
+import { IAlbum } from "../presets/interfaces"
+
 
 class AlbumsStore {
-    albums = [];
+    albums:IAlbum[] = [];
     state = LOADING_STATUS;
 
     constructor () {
@@ -13,7 +16,7 @@ class AlbumsStore {
         this.fetchAlbums();
     }
 
-    setAlbums = (albums) => {
+    setAlbums = (albums: IAlbum[]) => {
         this.albums = albums;
     };
 
@@ -21,22 +24,34 @@ class AlbumsStore {
         return this.albums;
     };
 
-    putAlbum = async (id, name, year, href, image, desc) => {
+    putAlbum = async (
+        id: number,
+        name: string,
+        year: string,
+        href: string,
+        image: string,
+        desc: string
+        ) => {
         await AlbumsService.update(id, name, year, href, image, desc);
     };
 
-    createAlbum = async (name, year, href, image, desc) => {
+    createAlbum = async (
+        name: string,
+        year: string,
+        href: string,
+        image: string,
+        desc: string) => {
         await AlbumsService.post(name, year, href, image, desc);
     };
 
-    deleteAlbum = async (id) => {
+    deleteAlbum = async (id: number) => {
         await AlbumsService.delete(id);
     };
 
-    * fetchAlbums () {
+    fetchAlbums = async () => {
         this.state = LOADING_STATUS;
         try {
-            const albums = yield AlbumsService.get();
+            const albums = await AlbumsService.get();
             this.state = COMPLETE_STATUS;
             this.setAlbums(albums.data.data);
         } catch (error) {
