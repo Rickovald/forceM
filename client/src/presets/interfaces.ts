@@ -15,3 +15,13 @@ export interface IAlbum {
     image: string;
     desc: string;
 }
+
+export interface IConcerts {
+    date: Date;
+    country: string;
+    city: string;
+    tickets_price: string;
+    tickets: string;
+    group: string;
+    place: string;
+}
