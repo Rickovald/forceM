@@ -60,7 +60,6 @@ app.post("/api/upload", uploadStorage.single("newimg"), (req, res) => {
   return res.send("Single file");
 });
 
-/* Error handler middleware */
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   console.error(err.message, err.stack);

@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const songs = require("../services/songs");
 
-/* GET songs. */
 router.get("/", async function (req, res, next) {
   try {
     res.json(await songs.getMultiple(req.query.page));

@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const banners = require("../services/banners");
 
-/* GET banners. */
 router.get("/", async function (req, res, next) {
   try {
     res.json(await banners.getMultiple(req.query.page));

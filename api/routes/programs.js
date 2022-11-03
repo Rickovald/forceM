@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const programs = require("../services/programs");
 
-/* GET programs. */
 router.get("/", async function (req, res, next) {
   try {
     res.json(await programs.getMultiple(req.query.page));

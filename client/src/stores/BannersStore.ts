@@ -44,7 +44,6 @@ class BannersStore {
       this.banners = [];
       this.state = LOADING_STATUS;
       try {
-          // Yield instead of await.
           const banners = yield BannersService.get();
           this.state = COMPLETE_STATUS;
           this.setBanners(banners.data.data);

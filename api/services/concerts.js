@@ -40,21 +40,6 @@ async function create(concert) {
   }
 
   return { message };
-
-  // const result = await db.query(
-  //   `INSERT INTO concerts
-  //     ('id', 'img', 'head', 'button', 'href')
-  //     VALUES
-  //     (NULL, ${img}, ${head}, ${button}, ${href})`
-  // );
-
-  // let message = "Error in creating concert";
-
-  // if (result.affectedRows) {
-  //   message = "concert created successfully";
-  // }
-
-  // return { message };
 }
 
 async function update(id, concert) {

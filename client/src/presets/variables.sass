@@ -40,10 +40,10 @@ $FastTransition: .2s ease-in-out
 @mixin H5Regular ($font-size: 66px)
     @include Font($font-size, $font-weight)
 
-@mixin H5Bold ($font-size: 66px, $font-weight: bold) //!! === H5Bold
+@mixin H5Bold ($font-size: 66px, $font-weight: bold) 
     @include Font($font-size, $font-weight)
 
-/*Paragraph*/
+/* Paragraph */
 
 @mixin P1Regular ($font-size: 9px)
     @include Font($font-size)
@@ -69,9 +69,9 @@ $FastTransition: .2s ease-in-out
 @mixin P6Bold ($font-size: 16px, $font-weight: bold)
     @include Font($font-size, $font-weight)
 
-/*Fonts Tag*/
+/* Fonts Tag */
 
-/*ButtonsFont*/
+/* ButtonsFont */
 @mixin ButtonFont ($font-size, $text-transform: uppercase)
     font:
         family: Montserrat
@@ -114,21 +114,9 @@ $FastTransition: .2s ease-in-out
     display: flex
     justify-content: space-between
     flex-direction: column
-    // flex-wrap: wrap
-    // z-index: -2
     align-items: center
     @media (max-width: 1024px)
         padding: 40px 20px 120px
-
-    // &::after
-    //     content: ""
-    //     position: absolute
-    //     top: 0
-    //     left: 0
-    //     right: 0
-    //     bottom: 0
-    //     z-index: -1
-    //     backdrop-filter: grayscale(75%) hue-rotate(170deg) sepia(55%) // blur(1px)
 
 @mixin Content
     width: 100%
@@ -136,3 +124,9 @@ $FastTransition: .2s ease-in-out
     padding: 10px
     overflow: hidden
     border-radius: 8px
+    
+@mixin Flex($justify-content: center, $align-items: center, $flex-direction: row)
+	display: flex
+	justify-content: $justify-content
+	align-items: $align-items
+	flex-direction: $flex-direction

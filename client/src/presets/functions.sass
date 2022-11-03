@@ -26,3 +26,7 @@
     @if ($maxScreen != $minScreen)
         $calc: calc(percentage($minSize) / 100 + (#{$maxSize} - #{$minSize}) * ( (100vw - #{$minScreen}px) / (#{$maxScreen} - #{$minScreen})))
     @return $calc
+
+@function toRem($value)
+    $remValue: calc($value / 16) + rem
+    @return $remValue

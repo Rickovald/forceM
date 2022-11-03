@@ -32,20 +32,6 @@ async function create(song) {
   }
 
   return { message };
-  // const result = await db.query(
-  //   `INSERT INTO songs
-  //     ('id', 'img', 'head', 'button', 'href')
-  //     VALUES
-  //     (NULL, ${img}, ${head}, ${button}, ${href})`
-  // );
-
-  // let message = "Error in creating song";
-
-  // if (result.affectedRows) {
-  //   message = "song created successfully";
-  // }
-
-  // return { message };
 }
 
 async function update(id, song) {

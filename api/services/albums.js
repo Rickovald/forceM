@@ -37,22 +37,22 @@ async function create(album) {
 }
 
 async function update(id, album) {
-  // const result = await db.query(
-  //   `UPDATE discography 
-  //       SET 
-  //           name="${album.name}", year="${album.year}", 
-  //           href="${album.href}", image="${album.image}",
-  //           desc = "${album.desc}"
-  //       WHERE id=${id}`
-  // );
-
-  // let message = "Error in updating album";
-
-  // if (result.affectedRows) {
-  //   message = "album updating successfully";
-  // }
-
-  // return { message };
+	const result = await db.query(
+		`UPDATE discography 
+		    SET 
+		        name="${album.name}", year="${album.year}", 
+		        href="${album.href}", image="${album.image}",
+		        desc = "${album.desc}"
+		    WHERE id=${id}`
+	);
+	  
+	let message = "Error in updating album";
+	  
+	if (result.affectedRows) {
+		message = "album updating successfully";
+	}
+	
+	return { message };
 }
 
 async function remove(id) {

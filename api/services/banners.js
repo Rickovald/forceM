@@ -38,21 +38,21 @@ async function create(banner) {
 }
 
 async function update(id, banner) {
-  // const result = await db.query(
-  //   `UPDATE banners
-  //       SET
-  //           img="${banner.img}", head="${banner.head}",
-  //           button="${banner.button}", href="${banner.href}"
-  //       WHERE id=${id}`
-  // );
+    const result = await db.query(
+        `UPDATE banners
+            SET
+                img="${banner.img}", head="${banner.head}",
+                button="${banner.button}", href="${banner.href}"
+            WHERE id=${id}`
+    );
 
-  // let message = "Error in updating banner";
+    let message = "Error in updating banner";
 
-  // if (result.affectedRows) {
-  //   message = "banner updating successfully";
-  // }
+    if (result.affectedRows) {
+      message = "banner updating successfully";
+    }
 
-  // return { message };
+    return { message };
 }
 async function remove(id) {
   const result = await db.query(`DELETE FROM banners WHERE id=${id}`);

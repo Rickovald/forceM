@@ -6,7 +6,7 @@
 
 ### Сервера
 ```Bash
-cd server
+cd api
 ```
 ```Node
 npm i #(если нет модулей)
