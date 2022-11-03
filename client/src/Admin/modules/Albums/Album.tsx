@@ -1,15 +1,22 @@
 import s from './albums.module.sass';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import upload from '../../../img/admin/download.png';
 
-const Album = (props) => {
+interface IConcerts {
+    propName: string;
+    propYear: string;
+    propDesc: string;
+    propimg: string;
+}
+
+const Album: FC<IConcerts> = ({propName, propYear, propDesc, propimg}) => {
     const [active, setActive] = useState(false);
     const [drag, setDrag] = useState(false);
 
-    const [name, setName] = useState(props.item.name);
-    const [year, setYear] = useState(props.item.year);
-    const [desc, setDesc] = useState(props.item.desc);
-    const [image, setImage] = useState(props.item.img);
+    const [name, setName] = useState(propName);
+    const [year, setYear] = useState(propYear);
+    const [desc, setDesc] = useState(propDesc);
+    const [image, setImage] = useState(propimg);
     const [imgPublic, setImgPublic] = useState({});
     const [imgPreview, setImgPreview] = useState('');
 
@@ -17,32 +24,32 @@ const Album = (props) => {
         setActive((active) => (active = !active));
     };
 
-    const dragInHandler = (e) => {
-        e.preventDefault();
+    const dragInHandler = (event: any) => {
+        event.preventDefault();
         setDrag(true);
     };
 
-    const dragLeaveHandler = (e) => {
-        e.preventDefault();
+    const dragLeaveHandler = (event: any) => {
+        event.preventDefault();
         setDrag(false);
     };
-    const dropHandler = (e) => {
-        e.preventDefault();
-        const file = e.dataTransfer.files[0];
+    const dropHandler = (event: any) => {
+        // event.preventDefault();
+        // const file = event.dataTransfer.files[0];
 
-        const data = new FormData();
-        const reader = new FileReader(file);
+        // const data = new FormData();
+        // const reader = new FileReader(file);
 
-        reader.onloadend = () => {
-            setImgPreview(reader.result);
-        };
+        // reader.onloadend = () => {
+        //     setImgPreview(reader.result);
+        // };
 
-        reader.readAsDataURL(file);
+        // reader.readAsDataURL(file);
 
-        data.append('newimg', file);
-        setImage(`/images/${file.name}`);
-        setImgPublic(data);
-        setDrag(false);
+        // data.append('newimg', file);
+        // setImage(`/images/${file.name}`);
+        // setImgPublic(data);
+        // setDrag(false);
     };
 
     const submit = () => {
@@ -58,7 +65,7 @@ const Album = (props) => {
             }
         >
             <h2 onClick={() => toggleActive()} className={s.albums__name}>
-                {props.item.name}
+                {propName}
                 <div
                     className={`${s.albums__dropdown} ${
                         active ? s.albums__dropdown_active : s.albums__dropdown_inactive
@@ -77,28 +84,27 @@ const Album = (props) => {
                     <div className={s.albums__inputWrapper}>
                         <p className={s.albums__inputLabel}>Название:</p>
                         <input
-                            onChange={(e) => setName(e.target.value)}
+                            onChange={(event: any) => setName(event.target.value)}
                             type="text"
                             className={s.albums__input}
-                            placeholder={props.item.name}
+                            placeholder={propName}
                         />
                     </div>
                     <div className={s.albums__inputWrapper}>
                         <p className={s.albums__inputLabel}>Год выпуска:</p>
                         <input
-                            onChange={(e) => setYear(e.target.value)}
+                            onChange={(event: any) => setYear(event.target.value)}
                             type="text"
                             className={s.albums__input}
-                            placeholder={props.item.year}
+                            placeholder={propYear}
                         />
                     </div>
                     <div className={s.albums__inputWrapper}>
                         <p className={s.albums__inputLabel}>Описание:</p>
                         <textarea
-                            onChange={(e) => setDesc(e.target.value)}
-                            type="text"
+                            onChange={(event: any) => setDesc(event.target.value)}
                             className={`${s.albums__input} ${s.albums__input_big}`}
-                            placeholder={props.item.desc}
+                            placeholder={propDesc}
                         />
                     </div>
                 </div>
@@ -107,35 +113,35 @@ const Album = (props) => {
                     {!drag
                         ? (
                             <p
-                                onDragStart={(e) => dragInHandler(e)}
-                                onDragLeave={(e) => dragLeaveHandler(e)}
-                                onDragOver={(e) => dragInHandler(e)}
+                                onDragStart={(event) => dragInHandler(event)}
+                                onDragLeave={(event) => dragLeaveHandler(event)}
+                                onDragOver={(event) => dragInHandler(event)}
                                 className={s.albums__drag_out}
                             >
                                 <img
                                     className={s.albums__old_img}
                                     alt="album_old"
-                                    src={imgPreview || props.item.image}
+                                    src={imgPreview || propimg}
                                     style={{ marginBottom: '10px' }}
                                 />
                             </p>
                         )
                         : (
                             <div
-                                onDragStart={(e) => dragInHandler(e)}
-                                onDragLeave={(e) => dragLeaveHandler(e)}
-                                onDragOver={(e) => dragInHandler(e)}
-                                onDrop={(e) => dropHandler(e)}
+                                onDragStart={(event) => dragInHandler(event)}
+                                onDragLeave={(event) => dragLeaveHandler(event)}
+                                onDragOver={(event) => dragInHandler(event)}
+                                onDrop={(event) => dropHandler(event)}
                                 className={s.albums__drag_on}
                             >
                                 <img alt="upload" src={upload} style={{ marginBottom: '10px' }} />
-              Отпустите файл чтобы загрузить его
+                                    Отпустите файл чтобы загрузить его
                             </div>
                         )}
                 </div>
 
                 <div className={s.albums__submit} onClick={submit}>
-          Сохранить
+                    Сохранить
                 </div>
             </div>
         </div>

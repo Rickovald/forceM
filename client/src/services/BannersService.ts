@@ -6,11 +6,11 @@ class BannersService {
         return await $api.get('/banners');
     };
 
-    static post = async (img, head, button, href, href_type) => {
+    static post = async (img: string, head: string, button: string, href: string, href_type: string) => {
         return await $api.post('/banners', { img, head, button, href, href_type });
     };
 
-    static update = async (id, img, head, button, href, href_type) => {
+    static update = async (id: number, img: string, head: string, button: string, href: string, href_type: string) => {
         return await $api.put(`/banners/${id}`, {
             img,
             head,
@@ -20,11 +20,11 @@ class BannersService {
         });
     };
 
-    static delete = async (id) => {
+    static delete = async (id: number) => {
         return await $api.delete(`/banners/${id}`);
     };
 
-    static upload = async (img) => {
+    static upload = async (img: string) => {
         return await axios.post(
             `${API_URL}/upload`,
             { img },

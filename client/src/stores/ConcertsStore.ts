@@ -1,9 +1,9 @@
 import { flow, makeAutoObservable } from 'mobx';
 import ConcertsService from '../services/ConcertsService';
 import { LOADING_STATUS, COMPLETE_STATUS, ERROR_STATUS } from './constants';
-
+import { IConcerts } from "../presets/interfaces"
 class ConcertsStore {
-    concerts = [];
+    concerts:IConcerts[] = [];
     state = LOADING_STATUS;
 
     constructor () {
@@ -13,7 +13,7 @@ class ConcertsStore {
         this.fetchConcerts();
     }
 
-    setConcerts = (concerts) => {
+    setConcerts = (concerts: IConcerts) => {
         this.concerts = { ...concerts };
     };
 
@@ -22,16 +22,16 @@ class ConcertsStore {
     };
 
     putConcert = async (
-        id,
-        concert_name,
-        date,
-        place,
-        group,
-        tickets,
-        tickets_price,
-        city,
-        country,
-        main_album
+        id: number,
+        concert_name: string,
+        date: string,
+        place: string,
+        group: string,
+        tickets: string,
+        tickets_price: string,
+        city: string,
+        country: string,
+        main_album: string
     ) => {
         await ConcertsService.update(
             id,
@@ -48,15 +48,15 @@ class ConcertsStore {
     };
 
     createConcert = async (
-        concert_name,
-        date,
-        place,
-        group,
-        tickets,
-        tickets_price,
-        city,
-        country,
-        main_album
+        concert_name: string,
+        date: string,
+        place: string,
+        group: string,
+        tickets: string,
+        tickets_price: string,
+        city: string,
+        country: string,
+        main_album: string
     ) => {
         await ConcertsService.post(
             concert_name,
@@ -71,26 +71,15 @@ class ConcertsStore {
         );
     };
 
-    deleteConcert = async (id, concert_name, date, place, group, tickets, tickets_price, city, country, main_album) => {
-        await ConcertsService.delete(
-            id,
-            concert_name,
-            date,
-            place,
-            group,
-            tickets,
-            tickets_price,
-            city,
-            country,
-            main_album
-        );
+    deleteConcert = async (id: number) => {
+        await ConcertsService.delete(id);
     };
 
-    * fetchConcerts () {
+    fetchConcerts = async () => {
         this.concerts = [];
         this.state = LOADING_STATUS;
         try {
-            const concerts = yield ConcertsService.get();
+            const concerts = await ConcertsService.get();
             this.state = COMPLETE_STATUS;
             this.setConcerts(concerts.data);
         } catch (error) {

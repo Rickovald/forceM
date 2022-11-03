@@ -5,18 +5,19 @@ import AlbumsStore from '../stores/AlbumsStore';
 import { useEffect, useState } from 'react';
 import SongsStore from '../stores/SongsStore';
 import useWindowDimensions from '../hooks/useWindowDimensions';
+import { IAlbum, ISongs } from '../presets/interfaces';
 
 const Album = observer(() => {
-    const [album, setAlbum] = useState('');
-    const [songs, setSongs] = useState([]);
+    const [album, setAlbum] = useState<IAlbum>();
+    const [songs, setSongs] = useState<ISongs[]>([]);
     const params = useParams();
     const data = AlbumsStore.getAlbums();
     const { width } = useWindowDimensions();
     const songsData = SongsStore.getSongs();
 
-    const byField = (field) => {
-        return (a, b) => (a[field] > b[field] ? 1 : -1);
-    };
+    // const byField = (field: string) => {
+    //     return (a, b) => (a[field] > b[field] ? 1 : -1);
+    // };
 
     useEffect(() => {
         if (data) {
@@ -30,7 +31,7 @@ const Album = observer(() => {
     }, [data, params.id]);
 
     useEffect(() => {
-        const songs = [];
+        const songs:ISongs[] = [];
         if (songsData) {
             songsData.map((item) => {
                 if (item.album_id.toString() === params.id) {
@@ -38,7 +39,7 @@ const Album = observer(() => {
                 }
                 return '';
             });
-            songs.sort(byField('id_in_album'));
+            // songs.sort(byField('id_in_album'));
             setSongs(songs);
         }
     }, [songsData, params.id]);
@@ -47,29 +48,29 @@ const Album = observer(() => {
         <div className={`${s.album}`}>
             <div className={s.album__content_wrapper}>
                 <h1 className={s.album__header}>
-                    {album.name}, {album.year}
+                    {album!.name}, {album!.year}
                 </h1>
                 <div className={s.album__content}>
                     {width >= 768 && (
                         <div>
                             <img
                                 className={s.album__image}
-                                src={album.image}
+                                src={album!.image}
                                 alt={'album cover'}
                             />
                         </div>
                     )}
                     <div className={s.album__right}>
-                        {songs.map((item, index) => {
+                        {songs.map(({name, id_in_album}, index) => {
                             return (
-                                <div key={item.name}>
-                                    {item.id_in_album}. {item.name}
+                                <div key={name}>
+                                    {id_in_album}. {name}
                                 </div>
                             );
                         })}
                         <a
                             className={s.album__button}
-                            href={album.href}
+                            href={album!.href}
                             target="_blank"
                             rel="noreferrer"
                         >

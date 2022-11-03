@@ -10,25 +10,25 @@ import Program from './modules/Program/Program';
 import Songs from './modules/Songs/Songs';
 
 const Admin = observer(() => {
-    const [activeTab, setActiveTab] = useState(0);
+    const [activeTab, setActiveTab] = useState("0");
     const [user, setUser] = useState(localStorage.getItem('user'));
 
     const storage_tab = localStorage.getItem('admin_tab');
 
     useEffect(() => {
         if (storage_tab) {
-            setActiveTab(Number(storage_tab));
+            setActiveTab(storage_tab);
         }
     }, [storage_tab]);
 
-    const tabSetter = (tab) => {
+    const tabSetter = (tab: string) => {
         setActiveTab(tab);
         localStorage.setItem('admin_tab', tab);
     };
 
     const toLogOut = async () => {
         await UserStore.logout();
-        setUser(false);
+        setUser(null);
     };
 
     if (user) {
@@ -37,60 +37,60 @@ const Admin = observer(() => {
                 <div className={s.admin__aside}>
                     <div
                         onClick={() => {
-                            tabSetter(0);
+                            tabSetter("0");
                         }}
                         className={`${s.admin__select}
-						 ${activeTab === 0 && s.admin__select_active}`}
+						 ${activeTab === "0" && s.admin__select_active}`}
                     >
-            Программа на концерт
+                        Программа на концерт
                     </div>
                     <div
                         onClick={() => {
-                            tabSetter(1);
+                            tabSetter("1");
                         }}
                         className={`${s.admin__select}
-						 ${activeTab === 1 && s.admin__select_active}`}
+						 ${activeTab === "1" && s.admin__select_active}`}
                     >
-            Баннеры
+                        Баннеры
                     </div>
                     <div
                         onClick={() => {
-                            tabSetter(2);
+                            tabSetter("2");
                         }}
                         className={`${s.admin__select}
-						 ${activeTab === 2 && s.admin__select_active}`}
+						 ${activeTab === "2" && s.admin__select_active}`}
                     >
-            Альбомы
+                        Альбомы
                     </div>
                     <div
                         onClick={() => {
-                            tabSetter(3);
+                            tabSetter("3");
                         }}
                         className={`${s.admin__select}
-						 ${activeTab === 3 && s.admin__select_active}`}
+						 ${activeTab === "3" && s.admin__select_active}`}
                     >
-            Концерты
+                        Концерты
                     </div>
                     <div
                         onClick={() => {
-                            tabSetter(4);
+                            tabSetter("4");
                         }}
                         className={`${s.admin__select}
-						 ${activeTab === 4 && s.admin__select_active}`}
+						 ${activeTab === "4" && s.admin__select_active}`}
                     >
-            Песни
+                        Песни
                     </div>
 
                     <div className={`${s.admin__logout}`} onClick={() => toLogOut()}>
-            выход
+                        выход
                     </div>
                 </div>
 
-                {activeTab === 0 && <Program />}
-                {activeTab === 1 && <Banners />}
-                {activeTab === 2 && <Albums />}
-                {activeTab === 3 && <Concerts />}
-                {activeTab === 4 && <Songs />}
+                {activeTab === "0" && <Program />}
+                {activeTab === "1" && <Banners />}
+                {activeTab === "2" && <Albums />}
+                {activeTab === "3" && <Concerts />}
+                {activeTab === "4" && <Songs />}
             </div>
         );
     } else {

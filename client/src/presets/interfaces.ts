@@ -18,10 +18,17 @@ export interface IAlbum {
 
 export interface IConcerts {
     date: Date;
+    concert_name?: string;
     country: string;
     city: string;
     tickets_price: string;
     tickets: string;
     group: string;
     place: string;
+    main_album?: string
+}
+
+export interface ISongs {
+    name: string;
+    id_in_album: number;
 }

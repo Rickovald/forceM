@@ -6,7 +6,7 @@ import useWindowDimensions from '../../hooks/useWindowDimensions';
 interface IAlbumBanner {
     side: number;
     header: string;
-    year: number;
+    year: string;
     desc: string;
     img: string;
     id: number;
@@ -45,6 +45,6 @@ const Banner: FC<IAlbumBanner> = ({side, header, year, desc, img, id}) => {
     );
 };
 
-Banner.defaultProps = { header: '', img: 'img', year: 2022, desc: "", id: 0, side: 1 };
+Banner.defaultProps = { header: '', img: 'img', year: '2022', desc: "", id: 0, side: 1 };
 
 export default Banner;

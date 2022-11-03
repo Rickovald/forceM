@@ -22,6 +22,7 @@
       "checkJs": true,
       "plugins": [{ "name": "typescript-plugin-css-modules" }]
     },
-    "include": [ "typings", "src" ]
+    "extends": "./tsconfig.json",
+    "include": [ "typings", "src", "./.eslintrc.cjs" ]
   }
   
