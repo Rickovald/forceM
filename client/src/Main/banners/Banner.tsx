@@ -2,14 +2,14 @@ import { FC } from 'react';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import s from './banner.module.sass';
 
-interface IBanner {
+interface IMainBanner {
     img: string;
     href: string;
     button: string;
-    header: string;
+    head: string;
 }
 
-const Banner: FC<IBanner> = ({ img, href, button, header }) => {
+const Banner: FC<IMainBanner> = ({ img, href, button, head }) => {
     const { width } = useWindowDimensions();
     return (
         <div className={s.banner}>
@@ -22,7 +22,7 @@ const Banner: FC<IBanner> = ({ img, href, button, header }) => {
                 alt="background"
             />
             <div className={s.banner__content}>
-                <h2 className={s.banner__head}>{header}</h2>
+                <h2 className={s.banner__head}>{head}</h2>
                 <a
                     className={s.banner__button}
                     href={href}
@@ -36,6 +36,6 @@ const Banner: FC<IBanner> = ({ img, href, button, header }) => {
     );
 };
 
-Banner.defaultProps = { header: '', button: 'смотреть', img: 'img', href: '#' };
+Banner.defaultProps = { head: '', button: 'смотреть', img: 'img', href: '#' };
 
 export default Banner;

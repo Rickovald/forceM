@@ -13,19 +13,19 @@ import 'swiper/css';
 import './swiper.sass';
 
 const Main = observer(() => {
-    const [slides, setSlides] = useState([]);
+    const [slides, setSlides] = useState<JSX.Element[]>([]);
     const data = BannersStore.getBanners();
     useEffect(() => {
         if (data) {
-            const banners = [];
-            data.map((item) =>
+            const banners:JSX.Element[] = [];
+            data.map(({id, head, button, img, href}) =>
                 banners.push(
-                    <SwiperSlide key={`banner_${item.id}`}>
+                    <SwiperSlide key={`banner_${id}`}>
                         <Banner
-                            header={item.head}
-                            button={item.button}
-                            img={item.img}
-                            href={item.href}
+                            head={head}
+                            button={button}
+                            img={img}
+                            href={href}
                         />
                     </SwiperSlide>
                 )
