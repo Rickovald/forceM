@@ -1,67 +1,72 @@
-import s from './albums.module.sass';
-import { FC, useState } from 'react';
-import upload from '../../../img/admin/download.png';
+import s from './albums.module.sass'
+import { FC, useState } from 'react'
+import upload from '../../../img/admin/download.png'
+import React from 'react'
 
 interface IConcerts {
-    propName: string;
-    propYear: string;
-    propDesc: string;
-    propimg: string;
+  propName: string
+  propYear: string
+  propDesc: string
+  propimg: string
 }
 
-const Album: FC<IConcerts> = ({propName, propYear, propDesc, propimg}) => {
-    const [active, setActive] = useState(false);
-    const [drag, setDrag] = useState(false);
+const Album: FC<IConcerts> = ({ propName, propYear, propDesc, propimg }) => {
+  const [active, setActive] = useState(false)
+  const [drag, setDrag] = useState(false)
 
-    const [name, setName] = useState(propName);
-    const [year, setYear] = useState(propYear);
-    const [desc, setDesc] = useState(propDesc);
-    const [image, setImage] = useState(propimg);
-    const [imgPublic, setImgPublic] = useState({});
-    const [imgPreview, setImgPreview] = useState('');
+  const [name, setName] = useState(propName)
+  const [year, setYear] = useState(propYear)
+  const [desc, setDesc] = useState(propDesc)
+  const [image, setImage] = useState(propimg)
+  const [imgPublic, setImgPublic] = useState({})
+  const [imgPreview, setImgPreview] = useState('')
 
-    const toggleActive = () => {
-        setActive((active) => (active = !active));
-    };
+  const toggleActive = (): void => {
+    setActive((active) => (active = !active))
+  }
 
-    const dragInHandler = (event: any) => {
-        event.preventDefault();
-        setDrag(true);
-    };
+  const dragInHandler = (event: any): void => {
+    event.preventDefault()
+    setDrag(true)
+  }
 
-    const dragLeaveHandler = (event: any) => {
-        event.preventDefault();
-        setDrag(false);
-    };
-    const dropHandler = (event: any) => {
-        // event.preventDefault();
-        // const file = event.dataTransfer.files[0];
+  const dragLeaveHandler = (event: any): void => {
+    event.preventDefault()
+    setDrag(false)
+  }
+  const dropHandler = (event: any): void => {
+    event.preventDefault()
+    // const file = event.dataTransfer.files[0];
 
-        // const data = new FormData();
-        // const reader = new FileReader(file);
+    // const data = new FormData();
+    // const reader = new FileReader(file);
 
-        // reader.onloadend = () => {
-        //     setImgPreview(reader.result);
-        // };
+    // reader.onloadend = () => {
+    //     setImgPreview(reader.result);
+    // };
 
-        // reader.readAsDataURL(file);
+    // reader.readAsDataURL(file);
 
-        // data.append('newimg', file);
-        // setImage(`/images/${file.name}`);
-        // setImgPublic(data);
-        // setDrag(false);
-    };
+    // data.append('newimg', file);
+    // setImage(`/images/${file.name}`);
+    // setImgPublic(data);
+    // setDrag(false);
+    setImgPreview('---')
+    setImage('---')
+    setImgPublic('---')
+    setDrag(false)
+  }
 
-    const submit = () => {
-        console.log(name, year, desc, image, imgPublic);
-    };
+  const submit = (): void => {
+    console.log(name, year, desc, image, imgPublic)
+  }
 
-    return (
+  return (
         <div
             className={
                 active
-                    ? `${s.albums__card} ${s.albums__card_active}`
-                    : `${s.albums__card}`
+                  ? `${s.albums__card} ${s.albums__card_active}`
+                  : `${s.albums__card}`
             }
         >
             <h2 onClick={() => toggleActive()} className={s.albums__name}>
@@ -76,8 +81,8 @@ const Album: FC<IConcerts> = ({propName, propYear, propDesc, propimg}) => {
             <div
                 className={
                     active
-                        ? `${s.albums__form} ${s.albums__form_active}`
-                        : `${s.albums__form}`
+                      ? `${s.albums__form} ${s.albums__form_active}`
+                      : `${s.albums__form}`
                 }
             >
                 <div className={s.albums__inputs}>
@@ -111,7 +116,7 @@ const Album: FC<IConcerts> = ({propName, propYear, propDesc, propimg}) => {
                 <div className={s.albums__imgSetter}>
                     <p style={{ marginBottom: '20px' }}>Изображение:</p>
                     {!drag
-                        ? (
+                      ? (
                             <p
                                 onDragStart={(event) => dragInHandler(event)}
                                 onDragLeave={(event) => dragLeaveHandler(event)}
@@ -126,7 +131,7 @@ const Album: FC<IConcerts> = ({propName, propYear, propDesc, propimg}) => {
                                 />
                             </p>
                         )
-                        : (
+                      : (
                             <div
                                 onDragStart={(event) => dragInHandler(event)}
                                 onDragLeave={(event) => dragLeaveHandler(event)}
@@ -145,7 +150,7 @@ const Album: FC<IConcerts> = ({propName, propYear, propDesc, propimg}) => {
                 </div>
             </div>
         </div>
-    );
-};
+  )
+}
 
-export default Album;
+export default Album

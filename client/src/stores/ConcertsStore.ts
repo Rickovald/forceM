@@ -13,7 +13,7 @@ class ConcertsStore {
         this.fetchConcerts();
     }
 
-    setConcerts = (concerts: IConcerts) => {
+    setConcerts = (concerts: IConcerts[]) => {
         this.concerts = { ...concerts };
     };
 

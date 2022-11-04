@@ -3,10 +3,11 @@ import BannersStore from '../../../stores/BannersStore';
 import { useEffect, useState } from 'react';
 import del from '../../../img/icons/close.svg';
 import Banner from './Banner';
+import { IMainBanner } from '../../../presets/interfaces';
 
 const Banners = () => {
-    const [banners, setBanners] = useState([]);
-    const data = BannersStore.getBanners().data;
+    const [banners, setBanners] = useState<IMainBanner[]>([]);
+    const data = BannersStore.getBanners();
     useEffect(() => {
         if (data) setBanners(data);
     }, [data]);
@@ -20,15 +21,20 @@ const Banners = () => {
             'outer'
         );
         await BannersStore.updateBanners();
-        const data = await BannersStore.getBanners().data;
+        const data = await BannersStore.getBanners();
         setBanners(data);
     };
 
     return (
         <div className={`${s.banners}`}>
-            {banners.map((item, index) => {
+            {banners.map(({head, button, href, img, id}, index) => {
                 return (
-                    <Banner key={`banner_card_${index}`} item={item} setBanners={setBanners}/>
+                    <Banner 
+                    key={`banner_card_${index}`}
+                    id={id}
+                    propHead={head} propButton={button}
+                    propHref={href} propImg={img} 
+                    setBanners={() => setBanners}/>
                 );
             })}
             <div className={s.banners__add} onClick={() => addSong()}>

@@ -1,16 +1,20 @@
-import { useState } from 'react';
-import UserStore from '../../../stores/UserStore';
-import s from './auth.module.sass';
+import { FC, useState } from 'react'
+import UserStore from '../../../stores/UserStore'
+import s from './auth.module.sass'
 
-const AuthPopup = (props) => {
+interface IAuth {
+    setUser: (user: string | null) => void
+}
+
+const AuthPopup: FC<IAuth> = ({ setUser }) => {
     const [login, setLogin] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
 
     const toLogin = async () => {
-        const response = await UserStore.login(login, password);
-        setError(response);
-        props.setUser(localStorage.getItem('user'));
+        const response = await UserStore.login(login, password)
+        setError(response)
+        setUser(localStorage.getItem('user'))
     };
 
     return (
@@ -20,7 +24,7 @@ const AuthPopup = (props) => {
                     className={s.popup__input}
                     onChange={(e) => setLogin(e.target.value)}
                     value={login}
-                    type="text"
+                    type="text" 
                     placeholder="Логин"
                     required
                 />
@@ -37,7 +41,7 @@ const AuthPopup = (props) => {
                     className={s.popup__button}
                     onClick={() => toLogin()}
                 >
-          Вход
+                    Вход
                 </button>
 
                 {error !== '' &&
