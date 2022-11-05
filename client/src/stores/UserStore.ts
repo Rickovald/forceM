@@ -2,28 +2,29 @@ import { makeAutoObservable } from 'mobx';
 import UserService from '../services/UserService';
 import axios from 'axios';
 import { LOADING_STATUS, COMPLETE_STATUS, ERROR_STATUS } from './constants';
-
+import { IUser } from '../presets/interfaces';
 class UserStore {
     isAuth = false;
     state = LOADING_STATUS;
+    user: IUser[] = [];
 
     constructor () {
         makeAutoObservable(this);
     }
 
-    setAuth = (bool) => {
-        this.isAuth = bool;
+    setAuth = (isAuth: boolean) => {
+        this.isAuth = isAuth;
     };
 
     getAuth = () => {
         return this.isAuth;
     };
 
-    setUser = (user) => {
+    setUser = (user: IUser[]) => {
         this.user = user;
     };
 
-    login = async (email, password) => {
+    login = async (email: string, password: string) => {
         this.state = LOADING_STATUS;
         try {
             const response = await UserService.login(email, password);
@@ -41,7 +42,7 @@ class UserStore {
         }
     };
 
-    registration = async (email, password) => {
+    registration = async (email: string, password: string) => {
         this.state = LOADING_STATUS;
         try {
             const response = await UserService.registration(email, password);
@@ -52,9 +53,9 @@ class UserStore {
             this.setAuth(true);
             this.setUser(response.data.user);
             this.state = COMPLETE_STATUS;
-        } catch (e) {
+        } catch (error: any) {
             this.state = ERROR_STATUS;
-            console.log(e.response?.data?.message);
+            console.log(error.response?.data?.message);
         }
     };
 
@@ -65,11 +66,11 @@ class UserStore {
             localStorage.removeItem('token');
             localStorage.removeItem('user');
             this.setAuth(false);
-            this.setUser({});
+            this.setUser([]);
             this.state = COMPLETE_STATUS;
-        } catch (e) {
+        } catch (error: any) {
             this.state = ERROR_STATUS;
-            console.log(e.response?.data?.message);
+            console.log(error.response?.data?.message);
         }
     };
 
@@ -82,9 +83,9 @@ class UserStore {
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
-        } catch (e) {
+        } catch (error: any) {
             this.state = ERROR_STATUS;
-            console.log(e.response?.data?.message);
+            console.log(error.response?.data?.message);
         } finally {
             this.state = COMPLETE_STATUS;
         }

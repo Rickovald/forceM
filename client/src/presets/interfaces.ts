@@ -28,7 +28,25 @@ export interface IConcerts {
   main_album?: string
 }
 
+export interface IUser {
+    id: number;
+    email: string;
+    password: string;
+}
+
+export interface ISongPrograms {
+    id: number;
+    name: string;
+    difficulty: string;
+    comments: string;
+    place: string;
+    concert_name: string;
+}
+
 export interface ISongs {
-  name: string
-  id_in_album: number
+    id: number;
+    name: string;
+    db_name: string;
+    id_in_album: string;
+    album_id: string;
 }
