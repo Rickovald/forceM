@@ -4,20 +4,21 @@ import del from '../../../img/icons/close.svg';
 import SongsStore from '../../../stores/SongsStore';
 import AlbumsStore from '../../../stores/AlbumsStore';
 import { observer } from 'mobx-react-lite';
+import { IAlbum, ISongs } from '../../../presets/interfaces';
 
 const Songs = observer(() => {
-    const [songs, setSongs] = useState([]);
+    const [songs, setSongs] = useState<ISongs[]>([]);
     const [album, setAlbum] = useState(1);
-    const [albums, setAlbums] = useState([]);
-    const data = SongsStore.getSongs().data;
-    const data2 = AlbumsStore.getAlbums().data;
+    const [albums, setAlbums] = useState<IAlbum[]>([]);
+    const data = SongsStore.getSongs();
+    const data2 = AlbumsStore.getAlbums();
 
-    const byField = (field) => {
-        return (a, b) => (a[field] > b[field] ? 1 : -1);
-    };
+    // const byField = (field) => {
+    //     return (a, b) => (a[field] > b[field] ? 1 : -1);
+    // };
 
     useEffect(() => {
-        const songs = [];
+        const songs: ISongs[] = [];
         if (data) {
             data.map((item) => {
                 if (item.album_id === album) {
@@ -25,42 +26,45 @@ const Songs = observer(() => {
                 }
                 return '';
             });
-            songs.sort(byField('id_in_album'));
+            // songs.sort(byField('id_in_album'));
             setSongs(songs);
         }
-    }, [data, album]);
+    }, [data, album])
+
     useEffect(() => {
         if (data2) setAlbums(data2);
     }, [data2]);
-    const deleteSong = async (id) => {
+
+    const deleteSong = async (id: number) => {
         await SongsStore.deleteSong(id);
         await SongsStore.updateSongs();
-        const data = await SongsStore.getSongs().data;
+        const data = await SongsStore.getSongs();
         setSongs(data);
     };
-    const putToSong = async (e, id, data) => {
-        if (e.target.innerText !== data) {
+
+    const putToSong = async (event: any, id: number, data: string) => {
+        if (event.target.innerText !== data) {
             SongsStore.putSong(
                 id,
-                e.target.innerText,
-                e.target.attributes.name.value
+                event.target.innerText,
+                event.target.attributes.name.value
             );
         }
         await SongsStore.updateSongs();
-        const songs = await SongsStore.getSongs().data;
+        const songs = await SongsStore.getSongs();
         setSongs(songs);
     };
 
     const addSong = async () => {
         await SongsStore.createSong(
             songs[songs.length - 1].id_in_album + 1,
-            'Force-Minor - ',
-            album
+            'Force-Minor - ', album
         );
         await SongsStore.updateSongs();
-        const data = await SongsStore.getSongs().data;
+        const data = await SongsStore.getSongs();
         setSongs(data);
     };
+
     return (
         <div className={`${s.songs}`}>
             <div>
@@ -86,7 +90,7 @@ const Songs = observer(() => {
                             <div
                                 contentEditable="true"
                                 suppressContentEditableWarning={true}
-                                name="id_in_album"
+                                // name="id_in_album"
                                 onBlur={(e) => putToSong(e, item.id, item.place)}
                                 style={{
                                     width: '53px'
@@ -98,7 +102,7 @@ const Songs = observer(() => {
                             <div
                                 contentEditable="true"
                                 suppressContentEditableWarning={true}
-                                name="name"
+                                // name="name"
                                 onBlur={(e) => putToSong(e, item.id, item.name)}
                                 style={{
                                     textAlign: 'left'

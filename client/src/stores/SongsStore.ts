@@ -26,7 +26,7 @@ class SongsStore {
         await SongsService.put(id, name, db_name);
     };
 
-    createSong = async (id_in_album: string, name: string, album_id: string) => {
+    createSong = async (id_in_album: number, name: string, album_id: number) => {
         await SongsService.post(id_in_album, name, album_id);
     };
 
