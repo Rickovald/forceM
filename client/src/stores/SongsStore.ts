@@ -1,9 +1,10 @@
 import { flow, makeAutoObservable } from 'mobx';
 import SongsService from '../services/SongsService';
 import { LOADING_STATUS, COMPLETE_STATUS, ERROR_STATUS } from './constants';
+import { ISongs } from "../presets/interfaces"
 
 class SongsStore {
-    songs = [];
+    songs: ISongs[] = [];
     state = LOADING_STATUS;
 
     constructor () {
@@ -13,7 +14,7 @@ class SongsStore {
         this.fetchSongs();
     }
 
-    setSongs = (songs) => {
+    setSongs = (songs: ISongs[]) => {
         this.songs = { ...songs };
     };
 
@@ -21,23 +22,23 @@ class SongsStore {
         return this.songs;
     };
 
-    putSong = async (id, name, db_name) => {
+    putSong = async (id: number, name: string, db_name: string) => {
         await SongsService.put(id, name, db_name);
     };
 
-    createSong = async (id_in_album, name, album_id) => {
+    createSong = async (id_in_album: string, name: string, album_id: string) => {
         await SongsService.post(id_in_album, name, album_id);
     };
 
-    deleteSong = async (id) => {
+    deleteSong = async (id: number) => {
         await SongsService.delete(id);
     };
 
-    * fetchSongs () {
+    fetchSongs = async () => {
         this.songs = [];
         this.state = LOADING_STATUS;
         try {
-            const songs = yield SongsService.get();
+            const songs = await SongsService.get();
 
             this.state = COMPLETE_STATUS;
             this.setSongs(songs.data);
