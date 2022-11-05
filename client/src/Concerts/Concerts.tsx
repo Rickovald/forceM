@@ -5,16 +5,17 @@ import useWindowDimensions from '../hooks/useWindowDimensions';
 import s from './concerts.module.sass';
 import ConcertCard from './ConcertCard/ConcertCard';
 import ConcertCardPc from './ConcertCard/ConcertCardPc';
+import { IConcerts } from '../presets/interfaces';
 
-interface IConcerts {
-    date: Date;
-    country: string;
-    city: string;
-    tickets_price: string;
-    tickets: string;
-    group: string;
-    place: string;
-}
+// interface IConcerts {
+//     date: Date;
+//     country: string;
+//     city: string;
+//     tickets_price: string;
+//     tickets: string;
+//     group: string;
+//     place: string;
+// }
 
 const Concerts = observer(() => {
     const [concerts, setConcerts] = useState<IConcerts[]>([]);
