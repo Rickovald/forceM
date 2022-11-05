@@ -1,9 +1,10 @@
 import { flow, makeAutoObservable } from 'mobx';
 import ProgramService from '../services/ProgramService';
 import { LOADING_STATUS, COMPLETE_STATUS, ERROR_STATUS } from './constants';
+import { ISongPrograms } from "../presets/interfaces"
 
 class ProgramStore {
-    program = [];
+    program:ISongPrograms[] = [];
     state = LOADING_STATUS;
 
     constructor () {
@@ -13,7 +14,7 @@ class ProgramStore {
         this.fetchProgram();
     }
 
-    setProgram = (program) => {
+    setProgram = (program: ISongPrograms[]) => {
         this.program = { ...program };
     };
 
@@ -21,23 +22,23 @@ class ProgramStore {
         return this.program;
     };
 
-    putSong = async (id, data, name) => {
+    putSong = async (id: number, data: string, name: string) => {
         await ProgramService.put(id, data, name);
     };
 
-    createSong = async (name, difficulty, comments, place, concert_name) => {
+    createSong = async (name: string, difficulty: string, comments: string, place: string, concert_name: string) => {
         await ProgramService.post(name, difficulty, comments, place, concert_name);
     };
 
-    deleteSong = async (id) => {
+    deleteSong = async (id: number) => {
         await ProgramService.delete(id);
     };
 
-    * fetchProgram () {
+    fetchProgram = async () => {
         this.program = [];
         this.state = LOADING_STATUS;
         try {
-            const program = yield ProgramService.get();
+            const program = await ProgramService.get();
 
             this.state = COMPLETE_STATUS;
             this.setProgram(program.data);

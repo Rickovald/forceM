@@ -10,7 +10,7 @@ module.exports = {
         },
         ecmaVersion: 'latest',
         sourceType: 'module',
-        project: path.join(__dirname, "tsconfig.json")
+        // project: path.join(__dirname, "tsconfig.json")
     },
     plugins: [
         'react',
