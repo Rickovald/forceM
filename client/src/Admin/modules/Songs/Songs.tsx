@@ -13,9 +13,15 @@ const Songs = observer(() => {
     const data = SongsStore.getSongs();
     const data2 = AlbumsStore.getAlbums();
 
-    // const byField = (field) => {
-    //     return (a, b) => (a[field] > b[field] ? 1 : -1);
-    // };
+    // const byField = (field: string) => {
+    //     return (
+    //         a: { [field: string]: number; }, 
+    //         b: { [field: string]: number; }
+    //         ) => (a[field] > b[field] ? 1 : -1);
+    // }; (a: ISongs, b: ISongs) => number
+    const byField = (field: string) => {
+        return ((a: ISongs, b: ISongs) => (a[field] < b[field] ? -1 : 1));
+    };
 
     useEffect(() => {
         const songs: ISongs[] = [];
@@ -27,6 +33,7 @@ const Songs = observer(() => {
                 return '';
             });
             // songs.sort(byField('id_in_album'));
+            songs.sort(byField('id_in_album'));
             setSongs(songs);
         }
     }, [data, album])

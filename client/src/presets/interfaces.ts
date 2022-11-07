@@ -52,4 +52,5 @@ export interface ISongs {
     id_in_album: number;
     album_id: number;
     place: string;
+    [index: string]: number | string;
 }

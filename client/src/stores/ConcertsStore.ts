@@ -80,6 +80,7 @@ class ConcertsStore {
         this.state = LOADING_STATUS;
         try {
             const concerts = await ConcertsService.get();
+            
             this.state = COMPLETE_STATUS;
             this.setConcerts(concerts.data.data);
         } catch (error) {

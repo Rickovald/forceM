@@ -20,6 +20,8 @@ module.exports = {
         indent: ['error', 4],
         'eol-last': ['error', 'never'],
         'no-console': 'off',
+        '@typescript-eslint/restrict-template-expressions': 'off',
+        '@typescript-eslint/strict-boolean-expressions': 'off',
         semi: ['error', 'always'],
         camelcase: ['error', { allow: ['aa_bb'] }]
     },

@@ -29,7 +29,8 @@ const Concerts = observer(() => {
             setConcerts(slides);
         }
     }, [data]);
-
+    console.log(data);
+    
     const { width } = useWindowDimensions();
     return (
         <div className={`${s.concerts}`}>

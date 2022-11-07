@@ -53,7 +53,7 @@ class ProgramStore {
         try {
             const program = await ProgramService.get();
             this.state = COMPLETE_STATUS;
-            this.setProgram(program.data);
+            this.setProgram(program.data.data);
         } catch (error) {
             this.state = ERROR_STATUS;
         }

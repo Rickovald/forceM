@@ -7,7 +7,7 @@ import { observer } from 'mobx-react-lite';
 
 const Program = observer(() => {
     const [program, setProgram] = useState([]);
-    const data = ProgramStore.getProgram().data;
+    const data = ProgramStore.getProgram();
 
     const byField = (field) => {
         return (a, b) => (a[field] > b[field] ? 1 : -1);
@@ -61,7 +61,6 @@ const Program = observer(() => {
                             <div
                                 contentEditable="true"
                                 suppressContentEditableWarning={true}
-                                name="place"
                                 onBlur={(e) => putToSong(e, item.id, item.place)}
                                 style={{
                                     width: '53px'
@@ -75,7 +74,6 @@ const Program = observer(() => {
                             <div
                                 contentEditable="true"
                                 suppressContentEditableWarning={true}
-                                name="difficulty"
                                 onBlur={(e) => putToSong(e, item.id, item.difficulty)}
                                 style={{
                                     width: '135px',
@@ -91,7 +89,6 @@ const Program = observer(() => {
                             <div
                                 contentEditable="true"
                                 suppressContentEditableWarning={true}
-                                name="name"
                                 onBlur={(e) => putToSong(e, item.id, item.name)}
                                 style={{
                                     width: '280px'

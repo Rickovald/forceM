@@ -19,6 +19,7 @@ const Concerts = observer(() => {
         if (data2) setAlbums(data2);
     }, [data2]);
 
+    console.log(concerts)
     return (
         <div className={`${s.concerts}`}>
             {concerts.map(({id, date, concert_name, country, city, tickets_price, tickets, group, place, main_album, year}, index) => {
