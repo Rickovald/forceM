@@ -1,7 +1,7 @@
 export class UpdateAlbumDTO {
-  name?: string;
-  year?: string;
+  img?: string;
+  head?: string;
+  button?: string;
   href?: string;
-  image?: string;
-  desc?: string;
+  href_type?: string;
 }

@@ -1,8 +1,8 @@
 export class AlbumDTO {
   id: number;
-  name: string;
-  year: string;
+  img: string;
+  head: string;
+  button: string;
   href: string;
-  image: string;
-  desc: string;
+  href_type: string;
 }
