@@ -1,8 +1,7 @@
-export class User {
+export class UserDTO {
   id: number;
-  img: string;
-  head: string;
-  button: string;
-  href: string;
-  href_type: string;
+  name: string;
+  password: string;
+  refreshToken: string;
+  accessToken: string;
 }
