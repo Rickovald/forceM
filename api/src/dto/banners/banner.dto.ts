@@ -1,4 +1,4 @@
-export class AlbumDTO {
+export class BannerDTO {
   id: number;
   img: string;
   head: string;

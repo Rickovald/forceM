@@ -1,4 +1,4 @@
-export class CreateAlbumDTO {
+export class CreateBannerDTO {
   img: string;
   head: string;
   button: string;

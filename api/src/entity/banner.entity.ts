@@ -1,17 +1,17 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-export class Discography {
+export class Banners {
   @PrimaryGeneratedColumn()
   id: number;
-  @Column({ nullable: false, length: 64 })
-  name: string;
   @Column()
-  year: string;
+  img: string;
+  @Column()
+  head: string;
+  @Column()
+  button: string;
   @Column()
   href: string;
   @Column()
-  image: string;
-  @Column()
-  desc: string;
+  href_type: string;
 }
