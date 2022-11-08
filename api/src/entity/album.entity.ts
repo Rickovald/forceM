@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class Album {
+export class Discography {
     @PrimaryGeneratedColumn()
     id: number;
     @Column( {nullable: false, length: 64} )
@@ -12,4 +12,6 @@ export class Album {
     href: string;
     @Column()
     image: string;
+    @Column()
+    desc: string;
 }
