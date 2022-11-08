@@ -26,28 +26,33 @@ export class BannersService {
     return bannerDTO;
   }
 
-  public async create(createAlbumRequest: CreateBannerDTO): Promise<BannerDTO> {
+  public async create(
+    createBannerRequest: CreateBannerDTO,
+  ): Promise<BannerDTO> {
     const banner: Banners = new Banners();
-    banner.img = createAlbumRequest.img;
-    banner.head = createAlbumRequest.head;
-    banner.button = createAlbumRequest.button;
-    banner.href = createAlbumRequest.href;
-    banner.href_type = createAlbumRequest.href_type;
+    banner.img = createBannerRequest.img;
+    banner.head = createBannerRequest.head;
+    banner.button = createBannerRequest.button;
+    banner.href = createBannerRequest.href;
+    banner.href_type = createBannerRequest.href_type;
 
     await this.bannerRepository.save(banner);
 
     return this.entityToDTO(banner);
   }
 
-  public async update(bannerId: number, updateAlbumRequest: UpdateBannerDTO) {
+  public async update(
+    bannerId: number,
+    updateBannerRequest: UpdateBannerDTO,
+  ): Promise<BannerDTO> {
     const banner: Banners = await this.getOne(bannerId);
 
-    if (updateAlbumRequest.img) banner.img = updateAlbumRequest.img;
-    if (updateAlbumRequest.head) banner.head = updateAlbumRequest.head;
-    if (updateAlbumRequest.button) banner.button = updateAlbumRequest.button;
-    if (updateAlbumRequest.href) banner.href = updateAlbumRequest.href;
-    if (updateAlbumRequest.href_type)
-      banner.href_type = updateAlbumRequest.href_type;
+    if (updateBannerRequest.img) banner.img = updateBannerRequest.img;
+    if (updateBannerRequest.head) banner.head = updateBannerRequest.head;
+    if (updateBannerRequest.button) banner.button = updateBannerRequest.button;
+    if (updateBannerRequest.href) banner.href = updateBannerRequest.href;
+    if (updateBannerRequest.href_type)
+      banner.href_type = updateBannerRequest.href_type;
 
     await this.bannerRepository.save(banner);
 
@@ -55,7 +60,7 @@ export class BannersService {
     return bannerDTO;
   }
 
-  public async delete(bannerId: number) {
+  public async delete(bannerId: number): Promise<void> {
     const banner: Banners = await this.getOne(bannerId);
 
     await this.bannerRepository.remove(banner);
@@ -73,7 +78,7 @@ export class BannersService {
       id: bannerId,
     });
     if (!banner)
-      throw new NotFoundException(`Album with id ${bannerId} was not found`);
+      throw new NotFoundException(`Banner with id ${bannerId} was not found`);
 
     const bannerDTO: BannerDTO = this.entityToDTO(banner);
     return bannerDTO;

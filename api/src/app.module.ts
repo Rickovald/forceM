@@ -5,12 +5,7 @@ import { BannersModule } from './banners/banners.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [
-    DatabaseModule,
-    AlbumsModule,
-    BannersModule,
-    UsersModule,
-  ],
+  imports: [DatabaseModule, AlbumsModule, BannersModule, UsersModule],
   controllers: [],
   providers: [],
 })
